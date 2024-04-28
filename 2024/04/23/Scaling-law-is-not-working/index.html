@@ -27,7 +27,7 @@
 <meta property="og:description" content="Looking at various LLM models developed in the past few months, we are absolutely pursuing LLM with larger number of parameters. This is counterintuitive to the concept of ‘parsimony’ in traditional m">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-04-24T01:37:16.000Z">
-<meta property="article:modified_time" content="2024-04-26T03:39:15.323Z">
+<meta property="article:modified_time" content="2024-04-27T04:29:37.405Z">
 <meta property="article:author" content="Di Zhen">
 <meta property="article:tag" content="NLP">
 <meta name="twitter:card" content="summary">
@@ -185,7 +185,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-25 23:39:15" itemprop="dateModified" datetime="2024-04-25T23:39:15-04:00">2024-04-25</time>
+      <time title="Modified: 2024-04-27 00:29:37" itemprop="dateModified" datetime="2024-04-27T00:29:37-04:00">2024-04-27</time>
     </span>
 
   
@@ -197,8 +197,8 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>Looking at various LLM models developed in the past few months, we are absolutely pursuing LLM with larger number of parameters. This is counterintuitive to the concept of ‘parsimony’ in traditional machine learning, which means using a minimum number of parameters necessary to train the model therefore preventing overfitting problem on unseen data. But as we’ve all seen that for in computer vision and natural language processing, generative models with larger number of parameters tend to outperform their more parsimonious counterparts. There are probably two main hypotheses: 1) increasing the amount of data can improve the performance of LLM, then the huge size of dataset requires large number of parameters otherwise the model is going to be underfitting, and 2) large number of parameters allow the model to generate high-resolution pictures, provide more detailed answers, gain the capability of solving more intricate problems.</p>
-<p>The paper “Scaling Law for Neural Language Models” published 2020 by OpenAI introduced the concept of scaling law - the performance of NLM is highly correlated with the scale of network, the size of dataset, and compute, but weakly correlated with model architecture (number of layers, depth, and width). There’s been a debate on this scaling law. OpenAI believes that parameter size is more important - for every x10 increase of compute, dataset size should be increased by x1.8, and parameter size should be increased by x5.5. However, DeepMind believes that they are equally important - for every x10 increase of compute, dataset size and parameter size should both be increased by x3.16.</p>
+    <div class="post-body" itemprop="articleBody"><p>Looking at various LLM models developed in the past few months, we are absolutely pursuing LLM with larger number of parameters. This is counterintuitive to the concept of ‘parsimony’ in traditional machine learning, which means using a minimum number of parameters necessary to train the model therefore preventing overfitting problem on unseen data. But as we’ve all seen that in computer vision and natural language processing, generative models with larger number of parameters tend to outperform their more parsimonious counterparts. There are probably two main hypotheses: 1) increasing the amount of data can improve the performance of LLM, then the huge size of dataset requires large number of parameters otherwise the model is going to be underfitting, and 2) large number of parameters allow the model to generate high-resolution pictures, provide more detailed answers, gain the capability of solving more intricate problems.</p>
+<p>The paper “Scaling Law for Neural Language Models” published in 2020 by OpenAI introduced the concept of scaling law - the performance of NLM is highly correlated with the scale of network, the size of dataset, and compute, but weakly correlated with model architecture (number of layers, depth, and width). There’s been a debate on this scaling law. OpenAI believes that parameter size is more important - for every x10 increase of compute, dataset size should be increased by x1.8, and parameter size should be increased by x5.5. However, DeepMind believes that they are equally important - for every x10 increase of compute, dataset size and parameter size should both be increased by x3.16.</p>
 <p>The paper “Bigger is not Always Better: Scaling Properties of Latent Diffusion Models” published by Google this month summarized an investigation of scaling law on Latent Diffusion Models (LDMs) specifically. It points out that “when operating under a given inference budget, smaller models frequently outperform their larger equivalents in generating high-quality results”. It turns out that with the same compute capacity, smaller model with large number of training steps can outperform larger model with small number of training steps. The existence of trade-off here is due to the fact that total compute is proportional to the number of training steps times GFLOPS (number of rounds of one forward propagation and one back propagation). But with the same number of training steps, it’s still true that the larger model the better performance. As the expense is calculated roughly by the parameter size times dataset size, this finding opens up new pathways to enhance LDM’s generative capacity within limited inference budgets.</p>
 <p>Reference:</p>
 <ol>

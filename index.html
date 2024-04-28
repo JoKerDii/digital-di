@@ -179,7 +179,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-25 23:39:15" itemprop="dateModified" datetime="2024-04-25T23:39:15-04:00">2024-04-25</time>
+      <time title="Modified: 2024-04-27 00:29:37" itemprop="dateModified" datetime="2024-04-27T00:29:37-04:00">2024-04-27</time>
     </span>
 
   
@@ -192,8 +192,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>Looking at various LLM models developed in the past few months, we are absolutely pursuing LLM with larger number of parameters. This is counterintuitive to the concept of ‘parsimony’ in traditional machine learning, which means using a minimum number of parameters necessary to train the model therefore preventing overfitting problem on unseen data. But as we’ve all seen that for in computer vision and natural language processing, generative models with larger number of parameters tend to outperform their more parsimonious counterparts. There are probably two main hypotheses: 1) increasing the amount of data can improve the performance of LLM, then the huge size of dataset requires large number of parameters otherwise the model is going to be underfitting, and 2) large number of parameters allow the model to generate high-resolution pictures, provide more detailed answers, gain the capability of solving more intricate problems.</p>
-<p>The paper “Scaling Law for Neural Language Models” published 2020 by OpenAI introduced the concept of scaling law - the performance of NLM is highly correlated with the scale of network, the size of dataset, and compute, but weakly correlated with model architecture (number of layers, depth, and width). There’s been a debate on this scaling law. OpenAI believes that parameter size is more important - for every x10 increase of compute, dataset size should be increased by x1.8, and parameter size should be increased by x5.5. However, DeepMind believes that they are equally important - for every x10 increase of compute, dataset size and parameter size should both be increased by x3.16.</p>
+          <p>Looking at various LLM models developed in the past few months, we are absolutely pursuing LLM with larger number of parameters. This is counterintuitive to the concept of ‘parsimony’ in traditional machine learning, which means using a minimum number of parameters necessary to train the model therefore preventing overfitting problem on unseen data. But as we’ve all seen that in computer vision and natural language processing, generative models with larger number of parameters tend to outperform their more parsimonious counterparts. There are probably two main hypotheses: 1) increasing the amount of data can improve the performance of LLM, then the huge size of dataset requires large number of parameters otherwise the model is going to be underfitting, and 2) large number of parameters allow the model to generate high-resolution pictures, provide more detailed answers, gain the capability of solving more intricate problems.</p>
+<p>The paper “Scaling Law for Neural Language Models” published in 2020 by OpenAI introduced the concept of scaling law - the performance of NLM is highly correlated with the scale of network, the size of dataset, and compute, but weakly correlated with model architecture (number of layers, depth, and width). There’s been a debate on this scaling law. OpenAI believes that parameter size is more important - for every x10 increase of compute, dataset size should be increased by x1.8, and parameter size should be increased by x5.5. However, DeepMind believes that they are equally important - for every x10 increase of compute, dataset size and parameter size should both be increased by x3.16.</p>
 <p>The paper “Bigger is not Always Better: Scaling Properties of Latent Diffusion Models” published by Google this month summarized an investigation of scaling law on Latent Diffusion Models (LDMs) specifically. It points out that “when operating under a given inference budget, smaller models frequently outperform their larger equivalents in generating high-quality results”. It turns out that with the same compute capacity, smaller model with large number of training steps can outperform larger model with small number of training steps. The existence of trade-off here is due to the fact that total compute is proportional to the number of training steps times GFLOPS (number of rounds of one forward propagation and one back propagation). But with the same number of training steps, it’s still true that the larger model the better performance. As the expense is calculated roughly by the parameter size times dataset size, this finding opens up new pathways to enhance LDM’s generative capacity within limited inference budgets.</p>
 <p>Reference:</p>
 <ol>
@@ -340,7 +340,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-26 23:23:45" itemprop="dateModified" datetime="2024-04-26T23:23:45-04:00">2024-04-26</time>
+      <time title="Modified: 2024-04-28 00:16:51" itemprop="dateModified" datetime="2024-04-28T00:16:51-04:00">2024-04-28</time>
     </span>
 
   
@@ -353,7 +353,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h4 id="Harvard-Business-Review"><a href="#Harvard-Business-Review" class="headerlink" title="Harvard Business Review"></a><strong>Harvard Business Review</strong></h4><blockquote>
+          <h3 id="Harvard-Business-Review"><a href="#Harvard-Business-Review" class="headerlink" title="Harvard Business Review"></a><strong>Harvard Business Review</strong></h3><blockquote>
 <p><em>As Columbia Business School professor Rita McGrath points out, it’s about identifying “the strategic inflection points” at which the cost of waiting exceeds to cost acting — in other words, identifying the most strategic point to enter a market or adopt a technology, balancing the risks and opportunities based on market readiness, technological maturity and organizational capacity.</em></p>
 <p><em>This speaks to the growing adoption of agile, “act, learn, build” approaches over traditional “prove-plan-execute” orientations. The popularity of techniques like <a target="_blank" rel="noopener" href="https://hbr.org/1995/07/discovery-driven-planning">discovery-driven planning</a>, <a target="_blank" rel="noopener" href="https://hbr.org/2013/05/why-the-lean-start-up-changes-everything">the lean startup</a>, and other agile approaches and propagated this philosophy in which, rather than building bullet-proof business cases, one makes small steps, learning from them, and deciding whether to invest further.</em></p>
 <p><strong>―  “6 Strategic Concepts That Set High-Performing Companies Apart”, Harvard Business Review</strong> [<a target="_blank" rel="noopener" href="https://hbr.org/2024/03/6-strategic-concepts-that-set-high-performing-companies-apart">Article</a>]</p>
@@ -375,7 +375,7 @@
 </blockquote>
 <p>This is the second Blockchain related article I have read from Harvard Business Review. Different authors have different perspectives. Unlike the previous article with a lot of concerns and cautions about Web3, this article seems more optimistic. It proposed a framework for adopting blockchain to revolutionize modern business, and a guidance to Blockchain investment. It points out that Blockchain has great potentials in boosting the efficiency and reducing the cost for all transactions and then explained the reason why the adoption of Blockchain would be slow by making a comparison with TCP&#x2F;IP, which took more than 30 years to reshape the economy by dramatically lowering the cost of connections. This is an interesting comparison: e-mail enabled bilateral messaging as the first application of TCP&#x2F;IP, while bitcoin enables bilateral financial transactions as the first application of Blockchain. It reminds me about what people (Jun Lei, Huateng Ma, Lei Ding, etc) were thinking about internet mindset and business model back in 2000s.</p>
 <p>In the end, the authors proposed a four-quadrant framework for adopting Blockchain step by step. The four quadrants are created by two dimensions: novelty (equivalent to the amount of efforts required to ensure users understand the problem) and complexity (equivalent to the amount of coordination and collaboration required to produce values). With the increase of both dimensions, the adoption will require more institutional change. An example of “low novelty and low complexity” is simply adding bitcoin as an alternative transaction method. An example of “low novelty and high complexity” is building a new, fully formed cryptocurrency system which requires wide adoption from every monetary transaction party and consumers’ complete understanding of cryptocurrency. An example of “high novelty and low complexity” is building a local private network on which multiple organizations are connected via a distributed ledger. An example of “high novelty and high complexity” is building “smart contracts”.</p>
-<h4 id="News"><a href="#News" class="headerlink" title="News"></a><strong>News</strong></h4><blockquote>
+<h3 id="News"><a href="#News" class="headerlink" title="News"></a><strong>News</strong></h3><blockquote>
 <p><strong>Does Amazon’s cashless Just Walk Out technology rely on 1,000 workers in India?</strong> [<a target="_blank" rel="noopener" href="https://www.usatoday.com/story/money/shopping/2024/04/04/amazon-just-walk-out-indian-workers/73204975007/">Link</a>]</p>
 <p><strong>Amazon insists Just Walk Out isn’t secretly run by workers watching you shop</strong> [<a target="_blank" rel="noopener" href="https://www.theverge.com/2024/4/17/24133029/amazon-just-walk-out-cashierless-ai-india">Link</a>]</p>
 <p><strong>An update on Amazon’s plans for Just Walk Out and checkout-free technology</strong> [<a target="_blank" rel="noopener" href="https://www.aboutamazon.com/news/retail/amazon-just-walk-out-dash-cart-grocery-shopping-checkout-stores">Link</a>]</p>
@@ -453,7 +453,7 @@
 <p><strong>Our next-generation Meta Training and Inference Accelerator</strong>  [<a target="_blank" rel="noopener" href="https://ai.meta.com/blog/next-generation-meta-training-inference-accelerator-AI-MTIA/">Link</a>]</p>
 <p><strong>Meta’s new AI chips run faster than before</strong> [<a target="_blank" rel="noopener" href="https://www.theverge.com/2024/4/10/24125924/meta-mtia-ai-chips-algorithm-training">Link</a>]</p>
 </blockquote>
-<h4 id="Interviews"><a href="#Interviews" class="headerlink" title="Interviews"></a><strong>Interviews</strong></h4><blockquote>
+<h3 id="Interviews"><a href="#Interviews" class="headerlink" title="Interviews"></a><strong>Interviews</strong></h3><blockquote>
 <p> <em>If someone whom you don’t trust or an adversary gets something more powerful, then I think that that could be an issue. Probably the best way to mitigate that is to have good open source AI that becomes the standard and in a lot of ways can become the leader. It just ensures that it’s a much more even and balanced playing field.</em></p>
 <p><strong>―  Mark Zuckerberg - Llama 3, $10B Models, Caesar Augustus, &amp; 1 GW Datacenters</strong> [<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=bc6uFV9CJGg">Link</a>]</p>
 </blockquote>
@@ -472,7 +472,10 @@
 <p><strong>―  Conversation with Groq CEO Jonathan Ross</strong> [<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=UneoszmxRGg&ab_channel=SocialCapital">Link</a>]</p>
 </blockquote>
 <p>This is a very insightful conversation especially in the part of comparison of training and inference. The answer to the final question is fascinating to end the conversation. A great takeaway that “intelligence is a telescope for the mind, in that we realize that we are small, while then also opportunity to see intelligence is vast and to not be afraid of it.”.</p>
-<h4 id="Papers-and-Reports"><a href="#Papers-and-Reports" class="headerlink" title="Papers and Reports"></a><strong>Papers and Reports</strong></h4><blockquote>
+<h3 id="Podcasts"><a href="#Podcasts" class="headerlink" title="Podcasts"></a>Podcasts</h3><blockquote>
+<p><strong>Are LLMs Hitting A Wall, Microsoft &amp; Alphabet Save The Market, TikTok Ban</strong> [<a target="_blank" rel="noopener" href="https://podcasts.apple.com/us/podcast/big-technology-podcast/id1522960417?i=1000653713621">Link</a>]</p>
+</blockquote>
+<h3 id="Papers-and-Reports"><a href="#Papers-and-Reports" class="headerlink" title="Papers and Reports"></a><strong>Papers and Reports</strong></h3><blockquote>
 <p><strong>ReALM: Reference Resolution As Language Modeling</strong> <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2403.20329">Link</a>]</p>
 </blockquote>
 <p>Apple proposed the ReALM model with 80M, 250M, 1B, and 3B parameters. It can be used on mobile devices and laptops. The task of ReALM is “Given relevant entities and a task the user wants to perform, we wish to extract the entity (or entities) that are pertinent to the current user query. “. The relevant entities can be on-screen entities, conversational entities, and background entities. The analysis shows that ReALM beats MARRs and has similar performance with GPT-4.</p>
@@ -500,7 +503,7 @@
 <p><strong>Stable Diffusion 3 API now available as Stable Assistant effort looms</strong> [<a target="_blank" rel="noopener" href="https://venturebeat.com/ai/stable-diffusion-3-api-now-available-as-stable-assist-effort-looms/">Link</a>]</p>
 <p><strong>Stable Diffusion 3: Research Paper</strong> [<a target="_blank" rel="noopener" href="https://stability.ai/news/stable-diffusion-3-research-paper">Link</a>]</p>
 </blockquote>
-<h4 id="Substack"><a href="#Substack" class="headerlink" title="Substack"></a><strong>Substack</strong></h4><blockquote>
+<h3 id="Substack"><a href="#Substack" class="headerlink" title="Substack"></a><strong>Substack</strong></h3><blockquote>
 <p><em>You don’t get paid for working hard.</em></p>
 <p><em>You get paid based on how hard you are to replace.</em></p>
 <p><em>You get paid based on how much value you deliver.</em></p>
@@ -516,13 +519,13 @@
 <li><em>Do they consistently beat their guidance?</em></li>
 </ul>
 <p><em>If not, it might be a sign that they are running out of steam and may have embellished their prospects in the S-1. But we need several quarters to understand the dynamic at play.</em></p>
-<p><strong>―  “Rubrik IPO: Key Takeaways”, App Economy Insights</strong> [<a target="_blank" rel="noopener" href="https://www.appeconomyinsights.com/p/rubrik-ipo-key-takeaways">Article</a>]</p>
+<p><strong>―  “Rubrik IPO: Key Takeaways”, App Economy Insights</strong> [<a target="_blank" rel="noopener" href="https://www.appeconomyinsights.com/p/rubrik-ipo-key-takeaways">Link</a>]</p>
 </blockquote>
 <p>An analysis of Rubrik, a Microsoft-backed cybersecurity company going public. I’ve got some opinions from the author in terms of company performance and strategic investment.</p>
 <blockquote>
 <p><strong>Intel Unleashes Enterprise AI with Gaudi 3</strong> [<a target="_blank" rel="noopener" href="https://aisupremacy.substack.com/p/intel-unleashes-enterprise-ai-with">Link</a>]</p>
 </blockquote>
-<p>It seems Intel was a huge beneficiary of Biden’s CHIPS Act. In late March 2024, Intel will receive up to $8.5 billion in grants and $11 billion in loans from the US government to produce cutting-edge semiconductors.</p>
+<p>Intel is a huge beneficiary of Biden’s CHIPS Act. In late March 2024, Intel will receive up to $8.5 billion in grants and $11 billion in loans from the US government to produce cutting-edge semiconductors.</p>
 <blockquote>
 <p><strong>US Banks: Uncertain Year</strong> [<a target="_blank" rel="noopener" href="https://www.appeconomyinsights.com/p/us-banks-uncertain-year">Link</a>]</p>
 </blockquote>
@@ -532,6 +535,7 @@
 <blockquote>
 <p><strong>Boeing vs Airbus</strong> [<a target="_blank" rel="noopener" href="https://www.appeconomyinsights.com/p/boeing-vs-airbus?utm_source=profile&utm_medium=reader2">Link</a>]</p>
 </blockquote>
+<p>Boeing 737 MAX’s two fatal crashes due to faulty software have eroded public trust. In addition to quality issues, Boeing is facing severe production delays. Airbus on the other hand has captured significant market share from Boeing. Airbus is heavily investing in technologies such as hydrogen-powered aircraft and sustainable aviation fuels. Airbus is also investing in the A321XLR and potential new widebody aircraft.</p>
 <blockquote>
 <p><strong>The End of the “Best Open LLM”</strong> [<a target="_blank" rel="noopener" href="https://www.interconnects.ai/p/compute-efficient-open-llms?utm_source=profile&utm_medium=reader2">Link</a>]</p>
 </blockquote>
@@ -690,7 +694,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-25 00:17:12" itemprop="dateModified" datetime="2024-04-25T00:17:12-04:00">2024-04-25</time>
+      <time title="Modified: 2024-04-27 23:24:44" itemprop="dateModified" datetime="2024-04-27T23:24:44-04:00">2024-04-27</time>
     </span>
 
   
@@ -703,13 +707,13 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h4 id="Lean-Analytics-Use-Data-to-Build-a-Better-Startup-Faster"><a href="#Lean-Analytics-Use-Data-to-Build-a-Better-Startup-Faster" class="headerlink" title="Lean Analytics, Use Data to Build a Better Startup Faster"></a><strong>Lean Analytics, Use Data to Build a Better Startup Faster</strong></h4><blockquote>
+          <h3 id="Lean-Analytics-Use-Data-to-Build-a-Better-Startup-Faster"><a href="#Lean-Analytics-Use-Data-to-Build-a-Better-Startup-Faster" class="headerlink" title="Lean Analytics, Use Data to Build a Better Startup Faster"></a><strong>Lean Analytics, Use Data to Build a Better Startup Faster</strong></h3><blockquote>
 <p><em>Humans do inspiration; machines do validation.</em> </p>
 <p><em>Math is good at optimizing a known system; humans are good at finding a new one. Put another way, change favors local maxima; innovation favors global disruption.</em></p>
 <p><strong>―  “Lean Analytics, Use Data to Build a Better Startup Faster”</strong></p>
 </blockquote>
 <p>Sometimes people who are doing hard data work may forget to step back and look at the big picture. This is a common mistake because we can definitely go from scientific data analysis to actionable insight for making better business decision. But we need to have some additional thoughts about whether the decision is a global optima or it’s just local due to the limited sample, restricted project goal, or restricted team scope.</p>
-<h4 id="Harvard-Business-Review"><a href="#Harvard-Business-Review" class="headerlink" title="Harvard Business Review"></a><strong>Harvard Business Review</strong></h4><blockquote>
+<h3 id="Harvard-Business-Review"><a href="#Harvard-Business-Review" class="headerlink" title="Harvard Business Review"></a><strong>Harvard Business Review</strong></h3><blockquote>
 <p><em>When I decided to end my voluntary immersion in the driver community, I could not shake the feeling that the depersonalization of app workers is a feature, not a bug, of an economic model born of and emboldened by transformations that are underway across the global economy. This includes increasingly prevalent work arrangements characterized by weak employer-worker relations (independent contracting), strong reliance on technology (algorithmic management, platform-mediated communication), and social isolation (no coworkers and limited customer interactions).</em></p>
 <p><em>As forces continue to erode traditional forms of identity support, meaningful selfdefinition at work will increasingly rely on how we collectively use and misuse innovative technologies and business models.</em><br><em>For example, how can companies deploy algorithmic management in a way that doesn’t threaten and depersonalize workers? How can focusing on the narratives that underlie and animate identities help workers reimagine what they really want and deserve out of a career coming out of the pandemic and the Great Resignation? Will increasingly immersive and realistic digital environments like the metaverse function as identity playgrounds for workers in the future? How will Web3 broadly, and the emergence of novel forms of organizing specifically (e.g., decentralized autonomous organizations or DAOs), affect the careers, connections, and causes that are so important to workers? What role can social media platforms, online discussion forums, and other types of virtual water coolers play in helping independent workers craft and sustain a desirable work identity? In short, how can we retain the human element in the face of increasingly shrewd resource management tactics?”</em></p>
 <p><strong>― “Dehumanization is a Feature of Gig Work, Not a Bug”, Harvard Business Review, The Year in Tech 2024</strong> [<a target="_blank" rel="noopener" href="https://hbr.org/2022/06/dehumanization-is-a-feature-of-gig-work-not-a-bug">Article</a>]</p>
@@ -732,7 +736,7 @@
 <p><strong>― “Does Elon Musk Have a Strategy?”, Harvard Business Review, The Year in Tech 2024</strong> [<a target="_blank" rel="noopener" href="https://hbr.org/2022/07/does-elon-musk-have-a-strategy">Article</a>]</p>
 </blockquote>
 <p>This is a great article which profiles Elon Musk specifically in his strategies and vision. It answered my question confusing me for two years: what was Musk thinking on buying Twitter? The answer is: Musk’s vision is not in pursuit of a specific type of solution but is in pursuit of a specific type of problem. If we go back to 2016, Igor as a CEO of Disney decided not to buy Twitter because he looked at Twitter as the solution: a global distribution platform, while concerned the quality of speech on it is a problem. Musk was looking for challenges and complexities while Igor was preventing them and looking for solutions.</p>
-<h4 id="Lex-Fridman-YouTube"><a href="#Lex-Fridman-YouTube" class="headerlink" title="Lex Fridman YouTube"></a><strong>Lex Fridman YouTube</strong></h4><blockquote>
+<h3 id="Interviews"><a href="#Interviews" class="headerlink" title="Interviews"></a><strong>Interviews</strong></h3><blockquote>
 <p>[<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=jvqFAi7vkBc&ab_channel=LexFridman">Sam</a>] [<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=13CZPWmke6A&ab_channel=LexFridman">Ilya</a>]</p>
 <p><em>“One of the things that I think OpenAI is doing that is the most important of everything that we are doing is putting powerful technology in the hands of people for free as a public good. We don’t run ads on our free version. We don’t monetize it in other ways. I think that kind of ‘open’ is very important, and is a huge deal for how we fulfill the mission. “― Sam</em></p>
 <p><em>“For active learning, the thing is it truly needs a problem. It needs a problem that requires it. It is very hard to do research about the capability of active learning if you don’t have a task. You will come up with an artificial task, get good results, but not really convince anyone. “, “Active learning will actually arrive with the problem that requires it to pop up.”― Ilya</em></p>
@@ -744,7 +748,7 @@
 </blockquote>
 <p>I watched Lex’s interview with Sam Altman uploaded on March 18, 2024, and an older interview with Ilya Sutskever happened 3 years ago. Elon’s lawsuit against OpenAI frustrated Sam but Sam is optimistic about the future and everything he is going to release in the next few months. Sam answered the questions “what does open mean in OpenAI” that ‘open’ mainly means putting powerful tech in the hands of people for free as a public good, but not necessarily mean open-source. He said there can be open-source models or closed-source models. About the transition between non-profit to capped for-profit, Sam said OpenAI is not setting a precedent for startup to mimic it but he suggested most startups should go for for-profit directly if they pursue profitability in the beginning.</p>
 <p>Ilya’s interview is more interesting to me because he talked a lot about vision, tech, philosophy in Deep Learning. It’s impressive that he had such thoughts 3 years ago. </p>
-<h4 id="News"><a href="#News" class="headerlink" title="News"></a><strong>News</strong></h4><blockquote>
+<h3 id="News"><a href="#News" class="headerlink" title="News"></a><strong>News</strong></h3><blockquote>
 <p><em>Speech is one kind of liability for companies using generative AI. The design of these systems can create other kinds of harms—by, say, introducing bias in hiring, giving bad advice, or simply making up information that might lead to financial damages for a person who trusts these systems.</em></p>
 <p><em>Because AIs can be used in so many ways, in so many industries, it may take time to understand what their harms are in a variety of contexts, and how best to regulate them, says Schultz.</em></p>
 <p><strong>The AI Industry Is Steaming Toward A Legal Iceberg</strong> [<a target="_blank" rel="noopener" href="https://www.wsj.com/tech/ai/the-ai-industry-is-steaming-toward-a-legal-iceberg-5d9a6ac1">Link</a>]</p>
@@ -792,7 +796,7 @@
 <p><em>Nvidia is counting on companies to buy large quantities of these GPUs, of course, and is packaging them in larger designs, like the GB200 NVL72, which plugs 36 CPUs and 72 GPUs into a single liquid-cooled rack for a total of 720 petaflops of AI training performance or 1,440 petaflops (aka 1.4 exaflops) of inference. It has nearly two miles of cables inside, with 5,000 individual cables.</em></p>
 <p><em>And of course, Nvidia is happy to offer companies the rest of the solution, too. Here’s the DGX Superpod for DGX GB200, which combines eight systems in one for a total of 288 CPUs, 576 GPUs, 240TB of memory, and 11.5 exaflops of FP4 computing.</em></p>
 <p><em>Nvidia says its systems can scale to tens of thousands of the GB200 superchips, connected together with 800Gbps networking with its new Quantum-X800 InfiniBand (for up to 144 connections) or Spectrum-X800 ethernet (for up to 64 connections).</em></p>
-<p><strong>Nvidia reveals Blackwell B200 GPU, the ‘world’s most powerful chip’ for AI</strong> [<a target="_blank" rel="noopener" href="https://www.theverge.com/2024/3/18/24105157/nvidia-blackwell-gpu-b200-ai">Link</a>] [<a target="_blank" rel="noopener" href="https://www.nvidia.com/gtc/keynote/">keynote</a>]</p>
+<p><strong>― Nvidia reveals Blackwell B200 GPU, the ‘world’s most powerful chip’ for AI</strong> [<a target="_blank" rel="noopener" href="https://www.theverge.com/2024/3/18/24105157/nvidia-blackwell-gpu-b200-ai">Link</a>] [<a target="_blank" rel="noopener" href="https://www.nvidia.com/gtc/keynote/">keynote</a>]</p>
 </blockquote>
 <p>Two B200 GPUs combined with one Grace CPU is a GB200 Blackwell Superchip. Two GB200 superchip is one Blackwell compute node. 18 Blackwell compute notes contain 36 CPU + 72 GPUs, becoming one larger virtual GPU - GB200 NVL72.</p>
 <p>Nvidia also offers packages for companies such as DGX Superpod for DGX GB200 which combines 8 such GB200 NVL72. 8 GB200 NVL72 combined with xx becomes one GB200 NVL72 compute rack. And the AI factory or full data center in the future would consists about 56 GB200 NVL72 compute racks, which is in total around 32000 GPUs.</p>
@@ -810,7 +814,7 @@
 <p> <strong>Adam Neumann looks to buy back WeWork for more than $500M: sources</strong> [<a target="_blank" rel="noopener" href="https://nypost.com/2024/03/25/business/adam-neumann-looks-to-buy-back-wework-for-more-than-500m-report/">Link</a>]</p>
 <p> <strong>NVIDIA Powers Japan’s ABCI-Q Supercomputer for Quantum Research</strong> [<a target="_blank" rel="noopener" href="https://nvidianews.nvidia.com/news/nvidia-powers-japans-abci-q-supercomputer-for-quantum-research">Link</a>]</p>
 </blockquote>
-<h4 id="Papers-and-Reports"><a href="#Papers-and-Reports" class="headerlink" title="Papers and Reports"></a><strong>Papers and Reports</strong></h4><blockquote>
+<h3 id="Papers-and-Reports"><a href="#Papers-and-Reports" class="headerlink" title="Papers and Reports"></a><strong>Papers and Reports</strong></h3><blockquote>
 <p><strong>Scaling Instructable Agents Across Many Simulated Worlds</strong> [<a target="_blank" rel="noopener" href="https://storage.googleapis.com/deepmind-media/DeepMind.com/Blog/sima-generalist-ai-agent-for-3d-virtual-environments/Scaling%20Instructable%20Agents%20Across%20Many%20Simulated%20Worlds.pdf">Link</a>]</p>
 </blockquote>
 <p>Google DeepMind SIMA Team is working on the Scalable, Instructable, Multiworld Agent (SIMA) project. The goal is to develop an agent that follows instructions to complete tasks in any 3D environments. So far they are making progress on making AI agent understand the environment from computer screen, and use keyboard-and-mouse controls to interact with environment, follow language instructions, and play the video game to maximize the win-rate.</p>
@@ -824,7 +828,46 @@
 <p><strong>Mora: Enabling Generalist Video Generation via A Multi-Agent Framework</strong> [<a target="_blank" rel="noopener" href="https://arxiv.org/html/2403.13248v1">Link</a>]</p>
 </blockquote>
 <p>Sora is the first video generation model, however it is not open-source. Lehigh University and Microsoft Research developed Mora to address the gap of no other video generation models to parallel with Sora in performance. Mora introduces an innovative multi-agent framework. As a result, Mora marks a considerable advancement in video generation from text prompts. The evaluation shows that Mora competes with Sora on most of the tasks, but not as refined as Sora in tasks such as changes in the video content, and video connectivity. </p>
-<h4 id="Blogs"><a href="#Blogs" class="headerlink" title="Blogs"></a><strong>Blogs</strong></h4><blockquote>
+<h3 id="Substack"><a href="#Substack" class="headerlink" title="Substack"></a>Substack</h3><blockquote>
+<p> <strong>Streaming Giants Earnings</strong> [<a target="_blank" rel="noopener" href="https://www.appeconomyinsights.com/p/streaming-giants-earnings-ee0">Link</a>]</p>
+</blockquote>
+<blockquote>
+<p><em>CrowdStrike has repeated in its investor presentations how it wants to be the leading ‘Security Cloud’ and emulate other category-defining cloud platforms:</em></p>
+<ul>
+<li><em>Workday (HR Cloud).</em></li>
+<li><em>Salesforce (CRM Cloud).</em></li>
+<li><em>ServiceNow (Service Management Cloud).</em></li>
+</ul>
+<p><em>Public cloud software companies are overwhelmingly unprofitable businesses. However, in FY24, Salesforce (CRM) demonstrated that margins can expand quickly once the focus turns to the bottom line (see visual). And when the entire business is driven by recurring subscription revenue and highly predictable unit economics, you are looking at a finely-tuned cash flow machine.</em></p>
+<p><strong>― CrowdStrike: AI-Powered Security</strong> [<a target="_blank" rel="noopener" href="https://www.appeconomyinsights.com/p/crowdstrike-ai-powered-security">Link</a>]</p>
+</blockquote>
+<blockquote>
+<p><strong>GRANOLAS: Europe’s Darlings</strong> [<a target="_blank" rel="noopener" href="https://www.appeconomyinsights.com/p/granolas-europes-darlings">Link</a>]</p>
+</blockquote>
+<blockquote>
+<p><em>Oracle became TikTok’s cloud provider in 2020 for US users. With the risk of a TikTok ban in America, we’ll look at the potential revenue impact.</em></p>
+<p><em>Catz believes this growth (of OCI revenue) is driven by:</em></p>
+<ul>
+<li><em>Price Performance.</em></li>
+<li><em>Full-stack technology for mission-critical workloads.</em></li>
+<li><em>AI capabilities focused on business outcomes.</em></li>
+<li><em>Deployment flexibility.</em></li>
+<li><em>Multi-cloud offerings.</em></li>
+</ul>
+<p><strong>― Oracle: Cloud &amp; AI Focus</strong> [<a target="_blank" rel="noopener" href="https://www.appeconomyinsights.com/p/oracle-cloud-and-ai-focus">Link</a>]</p>
+</blockquote>
+<p>Oracle services for enterprise software and cloud solutions: 1) cloud suite (cloud applications and services), 2) data analytics, 3) autonomous database, 4) enterprise resource planning (ERP) to improve operational efficiencies and integrated solutions to streamline complex business functions.</p>
+<p>Key news highlights: 1) Oracle acquired Cerner in June 2022 which is a leading provider of electronic health records (EHR) and other healthcare IT solutions used by hospitals and health systems. Oracle is expanding cloud services including the upcoming launch of Ambulatory Clinic Cloud Application Suite for Cerner customers. 2) The adoption of Oracle Cloud Infrastructure (OCI) are across different segments: cloud natives customers such as Zoom, Uber, ByteDance looking for high price performance and integrated security and privacy, AI&#x2F;ML customers looking for key differentiation, compute performance, and networking design, generative AI customers looking for control, data security, privacy, and governance. 3) TikTok is probably an essential component of the growth of OCI Gen2 infrastructure cloud services. 4) Oracle signed big Generation 2 Cloud infrastructure contract with Nvidia. 5) Oracle is a critical customer in Sovereign AI. It’s starting to win business per country for sovereign cloud, especially the cloud companies in Japan.</p>
+<blockquote>
+<p><strong>NVIDIA ‘AI Woodstock’</strong> [<a target="_blank" rel="noopener" href="https://www.appeconomyinsights.com/p/nvidia-ai-woodstock">Link</a>]</p>
+</blockquote>
+<blockquote>
+<p><em>We spent $700,000 on [our five-second Super Bowl ad] in total and yet earned over 60 million social media impressions.”</em> [<a target="_blank" rel="noopener" href="https://youtu.be/QPjgXWm7F6c">link</a>]</p>
+<p><strong>― Duolingo: Gamified Learning</strong> [<a target="_blank" rel="noopener" href="https://www.appeconomyinsights.com/p/duolingo-gamified-learning">Link</a>]</p>
+</blockquote>
+<p>Duolingo launched the Duolingo Max subscription tier ($168&#x2F;year), with Gen AI features enabling a more conversational and listening approach. Duolingo has leveraged AI in two areas: 1) using AI to create content, which allows it to experiment faster, 2) using AI to power spoken conversation with characters.</p>
+<p>What is coming: Duolingo launched Math and Music courses into its app in 2023.</p>
+<h3 id="Blogs"><a href="#Blogs" class="headerlink" title="Blogs"></a><strong>Blogs</strong></h3><blockquote>
 <p><strong>OpenAI and Elon Musk</strong> [<a target="_blank" rel="noopener" href="https://openai.com/blog/openai-elon-musk">Link</a>]</p>
 </blockquote>
 <p>Read arguments between OpenAI and Elon. Learned that Elon once believed there is 0% probability for OpenAI to succeed and wanted OpenAI to become for-profit so it can be merged to Tesla and being controlled by Elon himself.</p>
@@ -890,7 +933,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-25 00:02:32" itemprop="dateModified" datetime="2024-04-25T00:02:32-04:00">2024-04-25</time>
+      <time title="Modified: 2024-04-27 21:52:18" itemprop="dateModified" datetime="2024-04-27T21:52:18-04:00">2024-04-27</time>
     </span>
 
   
@@ -903,7 +946,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h3 id="Founders-Podcast"><a href="#Founders-Podcast" class="headerlink" title="Founders Podcast"></a><strong>Founders Podcast</strong></h3><h3 id="Substack"><a href="#Substack" class="headerlink" title="Substack"></a><strong>Substack</strong></h3><h3 id="Articles"><a href="#Articles" class="headerlink" title="Articles"></a><strong>Articles</strong></h3><blockquote>
+          <h3 id="Podcasts"><a href="#Podcasts" class="headerlink" title="Podcasts"></a><strong>Podcasts</strong></h3><h3 id="Articles"><a href="#Articles" class="headerlink" title="Articles"></a><strong>Articles</strong></h3><blockquote>
 <p><em>The qubit in superposition has some probability of being 1 or 0, but it represents neither state, just like our quarter flipping into the air is neither heads nor tails, but some probability of both. A quantum computer can use a collection of qubits in superpositions to play with different possible paths through a calculation. If done correctly, the pointers to incorrect paths cancel out, leaving the correct answer when the qubits are read out as Os and 1s.</em></p>
 <p><em>Grover’s algorithm, a famous quantum search algorithm, could find you in a phone book of 100 million names with just 10,000 operations. If a classical search algorithm just spooled through all the listings to find you, it would require 50 million operations, on average.</em></p>
 <p><em>Qubits have to be carefully shielded, and operated at very cold temperatures-sometimes only fractions of a degree above absolute zero. A major area of research involves developing algorithms for a quantum computer to correct its own errors, caused by glitching qubits.</em></p>
@@ -950,6 +993,68 @@
 <p><strong>White House touts $11 billion US semiconductor R&amp;D program</strong> [<a target="_blank" rel="noopener" href="https://www.reuters.com/technology/us-announces-over-5-bln-investments-semiconductor-related-research-development-2024-02-09/">Link</a>]</p>
 <p><strong>Meta to deploy custom-designed Artemis AI processor alongside commercial GPUs</strong> [<a target="_blank" rel="noopener" href="https://www.tomshardware.com/tech-industry/meta-to-deploy-custom-designed-artemis-ai-processor-alongside-commercial-gpus">Link</a>]</p>
 </blockquote>
+<h3 id="Substack"><a href="#Substack" class="headerlink" title="Substack"></a><strong>Substack</strong></h3><blockquote>
+<p><strong>Alphabet Cloud Rebound</strong>  [<a target="_blank" rel="noopener" href="https://www.appeconomyinsights.com/p/alphabet-cloud-rebounds">Link</a>]</p>
+</blockquote>
+<p>Google Cloud (GCP and Workspace) revenue growth reaccelerated by 4 percentage points, while AWS and Azure show softer momentum. Key business highlights: 1) Gemini in search for faster Search Generative Experience (SGE), 2) Conversational AI tool Bard now powered by Gemini Pro and will be powered by Gemini Ultra, 3) YouTube now has over 100M subscribers across Music and Premium, 4) Cloud driven by AI - Vertex AI platform and Duet AI agents, leads to expand relationships with many leading brands (e.g. Hugging Face, McDonald’s, Motorola Mobility, Verizon. ), 5) Waymo reached over 1M fully autonomous ride-hailing trips, 6) Isomorphic Labs partnered with Eli Lilly and Novartis to apply AI to treat diseases.</p>
+<p>AI specific business highlights: 1) Google is transforming searching behavior of customers: Search Generative Experience (SGE) is introducing a dynamic AI enhanced search experience, 2) Gemini includes Gemini Nano, Gemini Pro, and Gemini Ultra. Gemini Nano is optimized for on-device tasks and already available on Pixel 8 phone. Gemini Pro is currently in early preview through Cloud and specific apps. Gemini Ultra will be released later in 2024, 3) the conversational AI - Bard - might be exclusive to Tensor-powered Pixel phones and will be accessible through voice commands or double-tapping device side buttons. Bard will also be integrated with apps (e.g. Gmail, Maps, Drive) and Camera on Android phones.</p>
+<blockquote>
+<p><strong>Amazon: Ads Take the Cake</strong> [<a target="_blank" rel="noopener" href="https://www.appeconomyinsights.com/p/amazon-ads-take-the-cake">Link</a>]</p>
+</blockquote>
+<p>Key updates on Amazon business: 1) Infrastructure: Amazon has developed customized ML chips e.g. Trainium for training and Inferentia for inference. Additionally, it offers Graviton for generalized CPU chips, and launched Trainium2 with four times training performance. 2) Model: Bedrock is the LLM as a Service, allowing customers to run foundational models, customize them and create agents for automated tasks and workflows. 3) Apps: Amazon Q is a workplace-focused generative AI chatbot. It’s designed for business to assist with summarizing docs and answering internal questions. It’s built with high security and privacy, and integrated with Slack, Gmail, etc. </p>
+<p>What else to watch: 1) Cloud: Gen AI benefits Amazon (AWS) as well as existing market leaders in cloud infrastructure. 2) Project Kuiper is an initiative to increase global broadband access through a constellation of 3,236 satellites in low Earth orbit (LEO). Amazon is on track of launching it in the first half of 2024 and will start beta testing in the second half of the year. 3) Prime Video (with ads) remains a large and profitable business. 4) Investment in live sports as a critical customer acquisition strategy. </p>
+<p>What is coming: 1) Rufus - a Gen AI-powered shopping assistant with conversational AI capabilities 2) amazon’s advertising revenue is catching up Meta and Google, with Prime Video a probable accelerator. </p>
+<blockquote>
+<p><strong>Meta: The Zuck ‘Playbook’</strong> [<a target="_blank" rel="noopener" href="https://www.appeconomyinsights.com/p/meta-the-zuck-playbook">Link</a>]</p>
+</blockquote>
+<p>The Zuck Playbook: 1) Massive compute investment, 2) open-source strategy, 3) future-focused research, 4) data and feedback utilization, 5) experimentation culture, 6) growth before monetization.</p>
+<p>Meta’s business segments: 1) Family of Apps (Facebook, Instagram, Messenger, and WhatsApp), 2) Reality Labs (virtual reality hardware and supporting software).</p>
+<p>Key business highlights: 1) 1B+ revenue in Q4 2023 for the first time with Quest, and Quest 3 is off to a strong start, 2) established the right feedback loops with Stories and Reels to test new features and products, 3) Ray-Ban Meta smart glasses is off to a strong start. 4) Reels and Threads are growing. 5) Llama 3 and AGI. Zuck is aiming to position Meta as a leader in the field  of AI without necessarily monopolizing control over it.</p>
+<blockquote>
+<p><strong>Microsoft: AI at Scale</strong> [<a target="_blank" rel="noopener" href="https://www.appeconomyinsights.com/p/microsoft-ai-at-scale">Link</a>]</p>
+</blockquote>
+<p>Key business highlights: 1) AI’s impact on Azure’s growth: most essential revenue growth drivers are Azure OpenAI and OpenAI APIs, 2) small language models: Orca 2 leverages Meta’s Llama 2 base models, fine tuned with synthetic data, and Phi 2 is a transformer-based SLM designed for cloud and edge deployment, 3) new custom AI chips: Microsoft’s first custom chips - Maia and Cobalt. Maia 100 GPU is tailored for AI workloads, Cobalt 100 powers general cloud services, 4) rebranding Bing Chat as Copilot. 5) introducing a new key (Copilot key) on keyboard to Windows 11 PCs.</p>
+<p>What’s else in Microsoft’s portfolio: 1) Azure AI services gain more new customers, 2) Github Copilot revenue accelerated, 3) Microsoft 365 Copilot show faster customer adoption, 4) LinkedIn, 5) Search - not gaining market share in Search, 6) Gaming: with acquisition of Activision Blizzard, hundreds of millions of gamers are added in to the ecosystem. Innovation of cloud gaming improves player experience. 7) Paid Office 365 commercial seats.</p>
+<blockquote>
+<p><em>The Digital Markets Act (DMA) is a European Union regulation designed to promote fair competition and innovation in the digital sector by preventing large tech companies from monopolizing the market. It aims to ensure consumers have more choices and access to diverse digital services by regulating the practices of platforms acting as digital “gatekeepers.”</em></p>
+<p><strong>―  Apple App Store Shenanigans</strong> [<a target="_blank" rel="noopener" href="https://www.appeconomyinsights.com/p/apple-app-store-shenanigans">Link</a>]</p>
+</blockquote>
+<p>Recent news highlights: 1) as DMA compliance, Apple will allow for third-party stores and payment systems to App Store in Europe, so the developers can avoid 30% fee from Apple, 2) EU fines Apple €500M for unfairly competing with Spotify by restricting it from linking out to its own website for subscriptions. These anticompetitive practices by favoring its services over rivals have a bad impact on Apple’s reputation. 3) revenue from China is continuously declining.</p>
+<p>What is coming: 1) Vision Pro has 600+ native apps and games, and is supported by mixed streaming (Disney+, Prime Video). But Netflix and YouTube have held back. TikTok launched a native Vision Pro App tailored for an immersive viewing experience. 2) AI.</p>
+<blockquote>
+<p><em>In a context where the crux of the thesis is the durability of the demand for NVIDIA’s AI solutions, inference will likely become more crucial to future-proof the business.</em></p>
+<p><em>Jensen Huang previously described a ‘generative AI wave’ from one category to the next:</em></p>
+<ol>
+<li><em>→ Startups and CSPs.</em></li>
+<li><em>→ Consumer Internet.</em></li>
+<li><em>→ Software platforms.</em></li>
+<li><em>→ Enterprise and government.</em></li>
+</ol>
+<p><em>Huang continues to see three massive tailwinds:</em></p>
+<ol>
+<li><em>Transition from general-purpose to accelerated computing</em></li>
+<li><em>Generative AI.</em></li>
+<li><em>A whole new industry (think ChatGPT, Midjourney, or Gemini).</em></li>
+</ol>
+<p><em>History tells us that highly profitable industries tend to attract more competition, leading to mean reversion for the best performers.</em></p>
+<p><strong>―  Nvidia at Tipping Point</strong> [<a target="_blank" rel="noopener" href="https://www.appeconomyinsights.com/p/nvidia-ai-tipping-point">Link</a>]</p>
+</blockquote>
+<p>AI system operate through two core stages: training and inference. Nvidia dominates the Training segment with its robust GPU but faces stiffer competition in the Inference segment with Intel, Qualcomm, etc.</p>
+<p>Nvidia’s equity portfolio: Arm Holdings (ARM), Recursion Pharmaceuticals (RXRX), SoundHound AI (SOUN), TuSimple (TSPH), Nano-X Imaging (NNOX), showing Nvidia’s expansive approach to AI.</p>
+<p>Microsoft developed custom AI chips Maia and Cobalt to lessen reliance on Nvidia and benefit OpenAI. This shows a desire for self-reliance across Nvidia’s largest customers, which could challenge the company’s dominance in AI accelerators.</p>
+<p>Key business highlights: 1) Nvidia has three major customer categories: Cloud Service Providers (CSPs) for all hyperscalers (Amazon, Microsoft, Google), consumer internet companies such as Meta who invested in 350000 H100s from Nvidia, and enterprise such as Adobe, Databricks, and Snowflake who are adding AI copilots to their platforms. 2) Sovereign AI. </p>
+<blockquote>
+<p><strong>Reddit IPO: Key Takeaways</strong> [<a target="_blank" rel="noopener" href="https://www.appeconomyinsights.com/p/reddit-ipo-key-takeaways">Link</a>]</p>
+</blockquote>
+<h3 id="YouTube"><a href="#YouTube" class="headerlink" title="YouTube"></a>YouTube</h3><blockquote>
+<p><strong>Apple Vision Pro Vs. Meta Quest: The Ultimate Showdown</strong> [<a target="_blank" rel="noopener" href="https://youtu.be/u2rAScMGwo0">Link</a>]</p>
+<p><strong>Apple Vision Pro review: magic, until it’s not</strong> [<a target="_blank" rel="noopener" href="https://youtu.be/hdwaWxY11jQ">Link</a>] [<a target="_blank" rel="noopener" href="https://www.theverge.com/24054862/apple-vision-pro-review-vr-ar-headset-features-price">Link</a>]</p>
+</blockquote>
+<p>Apple Vision Pro launched on Feb 2, 2024 at $3,499. It’s interesting that Meta and Apple are starting on opposite ends of the spectrum. Meta quest has the right price and will try to improve the technology overtime. Apple Vision Pro has the right technology and will try to lower the price overtime. With a price of 3499, Apple is targeting the high end of the market, not aiming for a mass market product in the first iteration. Instead their sights are set on the early adaptors. It’s a pattern that most Apple products take several years to achieve the mass production. The first iteration of iPhone in 2007 was a soft launch. iPhone didn’t crack 10M units per quarter until the iPhone 4 in late 2010. Now Apple sells about 200M iPhones every year. So it’s highly possible that mass adoption of technologically improved mixed-reality headsets with more affordable pricing is coming in a decade.</p>
+<blockquote>
+<p><strong>Microsoft Game Day Commercial | Copilot: Your everyday AI companion</strong> [<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=SaCVSUbYpVc&ab_channel=Microsoft">Link</a>]</p>
+</blockquote>
+<p>Microsoft’s first Super Bowl Commercial to highlight its transformation into an AI-centric company, with a focus on Copilot’s ability of simplifying coding and digital art creation, etc.</p>
 
       
     </div>
@@ -1012,7 +1117,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-27 00:12:52" itemprop="dateModified" datetime="2024-04-27T00:12:52-04:00">2024-04-27</time>
+      <time title="Modified: 2024-04-27 10:41:49" itemprop="dateModified" datetime="2024-04-27T10:41:49-04:00">2024-04-27</time>
     </span>
 
   
@@ -1089,9 +1194,15 @@
 <h3 id="SubStack"><a href="#SubStack" class="headerlink" title="SubStack"></a>SubStack</h3><blockquote>
 <p><strong>Tesla: AI &amp; Robotics</strong> [<a target="_blank" rel="noopener" href="https://open.substack.com/pub/appeconomyinsights/p/tesla-ai-and-robotics?r=333z5o&utm_medium=ios">Link</a>]</p>
 </blockquote>
-<p>What Tesla is experiencing: 1) price cuts, 2) prioritizing volume and fleet growth, 3) continued improvement in the cost of goods sold per vehicle. What negatively impact gross margin are 1) price cuts, 2) Cybertruck production ramp, 3) AI, 4) other product expenses. What positively impact gross margin are 1) lower cost per vehicle, 2) delivery growth, 3) gross margin improvement for non-auto segments. What to watch of Tesla’s business: 1) Model Y Triumph, 2) supercharging the EV market (North American Charging Standard (NACS)), 3) market share hit 4% in North America, 4) Autopilot and Full Self-Driving (FSD) beta software (V12), 5) energy storage deployments (15 gigawatt hours of batteries delivered), 5) Optimus humanoid robot, 6) next generation platform “Redwood”, 7) Dojo</p>
+<p>What Tesla is experiencing: 1) price cuts, 2) prioritizing volume and fleet growth, 3) continued improvement in the cost of goods sold per vehicle. What negatively impact gross margin are 1) price cuts, 2) Cybertruck production ramp, 3) AI, 4) other product expenses. What positively impact gross margin are 1) lower cost per vehicle, 2) delivery growth, 3) gross margin improvement for non-auto segments. What to watch of Tesla’s business: 1) Model Y Triumph, 2) supercharging the EV market (North American Charging Standard (NACS)), 3) market share hit 4% in North America, 4) Autopilot and Full Self-Driving (FSD) beta software (V12), 5) energy storage deployments (15 gigawatt hours of batteries delivered), 5) Optimus humanoid robot, 6) next generation platform “Redwood”, 7) Dojo supercomputer.</p>
 <blockquote>
+<p><em>The Netherlands has restricted the export of ASML’s cutting-edge extreme ultraviolet (EUV) lithography machines to China, a decision influenced by international diplomatic pressures, notably from the US.</em></p>
 <p><strong>ASML: Advanced Chip Monopoly</strong> [<a target="_blank" rel="noopener" href="https://open.substack.com/pub/appeconomyinsights/p/asml-advanced-chip-monopoly?r=333z5o&utm_medium=ios">Link</a>]</p>
+</blockquote>
+<p>ASML is the sole producer of advanced EUV lithorgraphy machines at the center of global chip supply chain. Since the restriction of export of EUV lithography machines to China, it is now also at the mercy of the US-China trade war. There is a list of risk ASML is facing: IP theft and security breaches, cybersecurity costs, China’s ambitions of developing its semiconductor sector, semiconductor industry volatility (shortage and gluts), etc. </p>
+<h3 id="Paper-and-Reports"><a href="#Paper-and-Reports" class="headerlink" title="Paper and Reports"></a>Paper and Reports</h3><blockquote>
+<p><strong>The economic potential of generative AI: The next productivity frontier</strong> [[Link](<a target="_blank" rel="noopener" href="https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/the-economic-potential-of-generative-ai-the-next-productivity-frontier">https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/the-economic-potential-of-generative-ai-the-next-productivity-frontier</a><br> Sent from McKinsey Insights, available in App Store: <a target="_blank" rel="noopener" href="https://itunes.apple.com/us/app/mckinsey-insights/id674902075?mt=8">https://itunes.apple.com/us/app/mckinsey-insights/id674902075?mt=8</a> and Play Store: <a target="_blank" rel="noopener" href="https://play.google.com/store/apps/details?id=com.mckinsey.mckinseyinsights)%5D">https://play.google.com/store/apps/details?id=com.mckinsey.mckinseyinsights)]</a></p>
+<p><strong>McKinsey Technology Trends Outlook 2023</strong> [[Link](<a target="_blank" rel="noopener" href="https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/the-top-trends-in-tech">https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/the-top-trends-in-tech</a><br> Sent from McKinsey Insights, available in App Store: <a target="_blank" rel="noopener" href="https://itunes.apple.com/us/app/mckinsey-insights/id674902075?mt=8">https://itunes.apple.com/us/app/mckinsey-insights/id674902075?mt=8</a> and Play Store: <a target="_blank" rel="noopener" href="https://play.google.com/store/apps/details?id=com.mckinsey.mckinseyinsights)%5D">https://play.google.com/store/apps/details?id=com.mckinsey.mckinseyinsights)]</a></p>
 </blockquote>
 
       
