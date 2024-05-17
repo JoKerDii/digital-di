@@ -27,7 +27,7 @@
 <meta property="og:description" content="Substack To me, the best model going forward is going to be based on the weighted performance per parameter and training token count. Ultimately, a model keeps getting better the longer you train it.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-05-04T13:08:51.000Z">
-<meta property="article:modified_time" content="2024-05-16T02:47:09.019Z">
+<meta property="article:modified_time" content="2024-05-17T05:15:35.689Z">
 <meta property="article:author" content="Di Zhen">
 <meta property="article:tag" content="readings">
 <meta name="twitter:card" content="summary">
@@ -105,7 +105,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Substack"><span class="nav-number">1.</span> <span class="nav-text">Substack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Articles"><span class="nav-number">2.</span> <span class="nav-text">Articles</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#YouTube"><span class="nav-number">3.</span> <span class="nav-text">YouTube</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Papers-and-Reports"><span class="nav-number">4.</span> <span class="nav-text">Papers and Reports</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#News"><span class="nav-number">5.</span> <span class="nav-text">News</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Substack"><span class="nav-number">1.</span> <span class="nav-text">Substack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Articles"><span class="nav-number">2.</span> <span class="nav-text">Articles</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#YouTube"><span class="nav-number">3.</span> <span class="nav-text">YouTube</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Papers-and-Reports"><span class="nav-number">4.</span> <span class="nav-text">Papers and Reports</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GitHub-Repo"><span class="nav-number">5.</span> <span class="nav-text">GitHub Repo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#News"><span class="nav-number">6.</span> <span class="nav-text">News</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -186,7 +186,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-15 22:47:09" itemprop="dateModified" datetime="2024-05-15T22:47:09-04:00">2024-05-15</time>
+      <time title="Modified: 2024-05-17 01:15:35" itemprop="dateModified" datetime="2024-05-17T01:15:35-04:00">2024-05-17</time>
     </span>
 
   
@@ -295,15 +295,16 @@
 </blockquote>
 <p>Human comes into a new stage of learning: smartly asking AI questions to get answers as accurate as possible. So prompt engineering is a very important skill in AI era. In order to master prompt engineering, we need to have divide and conquer mindset, perfect first-principle thinking, critical thinking, and skepticism.</p>
 <blockquote>
+<p><em>If we had infinite capacity for memorisation, it’s clear the transformer approach is better than the human approach - it truly is more effective. But it’s less efficient - transformers have to store so much information about the past that might not be relevant. Transformers (🤖) only decide what’s relevant at <strong>recall time</strong>. The innovation of Mamba (🐍) is allowing the model better ways of forgetting earlier - it’s focusing by choosing what to discard using <strong>Selectivity</strong>, throwing away less relevant information at <strong>memory-making time</strong>.</em></p>
+<p><strong>―  Mamba Explained</strong> [<a target="_blank" rel="noopener" href="https://thegradient.pub/mamba-explained/">Link</a>]</p>
+</blockquote>
+<p>A very in-depth explanation of Mamba architecture. So the main difference between Transformer and Mamba is that Transformer stores all past information and decides what is relevant at recall time. While Mamba uses Selectivity to decide what to discard earlier. Mamba ensures both efficiency and effectiveness (space complexity reduces from O(n) to O(1), time complexity reduces from O(n^2) to O(n)). If Transformer has high effectiveness and low efficiency due to large state, and RNN has high efficiency and low effectiveness due to small state, Mamba is in between - Mamba selectively and dynamically compress data into the state.</p>
+<blockquote>
 <p><strong>Chatbot Arena results are in: Llama 3 dominates the upper and mid cost-performance front (full analysis) ― Reddit</strong> [<a target="_blank" rel="noopener" href="https://www.reddit.com/r/LocalLLaMA/comments/1cakcfq/chatbot_arena_results_are_in_llama_3_dominates/">Link</a>]</p>
 </blockquote>
 <blockquote>
 <p><strong>Efficiently fine-tune Llama 3 with PyTorch FSDP and Q-Lora</strong> [<a target="_blank" rel="noopener" href="https://www.philschmid.de/fsdp-qlora-llama3">Link</a>]</p>
 </blockquote>
-<blockquote>
-<p><strong>Mamba Explained</strong> [<a target="_blank" rel="noopener" href="https://thegradient.pub/mamba-explained/">Link</a>]</p>
-</blockquote>
-<p>A very in-depth explanation of Mamba architecture.</p>
 <h3 id="YouTube"><a href="#YouTube" class="headerlink" title="YouTube"></a>YouTube</h3><blockquote>
 <p><em>I don’t have an answer to peace in the Middle East, I wish I did, but I do have a very strong view that we are not going to get to peace when we are apologizing or denying crimes against humanity and crime mass rape of women. That’s not the path to peace, the path to peace is not saying this didn’t happen, the path to peace is saying this happened no matter what side of the fence you are on no matter what side of the world you are on, if you are the far right the far left, anywhere on the world, we are not going to let this happen again and we are going to get to peace to make sure.  - Sheryl Sandberg</em></p>
 <p><strong>―  In conversation with Sheryl Sandberg, plus open-source AI gene editing explained</strong> [<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=OxbtNsenZJY&ab_channel=All-InPodcast">Link</a>]</p>
@@ -373,6 +374,15 @@
 </blockquote>
 <blockquote>
 <p><strong>The Unreasonable Ineffectiveness of the Deeper Layers</strong> [<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2403.17887">Link</a>]</p>
+</blockquote>
+<h3 id="GitHub-Repo"><a href="#GitHub-Repo" class="headerlink" title="GitHub Repo"></a>GitHub Repo</h3><blockquote>
+<p><strong>Google Research Tune Playbook - GitHub</strong> [<a target="_blank" rel="noopener" href="https://github.com/google-research/tuning_playbook">Link</a>]</p>
+</blockquote>
+<blockquote>
+<p><strong>ML Engineering - GitHub</strong>  [<a target="_blank" rel="noopener" href="https://github.com/stas00/ml-engineering">Link</a>]</p>
+</blockquote>
+<blockquote>
+<p><strong>LLM from Scratch</strong> [<a target="_blank" rel="noopener" href="https://github.com/rasbt/LLMs-from-scratch/tree/main">Link</a>]</p>
 </blockquote>
 <h3 id="News"><a href="#News" class="headerlink" title="News"></a>News</h3><blockquote>
 <p><strong>Intel Inside Ohio</strong> [<a target="_blank" rel="noopener" href="https://www.bloomberg.com/features/2024-intel-comeback-chipmaking/">Link</a>]</p>
