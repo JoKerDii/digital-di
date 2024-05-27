@@ -179,7 +179,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-27 00:39:20" itemprop="dateModified" datetime="2024-05-27T00:39:20-04:00">2024-05-27</time>
+      <time title="Modified: 2024-05-27 16:41:43" itemprop="dateModified" datetime="2024-05-27T16:41:43-04:00">2024-05-27</time>
     </span>
 
   
@@ -350,6 +350,17 @@
 <p>Huang explained in the earning call that AI is not a chip problem only but also a systems problem now. They build AI factories.</p>
 <p>For further growth, Blackwell platform is coming, Spectrum-X networking is expanding, new software tools like NIMs is developing.</p>
 <blockquote>
+<p><em>A lot of current research focuses on LLM architectures, data sources prompting, and alignment strategies. While these can lead to better performance, such developments have 3 inter-related critical flaws-</em> </p>
+<ol>
+<li><em>They mostly work by increasing the computational costs of training and&#x2F;or inference.</em> </li>
+<li><em>They are a lot more fragile than people realize and don’t lead to the across-the-board improvements that a lot of Benchmark Bros pretend.</em> </li>
+<li><em>They are incredibly boring. A focus on getting published&#x2F;getting a few pyrrhic victories on benchmarks means that these papers focus on making tweaks instead of trying something new, pushing boundaries, and trying to address the deeper issues underlying these processes.</em></li>
+</ol>
+<p><strong>― Revolutionizing AI Embeddings with Geometry [Investigations] - Devansh</strong> [<a target="_blank" rel="noopener" href="https://artificialintelligencemadesimple.substack.com/p/revolutionizing-ai-embeddings-with">Link</a>]</p>
+</blockquote>
+<p>Very few AI research work don’t have # 1 and # 3 flaws and they are really good hard-core work. Time is required to verify whether they are generalizable, widely applicable or not. Especially nowadays the process of scientific research is very different from previous years where there was usually a decade between starting your work and publishing it.</p>
+<p>This article highlights some publications in complex embedding and looked into how they improved embeddings by using complex numbers. Current challenges in embedding are 1) sensitivity to outliers 2) limited capacity in capture complex relationship in unstructured text, 3) inconsistency in pairwise rankings of similarities, and 4) computational cost. The next generation complex embedding is benefitting from the following pillars: 1) complex geometry provides richer space to capture nuanced relationships and handle outliers, 2) orthogonality allows each dimension to be independent and distinct, 3) contrastive learning can be used to minimize the distance between similar pairs and maximize the distance between dissimilar pairs. Complex embeddings have a lot of advantages: 1) increasing representation capacity with two components (real and imaginary) of complex numbers, 2) complex geometry allows for orthogonality and thus improves generalization, and also allows use to reach stable convergence quickly, 3) robust features can be captured which improves robustness, and 4) solved limitation of cosine similarity (saturation zones which lead to vanishing gradients during optimization) by angle optimization in complex space.</p>
+<blockquote>
 <p><strong>Google I&#x2F;O AI keynote updates 2024 - AI Supremacy</strong> [<a target="_blank" rel="noopener" href="https://www.ai-supremacy.com/p/google-io-ai-keynote-updates-2024?r=333z5o&utm_medium=ios&triedRedirect=true">Link</a>] </p>
 <p><strong>Streaming Wars Visualized - App Economy Insights</strong> [<a target="_blank" rel="noopener" href="https://open.substack.com/pub/appeconomyinsights/p/streaming-wars-visualized?r=333z5o&utm_medium=ios">Link</a>]</p>
 <p><strong>This Week in Visuals - App Economy Insights</strong> [<a target="_blank" rel="noopener" href="https://www.appeconomyinsights.com/p/this-week-in-visuals?lli=1&utm_source=profile&utm_medium=reader2">Link</a>]</p>
@@ -519,8 +530,16 @@
 </blockquote>
 <p>This is a mathematically beautiful idea. The main difference between traditional MLP and KAN is that KAN have learnable activation function on weights, so all weights in KAN are non-linear. KAN outperforms MLP in accuracy and interpretability. Whether in the future KAN is able to replace MLP depends on whether there could be suitable learning algorithms like SGD, AdamW, etc and whether it will be GPU friendly.</p>
 <blockquote>
+<p><strong>The Platonic Representation Hypothesis</strong> [<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2405.07987">Link</a>]</p>
+</blockquote>
+<p>Interesting paper to read if you like philosophy. This paper argues that there is a platonic representation as a result of convergence of AI models towards a shared statistical model of reality. They show that there is a growing similarity in data representation across different model architectures, training objectives, and data modalities, as the model size, data size, and task diversity are growing. They also proposed three hypothesis for the representation convergence: 1) The multitask scaling hypothesis, 2) The capacity hypothesis, and 3) The simplicity bias hypothesis. And it definitely worths reading the counterexamples and limitations. </p>
+<blockquote>
+<p><strong>Frontier Safety Framework - Google DeepMind</strong> [<a target="_blank" rel="noopener" href="https://storage.googleapis.com/deepmind-media/DeepMind.com/Blog/introducing-the-frontier-safety-framework/fsf-technical-report.pdf">Link</a>]</p>
+</blockquote>
+<blockquote>
 <p><strong>DeepSeek-V2: A Strong, Economical, and Efficient Mixture-of-Experts Language Model</strong> [<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2405.04434">Link</a>] </p>
 </blockquote>
+<p>One main improvement: Multi-head latent attention via compressed latent KV requires smaller amount of KV cache per token but achieves stronger performance. Heads can be compressed differently (taking different portion of compressed latent states), and keys and values can be compressed differently.</p>
 <blockquote>
 <p><strong>What matters when building vision-language models</strong> [<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2405.02246">Link</a>]</p>
 </blockquote>
@@ -541,6 +560,29 @@
 <p><strong>Chameleon: Mixed-Modal Early-Fusion Foundation Models</strong> [<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2405.09818">Link</a>]</p>
 </blockquote>
 <p>This paper published by Meta proposed a mixed model which uses Transformer architecture under the covers but applies some innovations such as query-key normalization to fix the imbalance between the text and image tokens and other innovations as well.</p>
+<blockquote>
+<p><strong>Algorithmic Progress in Language Models</strong> [<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2403.05812">Link</a>]</p>
+</blockquote>
+<blockquote>
+<p><strong>Physics of Language Models: Part 3.3, Knowledge Capacity Scaling Laws</strong> [<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2404.05405">Link</a>]</p>
+</blockquote>
+<blockquote>
+<p><strong>Efficient Multimodal Large Language Models: A Survey</strong> [<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2405.10739v1">Link</a>]</p>
+</blockquote>
+<p>Good overview of multimodal LLMs.</p>
+<blockquote>
+<p><strong>Financial Statement Analysis with Large Language Models</strong> [<a target="_blank" rel="noopener" href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4835311">Link</a>]</p>
+</blockquote>
+<blockquote>
+<p><strong>LoRA Learns Less and Forgets Less</strong> [<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2405.09673">Link</a>]</p>
+</blockquote>
+<blockquote>
+<p><strong>Lessons from the Trenches on Reproducible Evaluation of Language Models</strong> [<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2405.14782">Link</a>]</p>
+</blockquote>
+<p>Challenges and best practices in evaluating LLMs.</p>
+<blockquote>
+<p><strong>Agent Planning with World Knowledge Model</strong>  [<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2405.14205">Link</a>]</p>
+</blockquote>
 <h3 id="GitHub-Repo"><a href="#GitHub-Repo" class="headerlink" title="GitHub Repo"></a>GitHub Repo</h3><blockquote>
 <p><strong>Google Research Tune Playbook - GitHub</strong> [<a target="_blank" rel="noopener" href="https://github.com/google-research/tuning_playbook">Link</a>]</p>
 </blockquote>
@@ -552,6 +594,15 @@
 </blockquote>
 <blockquote>
 <p><strong>Prompt Engineering Guide</strong> [<a target="_blank" rel="noopener" href="https://github.com/dair-ai/Prompt-Engineering-Guide">Link</a>] [<a target="_blank" rel="noopener" href="https://www.promptingguide.ai/">Link</a>]</p>
+</blockquote>
+<blockquote>
+<p><strong>ChatML + chat templates + Mistral v3 7b full example</strong> [<a target="_blank" rel="noopener" href="https://colab.research.google.com/drive/15F1xyn8497_dUbxZP4zWmPZ3PJx1Oymv?usp=sharing">Link</a>]</p>
+</blockquote>
+<blockquote>
+<p><strong>Finetune pythia 70M</strong> [<a target="_blank" rel="noopener" href="https://colab.research.google.com/gist/virattt/af36fd12480827da3f8427169b3348cb/finetuning-pythia-70m.ipynb">Link</a>]</p>
+</blockquote>
+<blockquote>
+<p><strong>Llama3 Implemented from Scratch</strong> [<a target="_blank" rel="noopener" href="https://github.com/naklecha/llama3-from-scratch">Link</a>]</p>
 </blockquote>
 <h3 id="News"><a href="#News" class="headerlink" title="News"></a>News</h3><blockquote>
 <p><strong>Intel Inside Ohio</strong> [<a target="_blank" rel="noopener" href="https://www.bloomberg.com/features/2024-intel-comeback-chipmaking/">Link</a>]</p>
