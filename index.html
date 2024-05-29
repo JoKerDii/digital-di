@@ -179,7 +179,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-27 16:41:43" itemprop="dateModified" datetime="2024-05-27T16:41:43-04:00">2024-05-27</time>
+      <time title="Modified: 2024-05-29 01:12:14" itemprop="dateModified" datetime="2024-05-29T01:12:14-04:00">2024-05-29</time>
     </span>
 
   
@@ -361,6 +361,28 @@
 <p>Very few AI research work don’t have # 1 and # 3 flaws and they are really good hard-core work. Time is required to verify whether they are generalizable, widely applicable or not. Especially nowadays the process of scientific research is very different from previous years where there was usually a decade between starting your work and publishing it.</p>
 <p>This article highlights some publications in complex embedding and looked into how they improved embeddings by using complex numbers. Current challenges in embedding are 1) sensitivity to outliers 2) limited capacity in capture complex relationship in unstructured text, 3) inconsistency in pairwise rankings of similarities, and 4) computational cost. The next generation complex embedding is benefitting from the following pillars: 1) complex geometry provides richer space to capture nuanced relationships and handle outliers, 2) orthogonality allows each dimension to be independent and distinct, 3) contrastive learning can be used to minimize the distance between similar pairs and maximize the distance between dissimilar pairs. Complex embeddings have a lot of advantages: 1) increasing representation capacity with two components (real and imaginary) of complex numbers, 2) complex geometry allows for orthogonality and thus improves generalization, and also allows use to reach stable convergence quickly, 3) robust features can be captured which improves robustness, and 4) solved limitation of cosine similarity (saturation zones which lead to vanishing gradients during optimization) by angle optimization in complex space.</p>
 <blockquote>
+<p><em>Llama 3 8B might be the most interesting all-rounder for fine-tuning as it can be fine-tuned no a single GPU when using LoRA.</em></p>
+<p><em>Phi-3 is very appealing for mobile devices. A quantized version of it can run on an iPhone 14.</em></p>
+<p><strong>How Good Are the Latest Open LLMs? And Is DPO Better Than PPO?</strong> [<a target="_blank" rel="noopener" href="https://magazine.sebastianraschka.com/p/how-good-are-the-latest-open-llms">Link</a>]</p>
+</blockquote>
+<p>Good paper review article. Highlights key discussions:</p>
+<ul>
+<li><p>Mixtral 8x22B: The key idea is to replace each feed-forward module in a transformer architecture with 8 expert layers. It achieves lower active parameters (cost) and higher performance (MMLU).</p>
+</li>
+<li><p>Llama 3: The main difference between Llama 3 and Llama 2 are 1) vocab size has been increased, 2) used grouped-query attention, 3) used both PPO &amp; DPO. The key research finding is that the more data the better performance, no matter what model size is. </p>
+<p>“Llama 3 8B might be the most interesting all-rounder for fine-tuning as it can be fine-tuned no a single GPU when using LoRA.”</p>
+</li>
+<li><p>Phi-3: Key characteristics are 1) it’s based on Llama architecture, 2) trained on 5x fewer tokens than Llama 3, 3) used the same tokenizer with a vocab size of 32064 as Llama2, much smaller than Llama 3 vocab size, 4) has only 3.8B parameters, less than half the size of Llama 3 8B, 5) secret sauce is dataset quality over quantity - it’s trained on heavily filtered web data and synthetic data. </p>
+<p>“Phi-3 is very appealing for mobile devices. A quantized version of it can run on an iPhone 14.”</p>
+</li>
+<li><p>OpenELM: key characteristics are 1) 4 relatively small sizes: 270M, 450M,1.1B, and 3B, 2) instruct version trained with rejection sampling and DPO, 3) slightly better than OLMo in performance, even though trained on 2x fewer tokens, 4) main architecture teak - a layer-wise scaling strategy, 5) sampled a relatively smaller subset of 1.8T tokens from various public datasets, but no clear rationale for subsampling, 6) one main research finding is that there is no clear difference between LoRA and DoRA for parameter efficient fine-tuning.</p>
+<p>About the layer-wise scaling strategy: 1) there are N transformer blocks in a model, 2) layers are gradually widened from the early to the later transformer blocks, so for each block: a) number of heads are increased, b) dimension of each layer is increased.</p>
+</li>
+<li><p>DPO vs PPO: The main difference between DPO and PPO is that “DPO does not require training a separate reward model but uses a classification-like objective to update LLM directly”. </p>
+<p>Key findings of the paper and best practices suggested: 1) PPO is generally better than DPO if you use it correctly. DPO suffers from out-of-distribution data, which means instruction data is different from preference data. The solution could be to “add a supervised instruction fine-tuning round on the preference dataset before following up with DPO fine-tuning.”, 2) If you use DPO, make sure to perform SFT on preference data first, 3) “iterative DPO which involves labeling additional data with an existing reward model is better than DPO on existing preference data.”, 4) “If you use PPO, the key is to use large batch sizes, advantage normalization, and parameter update via exponential moving average.”, 5) though PPO is generally better, DPO is more straightforward and will still be a popular go-to option, 6) both can be used. Recall the pipeline behind Llama3: pretraining -&gt; SFT -&gt; rejection sampling -&gt; PPO -&gt; DPO.</p>
+</li>
+</ul>
+<blockquote>
 <p><strong>Google I&#x2F;O AI keynote updates 2024 - AI Supremacy</strong> [<a target="_blank" rel="noopener" href="https://www.ai-supremacy.com/p/google-io-ai-keynote-updates-2024?r=333z5o&utm_medium=ios&triedRedirect=true">Link</a>] </p>
 <p><strong>Streaming Wars Visualized - App Economy Insights</strong> [<a target="_blank" rel="noopener" href="https://open.substack.com/pub/appeconomyinsights/p/streaming-wars-visualized?r=333z5o&utm_medium=ios">Link</a>]</p>
 <p><strong>This Week in Visuals - App Economy Insights</strong> [<a target="_blank" rel="noopener" href="https://www.appeconomyinsights.com/p/this-week-in-visuals?lli=1&utm_source=profile&utm_medium=reader2">Link</a>]</p>
@@ -528,7 +550,7 @@
 <blockquote>
 <p><strong>KAN: Kolmogorov-Arnold Networks</strong> [<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2404.19756">Link</a>] [<a target="_blank" rel="noopener" href="https://github.com/KindXiaoming/pykan?tab=readme-ov-file#authors-note">authors-note</a>]</p>
 </blockquote>
-<p>This is a mathematically beautiful idea. The main difference between traditional MLP and KAN is that KAN have learnable activation function on weights, so all weights in KAN are non-linear. KAN outperforms MLP in accuracy and interpretability. Whether in the future KAN is able to replace MLP depends on whether there could be suitable learning algorithms like SGD, AdamW, etc and whether it will be GPU friendly.</p>
+<p>This is a mathematically beautiful idea. The main difference between traditional MLP and KAN is that KAN has learnable activation function on weights, so all weights in KAN are non-linear. KAN outperforms MLP in accuracy and interpretability. Whether in the future KAN is able to replace MLP depends on whether there could be suitable learning algorithms like SGD, AdamW, etc and whether it will be GPU friendly.</p>
 <blockquote>
 <p><strong>The Platonic Representation Hypothesis</strong> [<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2405.07987">Link</a>]</p>
 </blockquote>
@@ -547,9 +569,6 @@
 <p><strong>The Unreasonable Ineffectiveness of the Deeper Layers</strong> [<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2403.17887">Link</a>]</p>
 </blockquote>
 <blockquote>
-<p><strong>D2PO: Discriminator-Guided DPO with Response Evaluation Models</strong> [<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2405.01511">Link</a>]</p>
-</blockquote>
-<blockquote>
 <p><strong>RecurrentGemma: Moving Past Transformers for Efficient Open Language Models</strong> [<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2404.07839">Link</a>]</p>
 </blockquote>
 <p>This paper published by Google DeepMind proposes language model called <a target="_blank" rel="noopener" href="https://ai.google.dev/gemma/docs/recurrentgemma">RecurrentGemma</a> that can match or exceed the performance of transformer-based models while being more memory efficient.</p>
@@ -560,6 +579,18 @@
 <p><strong>Chameleon: Mixed-Modal Early-Fusion Foundation Models</strong> [<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2405.09818">Link</a>]</p>
 </blockquote>
 <p>This paper published by Meta proposed a mixed model which uses Transformer architecture under the covers but applies some innovations such as query-key normalization to fix the imbalance between the text and image tokens and other innovations as well.</p>
+<blockquote>
+<p><strong>Simple and Scalable Strategies to Continually Pre-train Large Language Models</strong> [[Link](<a target="_blank" rel="noopener" href="https://arxiv.org/">https://arxiv.org/</a> pdf&#x2F;2403.08763)]</p>
+</blockquote>
+<p>Tricks for successful continued pretraining:</p>
+<ol>
+<li>﻿﻿﻿Re-warming and re-decaying the learning rate.</li>
+<li>﻿﻿﻿Adding a small portion (e.g., 5%) of the original pretraining data (D1) to the new dataset (D2) to prevent catastrophic forgetting.<br> Note that smaller fractions like 0.5% and 1% were also effective.</li>
+</ol>
+<p>Cautious about their validity on model with larger sizes.</p>
+<blockquote>
+<p><strong>Is DPO Superior to PPO for LLM Alignment? A Comprehensive Study</strong> [<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2404.10719">Link</a>]</p>
+</blockquote>
 <blockquote>
 <p><strong>Algorithmic Progress in Language Models</strong> [<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2403.05812">Link</a>]</p>
 </blockquote>
