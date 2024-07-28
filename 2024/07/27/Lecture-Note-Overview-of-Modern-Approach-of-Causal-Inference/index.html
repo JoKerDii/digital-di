@@ -27,7 +27,7 @@
 <meta property="og:description" content="This is one of my notes of the online Causal Inference Course in Columbia University, taught by Michael E. Sobel who is a professor in the Department of Statistics. It would be good to have this overv">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-07-27T22:22:52.000Z">
-<meta property="article:modified_time" content="2024-07-28T01:26:02.918Z">
+<meta property="article:modified_time" content="2024-07-28T02:05:59.859Z">
 <meta property="article:author" content="Di Zhen">
 <meta property="article:tag" content="knowledge">
 <meta name="twitter:card" content="summary">
@@ -53,7 +53,11 @@
   <noscript>
     <link rel="stylesheet" href="/digital-di/css/noscript.css">
   </noscript>
-</head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
   <div class="headband"></div>
@@ -105,7 +109,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Modern-Approach-for-Causal-Inference"><span class="nav-number">1.</span> <span class="nav-text">1 Modern Approach for Causal Inference</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Key-Features-of-Rubin%E2%80%99s-Approach"><span class="nav-number">1.1.</span> <span class="nav-text">Key Features of Rubin’s Approach:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Two-Key-Criteria-of-Modern-Causal-Inference"><span class="nav-number">1.2.</span> <span class="nav-text">Two Key Criteria of Modern Causal Inference</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Impact-on-Empirical-Research"><span class="nav-number">1.3.</span> <span class="nav-text">Impact on Empirical Research:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Challenges-in-Randomized-Studies"><span class="nav-number">1.4.</span> <span class="nav-text">Challenges in Randomized Studies:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Challenges-in-Observational-Studies"><span class="nav-number">1.5.</span> <span class="nav-text">Challenges in Observational Studies:</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Potential-Outcomes-Unit-and-Average-Effect"><span class="nav-number">2.</span> <span class="nav-text">2 Potential Outcomes, Unit, and Average Effect</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Potential-Outcomes-Framework"><span class="nav-number">2.1.</span> <span class="nav-text">Potential Outcomes Framework</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Average-Treatment-Effects"><span class="nav-number">2.2.</span> <span class="nav-text">Average Treatment Effects</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Practical-Implications"><span class="nav-number">2.3.</span> <span class="nav-text">Practical Implications</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Conditions-Allow-Average-Effects-be-Unbiasedly-Consistently-Estimated"><span class="nav-number">3.</span> <span class="nav-text">3 Conditions Allow Average Effects be Unbiasedly&#x2F; Consistently Estimated</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Key-Concepts"><span class="nav-number">3.1.</span> <span class="nav-text">Key Concepts</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Examples"><span class="nav-number">3.1.1.</span> <span class="nav-text">Examples</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ignorability-Condition"><span class="nav-number">3.2.</span> <span class="nav-text">Ignorability Condition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Practical-Implications-1"><span class="nav-number">3.3.</span> <span class="nav-text">Practical Implications</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Modern-Approach-for-Causal-Inference"><span class="nav-number">1.</span> <span class="nav-text">Modern Approach for Causal Inference</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Key-Features-of-Rubin%E2%80%99s-Approach"><span class="nav-number">1.1.</span> <span class="nav-text">Key Features of Rubin’s Approach:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Two-Key-Criteria-of-Modern-Causal-Inference"><span class="nav-number">1.2.</span> <span class="nav-text">Two Key Criteria of Modern Causal Inference</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Impact-on-Empirical-Research"><span class="nav-number">1.3.</span> <span class="nav-text">Impact on Empirical Research:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Challenges-in-Randomized-Studies"><span class="nav-number">1.4.</span> <span class="nav-text">Challenges in Randomized Studies:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Challenges-in-Observational-Studies"><span class="nav-number">1.5.</span> <span class="nav-text">Challenges in Observational Studies:</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Potential-Outcomes-Unit-and-Average-Effect"><span class="nav-number">2.</span> <span class="nav-text">Potential Outcomes, Unit, and Average Effect</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Potential-Outcomes-Framework"><span class="nav-number">2.1.</span> <span class="nav-text">Potential Outcomes Framework</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Average-Treatment-Effects"><span class="nav-number">2.2.</span> <span class="nav-text">Average Treatment Effects</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Practical-Implications"><span class="nav-number">2.3.</span> <span class="nav-text">Practical Implications</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Conditions-Allow-Average-Effects-be-Unbiasedly-Consistently-Estimated"><span class="nav-number">3.</span> <span class="nav-text">Conditions Allow Average Effects be Unbiasedly&#x2F; Consistently Estimated</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Key-Concepts"><span class="nav-number">3.1.</span> <span class="nav-text">Key Concepts</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Examples"><span class="nav-number">3.1.1.</span> <span class="nav-text">Examples</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ignorability-Condition"><span class="nav-number">3.2.</span> <span class="nav-text">Ignorability Condition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Practical-Implications-1"><span class="nav-number">3.3.</span> <span class="nav-text">Practical Implications</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -118,7 +122,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/digital-di/archives/">
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -180,7 +184,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2024-07-27 18:22:52 / Modified: 21:26:02" itemprop="dateCreated datePublished" datetime="2024-07-27T18:22:52-04:00">2024-07-27</time>
+      <time title="Created: 2024-07-27 18:22:52 / Modified: 22:05:59" itemprop="dateCreated datePublished" datetime="2024-07-27T18:22:52-04:00">2024-07-27</time>
     </span>
 
   
@@ -193,7 +197,7 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>This is one of my notes of the online Causal Inference Course in Columbia University, taught by Michael E. Sobel who is a professor in the Department of Statistics. It would be good to have this overview of causal inference regarding the framework in mind before getting into statistical and theoretical details especially for beginners. A clear approach framework is very important that it’s not only because rigorous experiment and analysis methods could be developed with this well-defined framework, but also because it can guide you to deal with challenging situations in a correct way, while being clear about the limitations and assumptions at the same time. This is why it became a Science.</p>
-<h1 id="1-Modern-Approach-for-Causal-Inference"><a href="#1-Modern-Approach-for-Causal-Inference" class="headerlink" title="1 Modern Approach for Causal Inference"></a>1 Modern Approach for Causal Inference</h1><p>The modern dominant approach for causal inference, significantly influenced by Donald Rubin’s contributions, primarily revolves around the following key ideas:</p>
+<h1 id="Modern-Approach-for-Causal-Inference"><a href="#Modern-Approach-for-Causal-Inference" class="headerlink" title="Modern Approach for Causal Inference"></a>Modern Approach for Causal Inference</h1><p>The modern dominant approach for causal inference, significantly influenced by Donald Rubin’s contributions, primarily revolves around the following key ideas:</p>
 <ol>
 <li><p>Potential Outcomes Framework:</p>
 <ul>
@@ -272,7 +276,7 @@
 </li>
 </ol>
 <p>These examples illustrate that both randomized and observational studies require careful consideration of various factors to ensure accurate and reliable causal inferences.</p>
-<h1 id="2-Potential-Outcomes-Unit-and-Average-Effect"><a href="#2-Potential-Outcomes-Unit-and-Average-Effect" class="headerlink" title="2 Potential Outcomes, Unit, and Average Effect"></a>2 Potential Outcomes, Unit, and Average Effect</h1><h2 id="Potential-Outcomes-Framework"><a href="#Potential-Outcomes-Framework" class="headerlink" title="Potential Outcomes Framework"></a>Potential Outcomes Framework</h2><ol>
+<h1 id="Potential-Outcomes-Unit-and-Average-Effect"><a href="#Potential-Outcomes-Unit-and-Average-Effect" class="headerlink" title="Potential Outcomes, Unit, and Average Effect"></a>Potential Outcomes, Unit, and Average Effect</h1><h2 id="Potential-Outcomes-Framework"><a href="#Potential-Outcomes-Framework" class="headerlink" title="Potential Outcomes Framework"></a>Potential Outcomes Framework</h2><ol>
 <li>Potential Outcomes:<ul>
 <li>Each unit (e.g., individual) has two potential outcomes: one if treated and one if not treated. However, only one outcome can be observed for each unit.</li>
 <li>This leads to the “fundamental problem of causal inference,” where we cannot observe both potential outcomes for a single unit.</li>
@@ -327,7 +331,7 @@
 </ul>
 </li>
 </ol>
-<h1 id="3-Conditions-Allow-Average-Effects-be-Unbiasedly-Consistently-Estimated"><a href="#3-Conditions-Allow-Average-Effects-be-Unbiasedly-Consistently-Estimated" class="headerlink" title="3 Conditions Allow Average Effects be Unbiasedly&#x2F; Consistently Estimated"></a>3 Conditions Allow Average Effects be Unbiasedly&#x2F; Consistently Estimated</h1><h2 id="Key-Concepts"><a href="#Key-Concepts" class="headerlink" title="Key Concepts"></a>Key Concepts</h2><ol>
+<h1 id="Conditions-Allow-Average-Effects-be-Unbiasedly-Consistently-Estimated"><a href="#Conditions-Allow-Average-Effects-be-Unbiasedly-Consistently-Estimated" class="headerlink" title="Conditions Allow Average Effects be Unbiasedly&#x2F; Consistently Estimated"></a>Conditions Allow Average Effects be Unbiasedly&#x2F; Consistently Estimated</h1><h2 id="Key-Concepts"><a href="#Key-Concepts" class="headerlink" title="Key Concepts"></a>Key Concepts</h2><ol>
 <li>Average Treatment Effect (ATE) Estimation:<ul>
 <li><strong>Random Sampling</strong>: Drawing random samples of treated ($y_1$) and untreated ($y_0$) units to estimate their respective means.</li>
 <li><strong>Sample Means</strong>: The means of treated ($\bar{y}_1$) and untreated ($\bar{y}_0$) samples serve as unbiased and consistent estimators of the population means.</li>
@@ -395,6 +399,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/digital-di/2024/07/27/Biased-and-Debiased-Machine-Learning-in-Causal-Inference/" rel="next" title="Biased and Debiased Machine Learning in Causal Inference">
+                  Biased and Debiased Machine Learning in Causal Inference <i class="fa fa-angle-right"></i>
+                </a>
             </div>
           </div>
     </footer>

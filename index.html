@@ -48,7 +48,11 @@
   <noscript>
     <link rel="stylesheet" href="/digital-di/css/noscript.css">
   </noscript>
-</head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
   <div class="headband"></div>
@@ -112,7 +116,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/digital-di/archives/">
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -134,6 +138,167 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jokerdii.github.io/digital-di/2024/07/27/Biased-and-Debiased-Machine-Learning-in-Causal-Inference/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/digital-di/images/avatar.gif">
+      <meta itemprop="name" content="Di Zhen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Di's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Di's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/digital-di/2024/07/27/Biased-and-Debiased-Machine-Learning-in-Causal-Inference/" class="post-title-link" itemprop="url">Biased and Debiased Machine Learning in Causal Inference</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2024-07-27 21:53:36 / Modified: 22:34:14" itemprop="dateCreated datePublished" datetime="2024-07-27T21:53:36-04:00">2024-07-27</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>The application of machine learning methods in estimating treatment effects is a burgeoning area in causal inference. The regression function $g$ and the propensity score $e$ used to estimate the average treatment effects can be estimated using machine learning methods like random forests. However, the naive applications of machine learning methods to estimate treatment effects lead to biased estimates due to regularization bias. The proof examines the asymptotic behavior of the estimator.</p>
+<h2 id="Proof-Process"><a href="#Proof-Process" class="headerlink" title="Proof Process"></a>Proof Process</h2><ol>
+<li><p><strong>Define the Model and Estimator</strong>:</p>
+<ul>
+<li>Assume a partially linear regression model where $Y$ is the outcome, $Z$ is the treatment indicator, and $X$ represents covariates.</li>
+<li>The regression function $g(X)$ and the propensity score $e(X)$ are modeled non-parametrically using machine learning methods.</li>
+</ul>
+</li>
+<li><p><strong>Assumptions</strong>:</p>
+<ul>
+<li>Treatment assignment $Z$ is unconfounded given covariates $X$.</li>
+<li>Residuals (errors) satisfy usual assumptions (e.g., mean zero, finite variance).</li>
+</ul>
+</li>
+<li><p><strong>Estimator Definition</strong>:</p>
+<ul>
+<li>Split the data into two groups.</li>
+<li>Estimate $g(X)$ using the second group with a machine learning method.</li>
+<li>Regress $Y−\hat{g}(X)$ on $Z$ in the first group to obtain the estimator $\hat{\theta}$ for the treatment effect.</li>
+</ul>
+</li>
+<li><p><strong>Rewrite the Estimator</strong>:</p>
+<ul>
+<li>Express the estimator $\hat{\theta}$ in a form that separates the effect of $g(X)$ and the residuals:<br>$$<br>\hat{\theta} &#x3D; \frac{1}{N_1} \sum_{i \in \text{treated}} \left[ Y_i - \hat{g}(X_i) \right] - \frac{1}{N_0} \sum_{i \in \text{control}} \left[ Y_i - \hat{g}(X_i) \right]<br>$$</li>
+</ul>
+</li>
+<li><p><strong>Decompose into Asymptotic Terms</strong>:</p>
+<ul>
+<li>Decompose $\hat{\theta}$ into terms that reveal the contributions of the estimation error from $\hat{g}(X)$ and the residuals:<br>$$<br>\hat{\theta} &#x3D; \theta + \frac{1}{N_1} \sum_{i \in \text{treated}} \left[ \epsilon_i - (\hat{g}(X_i) - g(X_i)) \right] - \frac{1}{N_0} \sum_{i \in \text{control}} \left[ \epsilon_i - (\hat{g}(X_i) - g(X_i)) \right]<br>$$</li>
+</ul>
+</li>
+<li><p><strong>Analyze Asymptotic Distribution</strong>:</p>
+<ul>
+<li><strong>First Term</strong>: Under usual regularity conditions, the term involving $\epsilon_i$ (residuals) converges in distribution to a normal distribution.</li>
+<li><strong>Second Term</strong>: The term involving $\hat{g}(X_i) - g(X_i)$ represents the bias due to regularization in the machine learning method. This term does not have mean zero and can diverge to infinity.</li>
+</ul>
+</li>
+<li><p><strong>Conclusion on Bias</strong>:</p>
+<ul>
+<li>The second term introduces bias because the machine learning method’s regularization bias does not vanish asymptotically.</li>
+<li>This results in the estimator $\hat{\theta}$ being asymptotically biased, even if the first term converges to a normal distribution.</li>
+</ul>
+</li>
+</ol>
+<h3 id="Detailed-Example"><a href="#Detailed-Example" class="headerlink" title="Detailed Example"></a>Detailed Example</h3><ol>
+<li><p><strong>Model Setup</strong>:</p>
+<ul>
+<li>Let $Y&#x3D;Zθ+g(X)+ϵ$</li>
+<li>Estimate $g(X)$ using a machine learning method (e.g., random forest).</li>
+</ul>
+</li>
+<li><p><strong>Estimator</strong>:</p>
+<ul>
+<li><p>Split data into two parts.</p>
+</li>
+<li><p>Use part one to estimate $\hat{g}(X)$.</p>
+</li>
+<li><p>Use part two to calculate $\hat{\theta}$:<br>$$<br>\hat{\theta} &#x3D; \frac{1}{N_1} \sum_{i&#x3D;1}^{N_1} (Y_i - \hat{g}(X_i)) Z_i - \frac{1}{N_0} \sum_{i&#x3D;1}^{N_0} (Y_i - \hat{g}(X_i)) (1 - Z_i)<br>$$</p>
+</li>
+</ul>
+</li>
+<li><p><strong>Asymptotic Analysis</strong>:</p>
+<ul>
+<li>Rewrite the estimator to separate terms:<br>$$<br>\hat{\theta} &#x3D; \theta + \left( \frac{1}{N_1} \sum_{i&#x3D;1}^{N_1} \epsilon_i - \frac{1}{N_0} \sum_{i&#x3D;1}^{N_0} \epsilon_i \right) - \left( \frac{1}{N_1} \sum_{i&#x3D;1}^{N_1} (\hat{g}(X_i) - g(X_i)) - \frac{1}{N_0} \sum_{i&#x3D;1}^{N_0} (\hat{g}(X_i) - g(X_i)) \right)<br>$$</li>
+</ul>
+</li>
+<li><p><strong>Identify Bias Term</strong>:</p>
+<ul>
+<li>The second term $\frac{1}{N_1} \sum_{i&#x3D;1}^{N_1} (\hat{g}(X_i) - g(X_i)) - \frac{1}{N_0} \sum_{i&#x3D;1}^{N_0} (\hat{g}(X_i) - g(X_i))$ represents the bias due to regularization in the machine learning method.</li>
+</ul>
+</li>
+<li><p><strong>Conclusion</strong>:</p>
+<ul>
+<li>The bias term does not converge to zero, leading to an asymptotically biased estimator.</li>
+<li>This illustrates why naive application of machine learning methods without addressing regularization bias can lead to incorrect estimates of treatment effects.</li>
+</ul>
+</li>
+</ol>
+<h2 id="Steps-to-Obtain-a-Debiased-Estimator"><a href="#Steps-to-Obtain-a-Debiased-Estimator" class="headerlink" title="Steps to Obtain a Debiased Estimator"></a>Steps to Obtain a Debiased Estimator</h2><p>To obtain a debiased estimator using machine learning methods, we follow a systematic approach that addresses the regularization bias inherent in machine learning models. Here is a detailed process:</p>
+<h4 id="1-Setup-the-Problem"><a href="#1-Setup-the-Problem" class="headerlink" title="1. Setup the Problem"></a>1. <strong>Setup the Problem</strong></h4><p>Define the outcome $Y$, treatment indicator $Z$, and covariates $X$. The objective is to estimate the average treatment effect (ATE).</p>
+<h4 id="2-Split-the-Data"><a href="#2-Split-the-Data" class="headerlink" title="2. Split the Data"></a>2. <strong>Split the Data</strong></h4><p>Divide the dataset into two parts to avoid overfitting and ensure valid inference:</p>
+<ul>
+<li><strong>Part 1</strong>: Used to estimate the propensity score.</li>
+<li><strong>Part 2</strong>: Used to estimate the regression function.</li>
+</ul>
+<h4 id="3-Estimate-the-Propensity-Score"><a href="#3-Estimate-the-Propensity-Score" class="headerlink" title="3. Estimate the Propensity Score"></a>3. <strong>Estimate the Propensity Score</strong></h4><p>Using <strong>Part 1</strong> of the data, estimate the propensity score $e(X) &#x3D; P(Z &#x3D; 1 | X)$. This can be done using a machine learning model such as logistic regression, random forests, or other methods.</p>
+<h4 id="4-Estimate-the-Regression-Function"><a href="#4-Estimate-the-Regression-Function" class="headerlink" title="4. Estimate the Regression Function"></a>4. <strong>Estimate the Regression Function</strong></h4><p>Using <strong>Part 2</strong> of the data, estimate the regression function $g(X) &#x3D; E[Y | X]$ using a machine learning model such as random forests, gradient boosting machines, or any other suitable method.</p>
+<h4 id="5-Calculate-Residuals"><a href="#5-Calculate-Residuals" class="headerlink" title="5. Calculate Residuals"></a>5. <strong>Calculate Residuals</strong></h4><p>For the treated and control groups in <strong>Part 2</strong> of the data, calculate the residuals:</p>
+<p>$\hat{U}_i &#x3D; Y_i - \hat{g}(X_i)$</p>
+<h4 id="6-Debiasing-Step"><a href="#6-Debiasing-Step" class="headerlink" title="6. Debiasing Step"></a>6. <strong>Debiasing Step</strong></h4><p>Estimate the treatment effect using the residuals and propensity scores. Calculate the debiased estimate by adjusting for the propensity score:<br>$$<br>\hat{\theta} &#x3D; \frac{1}{N} \sum_{i&#x3D;1}^N \left( \frac{Z_i (Y_i - \hat{g}(X_i))}{\hat{e}(X_i)} - \frac{(1 - Z_i) (Y_i - \hat{g}(X_i))}{1 - \hat{e}(X_i)} \right) + \frac{1}{N} \sum_{i&#x3D;1}^N \hat{g}(X_i)<br>$$</p>
+<h4 id="7-Variance-Estimation"><a href="#7-Variance-Estimation" class="headerlink" title="7. Variance Estimation"></a>7. <strong>Variance Estimation</strong></h4><p>Estimate the variance of the debiased estimator to construct confidence intervals. This step involves calculating the standard error of the debiased estimate.</p>
+<h4 id="8-Construct-Confidence-Intervals"><a href="#8-Construct-Confidence-Intervals" class="headerlink" title="8. Construct Confidence Intervals"></a>8. <strong>Construct Confidence Intervals</strong></h4><p>Using the standard error, construct confidence intervals for the treatment effect estimate.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -173,7 +338,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2024-07-27 18:22:52 / Modified: 21:26:02" itemprop="dateCreated datePublished" datetime="2024-07-27T18:22:52-04:00">2024-07-27</time>
+      <time title="Created: 2024-07-27 18:22:52 / Modified: 22:05:59" itemprop="dateCreated datePublished" datetime="2024-07-27T18:22:52-04:00">2024-07-27</time>
     </span>
 
   
@@ -187,7 +352,7 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>This is one of my notes of the online Causal Inference Course in Columbia University, taught by Michael E. Sobel who is a professor in the Department of Statistics. It would be good to have this overview of causal inference regarding the framework in mind before getting into statistical and theoretical details especially for beginners. A clear approach framework is very important that it’s not only because rigorous experiment and analysis methods could be developed with this well-defined framework, but also because it can guide you to deal with challenging situations in a correct way, while being clear about the limitations and assumptions at the same time. This is why it became a Science.</p>
-<h1 id="1-Modern-Approach-for-Causal-Inference"><a href="#1-Modern-Approach-for-Causal-Inference" class="headerlink" title="1 Modern Approach for Causal Inference"></a>1 Modern Approach for Causal Inference</h1><p>The modern dominant approach for causal inference, significantly influenced by Donald Rubin’s contributions, primarily revolves around the following key ideas:</p>
+<h1 id="Modern-Approach-for-Causal-Inference"><a href="#Modern-Approach-for-Causal-Inference" class="headerlink" title="Modern Approach for Causal Inference"></a>Modern Approach for Causal Inference</h1><p>The modern dominant approach for causal inference, significantly influenced by Donald Rubin’s contributions, primarily revolves around the following key ideas:</p>
 <ol>
 <li><p>Potential Outcomes Framework:</p>
 <ul>
@@ -266,7 +431,7 @@
 </li>
 </ol>
 <p>These examples illustrate that both randomized and observational studies require careful consideration of various factors to ensure accurate and reliable causal inferences.</p>
-<h1 id="2-Potential-Outcomes-Unit-and-Average-Effect"><a href="#2-Potential-Outcomes-Unit-and-Average-Effect" class="headerlink" title="2 Potential Outcomes, Unit, and Average Effect"></a>2 Potential Outcomes, Unit, and Average Effect</h1><h2 id="Potential-Outcomes-Framework"><a href="#Potential-Outcomes-Framework" class="headerlink" title="Potential Outcomes Framework"></a>Potential Outcomes Framework</h2><ol>
+<h1 id="Potential-Outcomes-Unit-and-Average-Effect"><a href="#Potential-Outcomes-Unit-and-Average-Effect" class="headerlink" title="Potential Outcomes, Unit, and Average Effect"></a>Potential Outcomes, Unit, and Average Effect</h1><h2 id="Potential-Outcomes-Framework"><a href="#Potential-Outcomes-Framework" class="headerlink" title="Potential Outcomes Framework"></a>Potential Outcomes Framework</h2><ol>
 <li>Potential Outcomes:<ul>
 <li>Each unit (e.g., individual) has two potential outcomes: one if treated and one if not treated. However, only one outcome can be observed for each unit.</li>
 <li>This leads to the “fundamental problem of causal inference,” where we cannot observe both potential outcomes for a single unit.</li>
@@ -321,7 +486,7 @@
 </ul>
 </li>
 </ol>
-<h1 id="3-Conditions-Allow-Average-Effects-be-Unbiasedly-Consistently-Estimated"><a href="#3-Conditions-Allow-Average-Effects-be-Unbiasedly-Consistently-Estimated" class="headerlink" title="3 Conditions Allow Average Effects be Unbiasedly&#x2F; Consistently Estimated"></a>3 Conditions Allow Average Effects be Unbiasedly&#x2F; Consistently Estimated</h1><h2 id="Key-Concepts"><a href="#Key-Concepts" class="headerlink" title="Key Concepts"></a>Key Concepts</h2><ol>
+<h1 id="Conditions-Allow-Average-Effects-be-Unbiasedly-Consistently-Estimated"><a href="#Conditions-Allow-Average-Effects-be-Unbiasedly-Consistently-Estimated" class="headerlink" title="Conditions Allow Average Effects be Unbiasedly&#x2F; Consistently Estimated"></a>Conditions Allow Average Effects be Unbiasedly&#x2F; Consistently Estimated</h1><h2 id="Key-Concepts"><a href="#Key-Concepts" class="headerlink" title="Key Concepts"></a>Key Concepts</h2><ol>
 <li>Average Treatment Effect (ATE) Estimation:<ul>
 <li><strong>Random Sampling</strong>: Drawing random samples of treated ($y_1$) and untreated ($y_0$) units to estimate their respective means.</li>
 <li><strong>Sample Means</strong>: The means of treated ($\bar{y}_1$) and untreated ($\bar{y}_0$) samples serve as unbiased and consistent estimators of the population means.</li>
@@ -3278,82 +3443,6 @@
 <li><p>Bigger is not Always Better: Scaling Properties of Latent Diffusion Models [<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2404.01367">Link</a>]</p>
 </li>
 </ol>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jokerdii.github.io/digital-di/2024/04/21/Concerns-about-AI/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/digital-di/images/avatar.gif">
-      <meta itemprop="name" content="Di Zhen">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Di's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Di's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/digital-di/2024/04/21/Concerns-about-AI/" class="post-title-link" itemprop="url">Concerns about AI</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2024-04-21 11:27:58" itemprop="dateCreated datePublished" datetime="2024-04-21T11:27:58-04:00">2024-04-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-22 21:54:31" itemprop="dateModified" datetime="2024-04-22T21:54:31-04:00">2024-04-22</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>I have read a lot of news and articles, and watched a few interviews regarding AI safety these days. The future of AI is promising. People are working towards more powerful AI and personalized AI assistants or agents. At the same time, AI causes problems. A very obvious downside of AI is people could use AI to do harmful things, but I think we are good to work together and prevent that from different angles such as legal aspect or open source software. I worry more about things that are not easily avoided and cannot be seen at least in these years when AI is still immature - which is being too early to rely on AI and thus deviating from truth. For example, it is too soon for us to lose faith in jobs like teachers, historians, journalists, writers, etc, but I’m concerning we are already losing faith in those jobs because of the development of AI and some violations of copyrighted work. As we have seen that AI could have wrong understanding of facts, have biased opinions, and make things up that don’t exist, we lives could fight for the truth but the dead cannot speak for themselves. It would be pathetic if human live in hallucination in the future, and I don’t know if there’s any good practice to prevent it. It’s like Pandora’s box is opened and complications cannot be stopped. But we should at least think seriously about the potential impact of AI on society and human consciousness and possible unexpected consequences.</p>
 
       
     </div>
