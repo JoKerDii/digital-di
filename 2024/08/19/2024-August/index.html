@@ -28,8 +28,9 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jokerdii.github.io/digital-di/images/new-post-training-approach.png">
 <meta property="og:image" content="https://jokerdii.github.io/digital-di/images/al-value-chain.png">
+<meta property="og:image" content="https://jokerdii.github.io/digital-di/images/genai-usecase.png">
 <meta property="article:published_time" content="2024-08-19T04:04:43.000Z">
-<meta property="article:modified_time" content="2024-08-28T18:48:04.709Z">
+<meta property="article:modified_time" content="2024-09-02T15:40:23.276Z">
 <meta property="article:author" content="Di Zhen">
 <meta property="article:tag" content="readings">
 <meta name="twitter:card" content="summary">
@@ -193,7 +194,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-28 14:48:04" itemprop="dateModified" datetime="2024-08-28T14:48:04-04:00">2024-08-28</time>
+      <time title="Modified: 2024-09-02 11:40:23" itemprop="dateModified" datetime="2024-09-02T11:40:23-04:00">2024-09-02</time>
     </span>
 
   
@@ -548,6 +549,10 @@
 <p><em>As an example relevant to investors, one might want to conduct an analytical reading of Benjamin Graham’s <a target="_blank" rel="noopener" href="http://amzn.to/1WWU4CD">The Intelligent Investor</a> and Philip Fisher’s <a target="_blank" rel="noopener" href="http://amzn.to/1PGbSRY">Common Stocks and Uncommon Profits</a> and then come to grips with the underlying themes expressed in both volumes while drawing conclusions on investing that might not appear in either book in isolation. This approach can, of course, be applied to other forms of literature including biographies. It is quite possible than a thorough analytical reading of Roger Lowenstein’s <a target="_blank" rel="noopener" href="http://amzn.to/1PGcebg">Buffett: The Making of an American Capitalist </a>and Alice Schroeder’s <a target="_blank" rel="noopener" href="http://amzn.to/1PGc9Ez">The Snowball: Warren Buffett and the Business of Life</a> could lead to insights about Warren Buffett that one could not achieve by reading one of these books in isolation.</em></p>
 <p><strong>― How to Read a Book: The Classic Guide to Intelligent Reading - The Rational Walk</strong> [<a target="_blank" rel="noopener" href="https://rationalwalk.com/how-to-become-a-better-reader/">Link</a>]</p>
 </blockquote>
+<blockquote>
+<p><strong>Do Not Use LLM or Generative AI For These Use Cases - Christopher Tao on TowardsAI</strong> [<a target="_blank" rel="noopener" href="https://pub.towardsai.net/do-not-use-llm-or-generative-ai-for-these-use-cases-a819ae2d9779">Link</a>]</p>
+</blockquote>
+<p><img src="/digital-di/./images/genai-usecase.png" alt="genai-usecase"></p>
 <h3 id="YouTube-and-Podcasts"><a href="#YouTube-and-Podcasts" class="headerlink" title="YouTube and Podcasts"></a>YouTube and Podcasts</h3><blockquote>
 <p><strong>Elon Musk: Neuralink and the Future of Humanity | Lex Fridman Podcast</strong> [<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Kbk9BiPhm7o">Link</a>]</p>
 </blockquote>
@@ -670,6 +675,30 @@
 <p><strong>A Survey on Benchmarks of Multimodal Large Language Models</strong> [<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2408.08632v1">Link</a>]</p>
 </blockquote>
 <p>This paper provides an extensive review of 180 benchmarks used to evaluate Multimodal Large Language Models. </p>
+<blockquote>
+<p><strong>Qwen2-VL: To See the World More Clearly - QwenLM</strong> [<a href="">Link</a>]</p>
+</blockquote>
+<p>The model comes in three sizes : 2B and 7B (open-sourced under Apache 2.0 license), and 72B (available via API).</p>
+<p>Performance: </p>
+<ul>
+<li>Qwen2-VL demonstrates state-of-the-art performance on visual understanding benchmarks. The 72B model surpasses GPT-4o and Claude 3.5-Sonnet on most metrics. </li>
+<li>The 7B model achieves top performance in document understanding and multilingual text comprehension. Even the 2B model shows strong performance in video-related tasks and document understanding.</li>
+</ul>
+<p>Key Capabilities:</p>
+<ul>
+<li>Processing videos over 20 minutes long</li>
+<li>Complex reasoning for device operation (e.g., mobile phones, robots)</li>
+<li>Multilingual text understanding in images (European languages, Japanese, Korean, Arabic, Vietnamese)</li>
+<li>Function calling for integration with external tools</li>
+<li>Document understanding and general scenario question-answering</li>
+<li>Integrates with Hugging Face Transformers and vLLM. </li>
+<li>Supports various tools for quantization, deployment, and fine-tuning, making it accessible for ML engineers and researchers to implement and customize.</li>
+</ul>
+<p>Two key architectural innovations:</p>
+<ul>
+<li><strong>Naive Dynamic Resolution</strong> support allows Qwen2-VL to handle arbitrary image resolutions by mapping them to a dynamic number of visual tokens. This ensures consistency between input and image information. </li>
+<li><strong>Multimodal Rotary Position Embedding (M-ROPE)</strong> enables concurrent capture of 1D textual, 2D visual, and 3D video positional information.</li>
+</ul>
 <h3 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h3><blockquote>
 <p><strong>Multimodal Report Generation Agent - Llamaindex</strong> [<a target="_blank" rel="noopener" href="https://github.com/run-llama/llama_parse/blob/main/examples/multimodal/multimodal_report_generation_agent.ipynb">Link</a>]</p>
 </blockquote>
@@ -698,6 +727,9 @@
 <p><strong>Notebooks: Using Mistral Nemo with 60% less memory - Nvidia</strong> [<a target="_blank" rel="noopener" href="https://colab.research.google.com/drive/17d3U-CAIwzmbDRqbZ9NnpHxCkmXB6LZ0?usp=sharing">Notebook1</a>] [<a target="_blank" rel="noopener" href="https://www.kaggle.com/code/danielhanchen/kaggle-mistral-nemo-12b-unsloth-notebook">Notebook2</a>]</p>
 </blockquote>
 <p>Nvidia has released two free notebooks for Mistral NeMo 12b, enabling 2x faster finetuning with 60% less memory. Mistral’s latest free LLM is the largest multilingual open-source model that fits in a free Colab GPU. </p>
+<blockquote>
+<p><strong>Prompt Engineering Interactive Tutorial - Anthropics</strong> [<a target="_blank" rel="noopener" href="https://github.com/anthropics/courses/tree/master/prompt_engineering_interactive_tutorial/Anthropic%201P">Link</a>]</p>
+</blockquote>
 <h3 id="News"><a href="#News" class="headerlink" title="News"></a>News</h3><blockquote>
 <p><strong>Google has an illegal monopoly on search, judge rules. Here’s what’s next - CNN</strong> [<a target="_blank" rel="noopener" href="https://amp-cnn-com.cdn.ampproject.org/c/s/amp.cnn.com/cnn/2024/08/05/business/google-loses-antitrust-lawsuit-doj">Link</a>]</p>
 </blockquote>
@@ -731,6 +763,9 @@
 <p><strong>Sakana AI’s ‘AI Scientist’ conducts research autonomously, challenging scientific norms - VentureBeat</strong> [<a target="_blank" rel="noopener" href="https://venturebeat.com/ai/sakana-ai-scientist-conducts-research-autonomously-challenging-scientific-norms/">Link</a>]</p>
 </blockquote>
 <p>Sakana AI unveils world’s first fully automatic ‘AI-Scientist’ generating complete research papers.</p>
+<blockquote>
+<p><strong>Scaling Laws, Economics and the AI “Game of Emperors.” - Gavin Baker</strong> [<a target="_blank" rel="noopener" href="https://x.com/gavinsbaker/status/1828862999836102800?s=12&utm_source=tldrnewsletter">Link</a>]</p>
+</blockquote>
 
     </div>
 
