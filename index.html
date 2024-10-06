@@ -116,7 +116,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/digital-di/archives/">
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -138,6 +138,299 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jokerdii.github.io/digital-di/2024/10/05/2024-October/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/digital-di/images/avatar.gif">
+      <meta itemprop="name" content="Di Zhen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Di's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Di's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/digital-di/2024/10/05/2024-October/" class="post-title-link" itemprop="url">2024-October</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-10-05 20:03:25" itemprop="dateCreated datePublished" datetime="2024-10-05T20:03:25-04:00">2024-10-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-10-06 16:08:33" itemprop="dateModified" datetime="2024-10-06T16:08:33-04:00">2024-10-06</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="Substack"><a href="#Substack" class="headerlink" title="Substack"></a>Substack</h3><blockquote>
+<p><em>This new <code>model.out_head</code> output layer has its <code>requires_grad</code> attribute set to <code>True</code> by default, which means that it’s the only layer in the model that will be updated during training. Technically, training the output layer we just added is sufficient. However, as I found in experiments, finetuning additional layers can noticeably improve the predictive performance of the finetuned model.</em> </p>
+<p><strong>― Building A GPT-Style LLM Classifier From Scratch - Sebastian Raschka</strong> [<a target="_blank" rel="noopener" href="https://magazine.sebastianraschka.com/p/building-a-gpt-style-llm-classifier">Link</a>] [<a target="_blank" rel="noopener" href="https://github.com/rasbt/LLMs-from-scratch/blob/main/ch06/01_main-chapter-code/ch06.ipynb">Github</a>]</p>
+</blockquote>
+<p>Interesting questions addressed by Sebastian:</p>
+<ol>
+<li><p>Do we need to train all layers?</p>
+<p>“For classification finetuning, it is not necessary to update all layers in an LLM. (The fewer weights we update, the faster the training will be because we don’t need to compute the gradients for these weights during backpropagation.)”</p>
+</li>
+<li><p>Why finetuning the last token, not the first token?</p>
+<p>“In contrast to BERT, GPT is a decoder-style model with a causal attention mask. This means the first token has no context information of any other token in the input. Only the last token has information about all other tokens.  Hence, if we want to use models like GPT for classification finetuning, we should focus on the last token to capture contextual information of all other input tokens.”</p>
+</li>
+<li><p>How does BERT compare to GPT performance-wise?</p>
+<p>“The small GPT-2 model from the previous section and BERT performed similarly well on the spam classification dataset. “</p>
+</li>
+<li><p>Should we disable the causal mask?</p>
+<p>“A core feature of the GPT architecture is the causal attention mask (different from BERT models or the original transformer architecture).  However, we could actually remove the causal mask during classification finetuning, which would allow us to finetune the first rather than the last token since future tokens will no longer be masked, and the first token can see all other tokens.”</p>
+</li>
+<li><p>What impact does increasing the model size have?</p>
+<p>The prediction accuracy can improve significantly with larger models.</p>
+</li>
+<li><p>What improvements can we expect from LoRA?</p>
+<p>Both full finetuning (all layers) and LoRA can result in the same test set performance. </p>
+<p>“On the small model, LoRA is slightly slower since the additional overhead from adding LoRA layers may outweigh the benefits, but when training the larger 1.5 billion parameters model, LoRA trains 1.53x faster.”</p>
+</li>
+<li><p>Padding or no padding? [<a target="_blank" rel="noopener" href="https://github.com/rasbt/LLMs-from-scratch/tree/main/ch06/02_bonus_additional-experiments">experiments</a>]</p>
+<p>“If we want to process data in batches during training or inference (this involves processing more than one input sequence at a time), we need to insert padding tokens to ensure that the training examples are of equal length. </p>
+<p>In regular text generation tasks, padding doesn’t affect the model response since padding tokens are usually added to the right side, and due to the causal mask discussed earlier, these padding tokens don’t influence the other tokens. However, remember that we finetuned the last token, as discussed earlier. Since the padding tokens are to the left of this last token, the padding tokens may affect the result. “</p>
+</li>
+</ol>
+<blockquote>
+<p><strong>These Are The 6 Best Science-Based Study Strategies - Super Learning Lab</strong> [<a target="_blank" rel="noopener" href="https://axelcasas.substack.com/p/these-are-the-6-best-science-based">Link</a>]</p>
+</blockquote>
+<ol>
+<li><p>Spaced Practice</p>
+<p>Instead of cramming all the information at once, spaced practice consists of revisiting the material multiple times with breaks in between.</p>
+</li>
+<li><p>Interleaving</p>
+<p>This is about studying different topics in a sequence.</p>
+</li>
+<li><p>Retrieval</p>
+<p>This consists of bringing learned information from mid to long-term memory by recall or retrieval practices.</p>
+</li>
+<li><p>Elaboration</p>
+<p>Elaborative interrogation consists of asking and explaining why and how things work based on prior knowledge. In other words, it involves connecting new information to preexisting knowledge.</p>
+</li>
+<li><p>Concrete Example</p>
+<p>When learning abstract concepts it was found that illustrating these topics with specific examples improves learning.</p>
+</li>
+<li><p>Dual Coding</p>
+<p>Dual coding is about combining words with visuals. If you use relevant and helpful images in your notes, you may increase learning by remembering what you study with the help of these images.</p>
+</li>
+</ol>
+<blockquote>
+<p><em>The $120 billion wagered on sports betting in America in 2023 translated into nearly $11 billion in revenue for sports betting companies. This corresponds to the ~9% fee sportsbooks keep after all bets have been settled.</em></p>
+<ul>
+<li><em>Flutter: Leverages FanDuel’s dominance and global expertise.</em></li>
+<li><em>DraftKings: Focuses on innovation and user engagement to fuel growth.</em></li>
+<li><em>Entain: Bets on BetMGM’s success in the US market.</em></li>
+<li><em>Penn: Leverages the ESPN partnership to challenge established players.</em></li>
+</ul>
+<p><strong>― Sports Betting Economics - App Economy Insights</strong> [<a target="_blank" rel="noopener" href="https://www.appeconomyinsights.com/p/sports-betting-economics">Link</a>]</p>
+</blockquote>
+<blockquote>
+<p><em>For decades, companies have outsourced their organizational innovation to consultants or enterprise software vendors who develop generalized approaches based on what they see across many organizations. That won’t work here, at least for a while. Nobody has special information about how to best use AI at your company, or a playbook for how to integrate it into your organization.</em> </p>
+<p><strong>― AI in organizations: Some tactics - One Useful Thing</strong> [<a target="_blank" rel="noopener" href="https://www.oneusefulthing.org/p/ai-in-organizations-some-tactics">Link</a>]</p>
+</blockquote>
+<p>Issues with AI at the organizational level and how to solve them.</p>
+<ol>
+<li>In many companies, there is little AI use and few productivity gains outside of narrow permitted use cases. That’s because AI use that boosts individual performance does not always translate to boosting organizational performance for a variety of reasons. To get organizational gains requires R&amp;D into AI use and you are largely going to have to do the R&amp;D yourself.</li>
+<li>“Many key breakthrough innovations come not from central R&amp;D labs, but from people actually using products and tinkering with them to solve their own problems. “ (Prof. Eric von Hippel). As users are very motivated to make their own jobs easier with technology, they find ways to do so. The user advantage is especially big in experimenting with Generative AI because the systems are unreliable and have a jagged frontier of capability. People are experimenting with AI and finding it very useful. But they aren’t sharing their results with their employers.</li>
+</ol>
+<p>How to solve the issues? What are the tactics? Talents in the lab should focus on building, not analysis or abstract strategy.</p>
+<ul>
+<li>Build AI benchmarks for your organization. [<a target="_blank" rel="noopener" href="https://docs.anthropic.com/en/docs/build-with-claude/develop-tests">Anthropic’s guide to benchmarking</a>]</li>
+<li>Build prompts and tools that work.</li>
+<li>Build stuff that doesn’t work… yet. </li>
+<li>Build provocations and magic.</li>
+</ul>
+<blockquote>
+<p><strong>The USA vs Visa - Net Interest</strong> [<a target="_blank" rel="noopener" href="https://www.netinterest.co/p/the-usa-vs-visa">Link</a>]</p>
+</blockquote>
+<p>Key elements of Doha Mekki’s recent antitrust lawsuit against Visa:</p>
+<ol>
+<li>Visa controls over 60% of U.S. debit transactions, with Mastercard far behind at 25%.</li>
+<li>Visa traps merchants with pricing that penalizes them if they don’t process all transactions through Visa.</li>
+<li>Exclusive deals incentivize merchants to use Visa exclusively, reducing competition.</li>
+<li>Visa prevents potential competitors like PayPal and Apple from entering the market by locking them into restrictive agreements.</li>
+<li>Visa has faced antitrust lawsuits since 1971 and maintains a large legal team to manage ongoing cases.</li>
+</ol>
+<h3 id="YouTube-and-Podcast"><a href="#YouTube-and-Podcast" class="headerlink" title="YouTube and Podcast"></a>YouTube and Podcast</h3><blockquote>
+<p><em>Tesla I don’t think it’s a car company, I think this is misleading, this is a robotics company robotics at Scale Company, because I would say at scale is also like a whole separate variable, they’re not building a single thing, they’re building the machine that builds the thing which is a whole separate thing and so I think robotics at scale company is what Tesla is.</em> </p>
+<p><em>I think with synthetic data you just have to be careful, because these models are silently collapsed, is like one of the major issues so if you go to ChatGPT and you ask it to give you a joke, you’ll notice that it only knows three jokes, that’s the only it gives you like one joke I think most of the time. And sometimes it gives you like three jokes and it’s because the models are collapsed and it’s silent, so when you’re looking at any single individual output, you’re just seeing a single example, but when you actually look at the distribution, you’ll notice that it’s not a very diverse distribution, it’s silently collapsed. When you’re doing synthetic data generation, this is a problem, because you actually really want that entropy, you want the diversity, and the richness in your data set otherwise.</em></p>
+<p><strong>― No Priors Ep. 80 | With Andrej Karpathy from OpenAI and Tesla - No Priors: AI, Machine Learning, Tech &amp; Startups</strong> [<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=hM_h0UA7upI&ab_channel=NoPriors:AI,MachineLearning,Tech,&Startups">Link</a>]</p>
+</blockquote>
+<p>Andrej Karpathy was a founding team member of OpenAI and the former Tesla Autopilot leader. He discussed the evolution of self driving cards, tech challenges, Tesla’s Optimus humanoid robot, bottlenecks of AI development today. The topic of how AI capabilities could be further integrated with human cognition sounds very future and funny.</p>
+<blockquote>
+<p><strong>AI prompt engineering: A deep dive - Anthropic</strong> [<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=T9aRN5JkmL8&ab_channel=Anthropic">Link</a>]</p>
+</blockquote>
+<p>Some of Anthropic’s prompt engineering specialists—Amanda Askell (Alignment Finetuning), Alex Albert (Developer Relations), David Hershey (Applied AI), and Zack Witten (Prompt Engineering)—share their insights on the evolution of prompt engineering, offer practical advice, and discuss how prompting could evolve as AI continues to advance.</p>
+<blockquote>
+<p><strong>Decoding Google Gemini with Jeff Dean - Google DeepMind</strong> [<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=lH74gNeryhQ&ab_channel=GoogleDeepMind">Link</a>]</p>
+</blockquote>
+<p> Jeff Dean, chief scientist of Google DeepMind and Google Research, discusses the past, present and future of AI, specially the long term potential of multi-modal models like Gemini.</p>
+<blockquote>
+<p><strong>Shall We Repeal the Laws of Economics? - Oaktree Capital</strong> [<a target="_blank" rel="noopener" href="https://www.oaktreecapital.com/insights/memo-podcast/shall-we-repeal-the-laws-of-economics">Link</a>]</p>
+</blockquote>
+<p>Howard Marks addresses how politicians often ignore economic reality in their campaign promises, using examples like Trump’s call for tariffs and Harris’s attack on grocery profiteering. He emphasizes that economic laws are incontrovertible, and politicians can’t deliver on promises that contradict these laws; free markets allocate resources efficiently. And he highlights the ongoing political refusal to address issues like Social Security insolvency and national debt, stating that ignoring economic laws will eventually lead to negative outcomes.</p>
+<blockquote>
+<p><strong>Introducing OpenAI o1</strong> <strong>- Open AI</strong> [<a target="_blank" rel="noopener" href="https://www.youtube.com/playlist?list=PLOXw6I10VTv_T9QV-DKXhq7HFUQRkGQLI">Link</a>]</p>
+</blockquote>
+<p>A series of video from Open AI to introduce GPT o1.</p>
+<h3 id="Articles-and-Blogs"><a href="#Articles-and-Blogs" class="headerlink" title="Articles and Blogs"></a>Articles and Blogs</h3><blockquote>
+<p>Of the employees we studied, those with superior sales performance were genetically different from the rest of the group. They were better at learning in real time about new customers and new sales opportunities. From an initial conversation with a sales lead, they were able to quickly feel out the customer and propose appropriate products without being told what to recommend. </p>
+<p>Adaptive learning is different; it isn’t trainable. It’s the ability to process new information in real time and immediately use it to achieve a positive result.</p>
+<p>For example, sales teams often require junior employees to cold-call leads, even through they don’t know as much about the company as more experienced employees do. Most of them haven’t even learned how to sell yet. But our research shows that for adaptive learners, seniority and experience are less important. Employees with the sales gene quickly become knowledgeable about your products and are able to learn and adjust on the fly.</p>
+<p><strong>― There Really Is a “Sales Gene” - Juan Martinez, Harvard Business Review</strong> [<a target="_blank" rel="noopener" href="https://hbr.org/2024/09/there-really-is-a-sales-gene">Link</a>]</p>
+</blockquote>
+<p>Adaptive learning skill is important but might not correlated with seniority or experience. Employees with this capability can quickly become knowledgeable about the products and are able to learn and adjust on the fly.</p>
+<p>The article suggests that managers or companies could be given a snapshot of how many of salespeople are adaptive learners without singling out any individual. and they could tell which tasks require adaptive learning skills and which don’t and allow them to choose. This should be done in an anonymous way. </p>
+<p>No matter whether what’s been proposed in this article is applicable or ethical. The idea of adaptive learning is kind of new to me, and it inspires me to further think about whether this skill is learnable and teachable, and think about whether there is any other secret skills in sales. </p>
+<blockquote>
+<p><strong>New Rules for Teamwork - Harvard Business Review</strong> [<a target="_blank" rel="noopener" href="https://hbr.org/2024/09/new-rules-for-teamwork">Link</a>]</p>
+</blockquote>
+<ol>
+<li><p>Develop an Operating System</p>
+<p>OS means building blocks for the way team members collaborate, create change, and support one another. Effective operating systems vary widely, depending on the needs and norms of the organization. What they all have in common is that they set out a view of how teams create value, what teams are supposed to achieve, the technical skills each team member is expected to contribute, the processes by which the work will be managed, and the cultural norms and mindsets of constructive collaboration that will guide behavior. </p>
+<p>Suggestions: hold kickoffs, conduct one on ones, and take stock of progress using retrospectives, are the three practices as a foundations of team OS.</p>
+</li>
+<li><p>Invest in Active, Real-Time Measurement</p>
+<p>To make teamwork scientific, organizations need to be able to measure the outcomes of their actions and determine how changes in the inputs affect results. </p>
+<p>Suggestion: define what constitutes success.</p>
+</li>
+<li><p>Create a System for Continuous Improvement and Innovation</p>
+<p>Teams today have new forms of technology and data collection at their disposal to help them self-correct while projects are underway. e.g. support colleagues to discuss what could have been done better; look at the patterns across teams to identify improvements and share best practices, particularly with regard to the rapid adoption of new technologies such as GenAI.</p>
+<p>Suggestions: Identify the metrics that matter most (shift-changeover time, perhaps), hypothesize which actions could improve performance in those areas (preassigned workstations, perhaps), and embed technologies in the operating system (a smart-planning app, perhaps) to enable continuous improvement. Continuous improvement can occur only when all perspectives are considered and all teams have access to a centralized knowledge repository. Finally, it may be useful to set up a center of excellence, staffed with full-time employees with experience in analytics and operating system design.</p>
+</li>
+</ol>
+<blockquote>
+<p><strong>Why Leadership Teams Fail - Harvard Business Review</strong> [<a target="_blank" rel="noopener" href="https://hbr.org/2024/09/why-leadership-teams-fail">Link</a>]</p>
+</blockquote>
+<p>I was reading while thinking about my team and neighbor teams. I find this article very useful. </p>
+<p>A critical factor in organizational success: the health of their leadership team. There are three main patterns of dysfunction: Shark Tanks, Petting Zoos, and Mediocracies. </p>
+<ol>
+<li><p><strong>Shark Tanks</strong></p>
+<ul>
+<li><p>Definition: A leadership team marked by hyper-competition, political maneuvering, and infighting. Members prioritize personal agendas over collective goals, leading to toxic and combative dynamics.</p>
+</li>
+<li><p>Causes: Lack of clear direction or boundaries from the CEO or team leader. Failure to address self-serving behaviors early on. Absence of behavioral norms that encourage collaboration.</p>
+</li>
+<li><p>Signs: Team members engage in power struggles outside of meetings. One-on-one discussions with the CEO on issues that should be resolved in team settings. Meetings turn into battlegrounds, with frequent arguments and difficulty reaching consensus. Executives bad-mouth each other, form alliances, or resist decisions after they’ve been made.</p>
+</li>
+<li><p>Prevention:</p>
+<ul>
+<li><p>Clear Expectations: Leaders should explicitly define which behaviors are acceptable and unacceptable. Set boundaries around how competition should be managed.</p>
+</li>
+<li><p>Confront Self-Serving Behaviors: Address aggressive or toxic behaviors directly with individuals. Remove those unwilling to align with the team’s goals, even if they’re high performers.</p>
+</li>
+<li><p>Role Modeling: The CEO or team leader must model collaborative behaviors and ensure transparency in communication to prevent political games.</p>
+</li>
+<li><p>Regular Feedback: Reinforce positive behaviors and correct negative ones through continuous feedback. Implement 360-degree reviews to track team behavior and performance alignment.</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Petting Zoos</strong></p>
+<ul>
+<li><p>Definition: A leadership team that avoids conflict to maintain harmony. Vigorous debate is sacrificed, and members prioritize getting along over pushing for the best ideas, leading to complacency and poor decision-making.</p>
+</li>
+<li><p>Causes: Overemphasis on collaboration and mutual trust, leading to conflict avoidance. Team members are too deferential, fearing that disagreements might disrupt the team’s harmony. Leaders may unknowingly encourage this avoidance by stressing harmony over debate.</p>
+</li>
+<li><p>Signs: Meetings lack critical debate, and discussions feel muted and lacking in emotional intensity. Team members engage in performance theater, focusing on positive news while downplaying problems. Decisions are made by consensus without sufficient evaluation or challenge. Leaders avoid holding one another accountable for poor performance, reluctant to disrupt the status quo.</p>
+</li>
+<li><p>Prevention:</p>
+<ul>
+<li>Encourage Debate: Leaders should foster a culture of constructive conflict where members feel safe to challenge each other’s ideas. A foundation of trust and psychological safety is key.</li>
+<li>Promote Data-Driven Discussion: Ensure discussions are rooted in facts, using shared data to spur debate and avoid personal conflict. This encourages neutral, objective decision-making.</li>
+<li>Monitor Meeting Dynamics: Leaders should track participation and the quality of discussion during meetings, encouraging team members to speak up and challenge ideas more openly.</li>
+<li>Redefine Consensus: Teams must understand that consensus does not mean avoiding conflict but making informed decisions after rigorous debate.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Mediocracies</strong></p>
+<ul>
+<li><p>Definition: A leadership team marked by complacency, lacking the drive or skills to achieve high performance. Collaboration and competition are both underemphasized, and the team fails to meet the organization’s needs.</p>
+</li>
+<li><p>Causes: Long periods of success that breed complacency. Poor alignment between the team’s skills and the changing demands of the business. A divided team, where some members prefer competition while others favor collaboration, leading to inconsistent and ineffective efforts. A leader’s failure to adapt to changing market conditions or internal challenges.</p>
+</li>
+<li><p>Signs: Team members operate in silos, with little collaboration between departments or units. Decision-making is slow, and there is a lack of accountability for performance. The team focuses on past achievements rather than future goals, with little ambition or drive for improvement. The team struggles with stagnation, missed opportunities, and duplicated efforts due to poor coordination.</p>
+</li>
+<li><p>Prevention:</p>
+<ul>
+<li>Rebuild the Team: Leaders may need to replace members who are not fit for their roles or who lack the motivation or skills needed to lead effectively. New hires should be chosen not just for their skills but also for their alignment with the company’s purpose and values.</li>
+<li>Promote Balance: Strike a balance between competition and collaboration by hiring individuals with complementary skills and styles (e.g., planners and visionaries alongside hard-nosed executors).</li>
+<li>Clear Roles and Expectations: Define where collaboration is expected (e.g., across departments) and where competition might be useful (e.g., in individual market decisions). Ensure everyone understands their responsibilities and how their performance contributes to broader goals.</li>
+<li>Challenge the Status Quo: Continuously push the team to innovate and grow by setting ambitious goals and holding team members accountable for driving performance improvements.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="Reports-and-Papers"><a href="#Reports-and-Papers" class="headerlink" title="Reports and Papers"></a>Reports and Papers</h3><blockquote>
+<p><strong>Learning vs Retrieval: The Role of In-Context Examples in Regression with LLMs</strong> [<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2409.04318">Link</a>]</p>
+</blockquote>
+<p>The paper explores in-context learning (ICL) mechanisms in large language models (LLMs), focusing on the balance between knowledge retrieval and learning from in-context examples in regression tasks. It reports that LLMs can learn from regression examples of realistic datasets in-context, extending previous work on synthetic data to more practical scenarios.</p>
+<p>I’m looking forward to this kind of experiments and studies, because I was suspicious about applying LLM on structured data.</p>
+<blockquote>
+<p><strong>Larger and more instructable language models become less reliable</strong> [<a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41586-024-07930-y">Link</a>]</p>
+</blockquote>
+<p>The issue might stem from the nature of LLMs, which are designed to generate plausible responses based on patterns in the data they’ve seen, rather than to <em>know</em> anything in the traditional sense. They don’t have an internal mechanism to differentiate truth from fabrication, so as they scale up, they produce more complex, yet not necessarily more accurate, answers. This makes them better at appearing smart, but less reliable overall—a quality that philosophers like Mike Hicks rightly criticize as “bullshitting.”</p>
+<p>From a user perspective, it underscores the need for critical thinking when engaging with AI models through prompt engineering. Just because an LLM provides a well-phrased response doesn’t mean it’s accurate. </p>
+<blockquote>
+<p><em>o1—like previous LLMs—is sensitive to the probability of examples and tasks, performing better and requiring fewer “thinking tokens” in high-probability settings than in low-probability ones.</em></p>
+<p><strong>― When a language model is optimized for reasoning, does it still show embers of autoregression? An analysis of OpenAI o1</strong> [<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2410.01792">Link</a>]</p>
+</blockquote>
+<p>Although optimized for reasoning, o1 still exhibits probability-based limitations tied to its autoregressive origins, implying that a complete departure from these influences has not been fully achieved.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -439,7 +732,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-10-02 01:24:45" itemprop="dateModified" datetime="2024-10-02T01:24:45-04:00">2024-10-02</time>
+      <time title="Modified: 2024-10-06 10:39:07" itemprop="dateModified" datetime="2024-10-06T10:39:07-04:00">2024-10-06</time>
     </span>
 
   
@@ -580,11 +873,13 @@
 <p><strong>Big Fed rate cuts, AI killing call centers, $50B govt boondoggle, VC’s rough years, Trump&#x2F;Kamala - All-In Podcast</strong> [<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=xAUA9QgqkxM&ab_channel=All-InPodcast">Link</a>]</p>
 </blockquote>
 <blockquote>
-<p><strong>The Mark Zuckerberg Interview - Acquired</strong> [<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=QciJ9ubeLQk&ab_channel=Acquired">Link</a>]</p>
+<p><em>Learn from other people’s successes and failures but do your own thing.</em></p>
+<p><strong>― The Mark Zuckerberg Interview - Acquired</strong> [<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=QciJ9ubeLQk&ab_channel=Acquired">Link</a>]</p>
 </blockquote>
 <blockquote>
 <p><strong>How to Think About Risk with Howard Marks - Oaktree Capital</strong> [<a target="_blank" rel="noopener" href="https://www.youtube.com/playlist?list=PLxbi-KAxos9tf1iHzRFTZmXDsGI-nQGsm">Link</a>]</p>
 </blockquote>
+<p>Oaktree co-chairman Howard Marks explores the true meaning of risk in a series of videos. He discusses the nature of risk, the relationship between risk and return, misconceptions about risk, and much more.</p>
 <blockquote>
 <p><strong>Next up for AI? Dancing robots - TED</strong> [<a target="_blank" rel="noopener" href="https://www.ted.com/talks/catie_cuan_next_up_for_ai_dancing_robots?subtitle=en">Link</a>]</p>
 </blockquote>
@@ -597,15 +892,16 @@
 <p><strong>E166｜聊聊火人节与硅谷精神：挑战规则、反叛权威的双生花 - 硅谷101</strong> [<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=N_5FSy1UFaA&t=57s&ab_channel=%E7%A1%85%E8%B0%B7101%E6%92%AD%E5%AE%A2">Link</a>]</p>
 </blockquote>
 <blockquote>
-<p><strong>Shall We Repeal the Laws of Economics? - Oaktree Capital</strong> [<a target="_blank" rel="noopener" href="https://www.oaktreecapital.com/insights/memo-podcast/shall-we-repeal-the-laws-of-economics">Link</a>]</p>
-</blockquote>
-<blockquote>
 <p><strong>TIP662: Building Buffett: The Foundation of Success w&#x2F; Kyle Grieve - We Study Billionaires</strong> [<a target="_blank" rel="noopener" href="https://open.spotify.com/episode/36Hs6wtlXM3t86y3bTgMCt">Link</a>]</p>
 </blockquote>
 <blockquote>
 <p><strong>How To Build An AI Customer Service Bot - McKay Wrigley</strong> [<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=87ZX56RSamA&ab_channel=MckayWrigley">Link</a>]</p>
 </blockquote>
 <p>Helps to understand how to integrate language models with communication platforms. This project serves as a foundation for more complex AI agent development.</p>
+<blockquote>
+<p><strong>Building LLMs from the Ground Up: A 3-hour Coding Workshop - Sebastian Raschka</strong> [<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=quh7z1q7-uc&ab_channel=SebastianRaschka">Link</a>]</p>
+</blockquote>
+<p>Code a simple tokenizer, implement GPT-2 and Llama 2 architectures, pre-train models and perform instruction fine-tuning. As well as model evaluation and conversational tests. </p>
 <h3 id="Articles-and-Blogs"><a href="#Articles-and-Blogs" class="headerlink" title="Articles and Blogs"></a>Articles and Blogs</h3><blockquote>
 <p><strong>Explain the role of Monte Carlo Tree Search (MCTS) in AlphaGo and how it integrates with policy and value networks. - EITCA</strong> [<a target="_blank" rel="noopener" href="https://eitca.org/artificial-intelligence/eitc-ai-arl-advanced-reinforcement-learning/case-studies/classic-games-case-study/examination-review-classic-games-case-study/explain-the-role-of-monte-carlo-tree-search-mcts-in-alphago-and-how-it-integrates-with-policy-and-value-networks/">Link</a>]</p>
 </blockquote>
@@ -637,6 +933,21 @@
 <p><strong>The Intelligence Age - Sam Altman Blog</strong> [<a target="_blank" rel="noopener" href="https://ia.samaltman.com/">Link</a>]</p>
 </blockquote>
 <p>Sam predicting potential super intelligence emergence within few thousand days.</p>
+<blockquote>
+<p><strong>Exploring Multimodal RAG with LlamaIndex and GPT-4 or the New Anthropic Sonnet Model - Medium</strong> [<a target="_blank" rel="noopener" href="https://levelup.gitconnected.com/exploring-multimodal-rag-with-llamaindex-and-gpt-4-or-the-new-anthropic-sonnet-model-96705c877dbb">Link</a>]</p>
+</blockquote>
+<p>Build a Multimodal RAG system using LlamaIndex, GPT-4, and Anthropic Sonnet.</p>
+<blockquote>
+<p><strong>The next phase of Microsoft 365 Copilot innovation - Microsoft</strong> [<a target="_blank" rel="noopener" href="https://news.microsoft.com/m365-copilot-Sept-2024/">Link</a>]</p>
+</blockquote>
+<p>Microsoft launches 365 Copilot agents with features like ability to process data in Excel by generating Python code. </p>
+<blockquote>
+<p><strong>NotebookLM now lets you listen to a conversation about your sources - Google</strong> [<a target="_blank" rel="noopener" href="https://blog.google/technology/ai/notebooklm-audio-overviews/">Link</a>]</p>
+</blockquote>
+<blockquote>
+<p><strong>Replit Agent</strong> [<a target="_blank" rel="noopener" href="https://docs.replit.com/replitai/agent?ref=maginative.com">Link</a>]</p>
+</blockquote>
+<p>Replit launches AI agent capability that codes and deploys full apps from prompts.</p>
 <h3 id="Papers-and-Reports"><a href="#Papers-and-Reports" class="headerlink" title="Papers and Reports"></a>Papers and Reports</h3><blockquote>
 <p><strong>Dissecting Multiplication in Transformers: Insights into LLMs</strong> [<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2407.15360">Link</a>]</p>
 </blockquote>
@@ -644,7 +955,7 @@
 <p><strong>Introducing OpenAI o1-preview - OpenAI</strong> [<a target="_blank" rel="noopener" href="https://openai.com/index/introducing-openai-o1-preview/">Link</a>] </p>
 <p><strong>OpenAI o1-mini - OpenAI</strong> [<a target="_blank" rel="noopener" href="https://openai.com/index/openai-o1-mini-advancing-cost-efficient-reasoning/">Link</a>]</p>
 </blockquote>
-<p>This is a huge progress.</p>
+<p>This is a huge progress. </p>
 <p><img src="/digital-di/./images/o1-result.png" alt="img"></p>
 <p><a target="_blank" rel="noopener" href="https://x.com/DrJimFan/status/1834279865933332752">Jim Fan</a> highlighted the trends: </p>
 <ol>
@@ -688,9 +999,13 @@
 <p>Anthropic reduces the error rate of RAGs by 67% using “contextual retrieval” method.</p>
 <p>Method: Add important context to small text chunks before storing them. </p>
 <blockquote>
-<p><strong>Exploring Multimodal RAG with LlamaIndex and GPT-4 or the New Anthropic Sonnet Model - Medium</strong> [<a target="_blank" rel="noopener" href="https://levelup.gitconnected.com/exploring-multimodal-rag-with-llamaindex-and-gpt-4-or-the-new-anthropic-sonnet-model-96705c877dbb">Link</a>]</p>
+<p><strong>What is the Role of Small Models in the LLM Era: A Survey</strong> [<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2409.06857">Link</a>]</p>
 </blockquote>
-<p>Build a Multimodal RAG system using LlamaIndex, GPT-4, and Anthropic Sonnet.</p>
+<p>They analyze how small models can enhance LLMs in tasks like data curation, efficient inference, and deficiency repair. </p>
+<blockquote>
+<p><strong>LLMs Will Always Hallucinate, and We Need to Live With This</strong> [<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2409.05746">Link</a>]</p>
+</blockquote>
+<p>This paper proves that every stage of LLM processing has a non-zero probability of producing hallucinations.</p>
 <h3 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h3><blockquote>
 <p><strong>STORM: Synthesis of Topic Outlines through Retrieval and Multi-perspective Question Asking</strong> [<a target="_blank" rel="noopener" href="https://github.com/stanford-oval/storm">Link</a>]</p>
 </blockquote>
@@ -783,6 +1098,37 @@
 </blockquote>
 <blockquote>
 <p><strong>GenAI Agents: Comprehensive Repository for Development and Implementation - NirDiamant</strong> [<a target="_blank" rel="noopener" href="https://github.com/NirDiamant/GenAI_Agents">Link</a>]</p>
+</blockquote>
+<blockquote>
+<p><strong>Prompt Evaluations - Anthropic</strong> [<a target="_blank" rel="noopener" href="https://github.com/anthropics/courses/tree/master/prompt_evaluations">Link</a>]</p>
+</blockquote>
+<p>Master LLM prompt evaluations. Key learning:</p>
+<ul>
+<li>Creating comprehensive test datasets</li>
+<li>Implementing exact string matching and keyword presence checks</li>
+<li>Using regular expressions for complex pattern matching</li>
+<li>Leveraging LLMs for nuanced grading tasks</li>
+<li>Designing custom rubrics for model-based evaluation</li>
+<li>Iterating prompts to improve performance metrics</li>
+<li>Comparing model versions objectively</li>
+<li>Ensuring quality before and after deployment</li>
+</ul>
+<blockquote>
+<p><strong>Llama Parse CLI - 0xthierry</strong> [<a target="_blank" rel="noopener" href="https://github.com/0xthierry/llama-parse-cli">Link</a>]</p>
+</blockquote>
+<p>The “Llama Parse CLI” is a command-line tool for parsing complex documents into machine and LLM-readable formats. It uses the LlamaIndex Parser API to handle PDFs with text, tables, and images. This tool helps you convert documents to markdown or JSON with a simple terminal command, streamlining data preparation for LLM training and fine-tuning tasks.</p>
+<p>Key learning:</p>
+<ul>
+<li>Install and authenticate the CLI</li>
+<li>Parse documents with various options (format, OCR language, page selection)</li>
+<li>Customize parsing instructions and output</li>
+<li>Handle multi-page documents and complex layouts</li>
+<li>Integrate parsed data into LLM training pipelines</li>
+<li>Optimize parsing for specific document types</li>
+<li>Use advanced features like fast mode and GPT-4 integration</li>
+</ul>
+<blockquote>
+<p><strong>AI-Driven Research Assistant - starpig1129</strong> [<a target="_blank" rel="noopener" href="https://github.com/starpig1129/ai-data-analysis-MulitAgent">Link</a>]</p>
 </blockquote>
 <h3 id="News"><a href="#News" class="headerlink" title="News"></a>News</h3><blockquote>
 <p><strong>How Costco Hacked the American Shopping Psyche - New York Times</strong> [<a target="_blank" rel="noopener" href="https://www.nytimes.com/2024/08/20/dining/costco.html?unlocked_article_code=1.E04.3IV_.CKBGzqRPdUjo&smid=em-share">Link</a>]</p>
@@ -3413,762 +3759,6 @@
 </blockquote>
 <blockquote>
 <p>Own the fear, find the cave, and write a new ending for yourself, for the people you’re meant to serve and support, and for your culture. Choose courage over comfort. Choose whole hearts over armor. And choose the great adventure of being brave and afraid. At the exact same time.</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jokerdii.github.io/digital-di/2024/06/20/2024-June/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/digital-di/images/avatar.gif">
-      <meta itemprop="name" content="Di Zhen">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Di's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Di's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/digital-di/2024/06/20/2024-June/" class="post-title-link" itemprop="url">2024 June</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2024-06-20 04:22:31" itemprop="dateCreated datePublished" datetime="2024-06-20T04:22:31-04:00">2024-06-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-02 00:21:17" itemprop="dateModified" datetime="2024-07-02T00:21:17-04:00">2024-07-02</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="Substack"><a href="#Substack" class="headerlink" title="Substack"></a>Substack</h3><blockquote>
-<p><strong>Salesforce: Worst Day in 20 Years - App Economy Insights</strong> [<a target="_blank" rel="noopener" href="https://www.appeconomyinsights.com/p/salesforce-worst-day-in-20-years">Link</a>]</p>
-</blockquote>
-<p>PayPal hired Mark Grether who was head of Uber’s ad business to lead the initiative of an ad network. </p>
-<p>Costco’s membership fees declined from 86% to 50% of the its operating profit. It has shown economies of scale and benefits from a more favorable revenue mix.</p>
-<p>Salesforce’s revenue grew 11% to $9.1B, missing Wall Street estimates by $20M. Current Remaining Performance Obligations - the best indicator of future growth - rose 10%, missing estimates of 12%. The slowing growth is partially due to broader macroeconomic challenges and internal execution issues. Salesforce Data Cloud is contributing to 25% of the deals valued above $1M, indicating it’s well-positioned to benefit from AI boom.</p>
-<p>Live Nation has caused such widespread outrage in 2022 Taylor Swift Eras Tour ticket sales because fans faced technical glitches and exorbitant fees. Live Nation was accused of locking venues into exclusive deals and bullying artists into using its services, which caused higher ticket prices through service and convenience fees. Live Nation is under scrutiny by the government. It is forced to divest Ticketmaster (acquired in 2020). Fans &#x2F; artists are expecting increased competition in live music industry and lower prices, and a smoother ticket buying experience.</p>
-<blockquote>
-<p><strong>Online Travel: AI is Coming - App Economy Insights</strong> [<a target="_blank" rel="noopener" href="https://www.appeconomyinsights.com/p/online-travel-ai-is-coming">Link</a>]</p>
-</blockquote>
-<p>AI agents as the next frontier could make traveling personalized. The key metrics to define their success are 1) gross bookings, 2) nights booked, 3) average daily rate (ADR), 4) revenue per available room (RevPAR), customer acquisition cost (CAC). </p>
-<p>The largest travel companies (online travel agencies and rentals and hotel chains) are Booking Holdings, Airbnb, Expedia, Marriott, and Hilton.</p>
-<p>Highlights: 1) Booking Holdings (operating as an OTA): CEO Glenn Fogel envisions AI enhancing connected trips (single booking that include multiple travel elements such as flights, accommodations, car rentals, etc), 2) Airbnb exceeded expectations on both revenue and profitability in Q1 due to its robust international expansion, while slowing down the growth in North America. Airbnb is aiming to create an AI powered concierge to elevate the overall Airbnb experiences, 3) Expedia (operating as an OTA): Expedia is currently facing challenges of transition and adjustment: Vrbo vacation rental platform integration into Expedia platform is slower than expected. And it’s also facing challenges in attracting and retaining customers in its B2C segment. A new CEO Ariane Gorin was recently appointed to help navigate through these challenges. 4) Marriott (operating as booking platform): Marriott has developed Homes &amp; Villas tool that allows users to search for vacation rentals using language. A slow-down RevPAR in North America has been observed which indicates a shift in consumer preferences towards international destinations and alternative accommodations. Its brand reputation, loyalty program and focus on group&#x2F;business travel remain strong. 5) Hilton: has strong emphasis on personalization and loyalty programs though facing headwinds in the US. CEO Chris Nassetta envisions AI-powered tools to address guest concerns in real time.</p>
-<blockquote>
-<p><em>From graphics rendering, gaming and media, cloud computing and crypto, Nvidia’s chips have led the way in each of these past innovation cycles as it saw its GPU applications expand over the last 2 decades. And now it is getting ready to advance the next industrial revolution, that will be powered by AI.</em></p>
-<p><em>Some industry experts believe that<a target="_blank" rel="noopener" href="https://www.wsj.com/tech/ai/how-a-shifting-ai-chip-market-will-shape-nvidias-future-f0c256b1"> 20% of the demand for AI chips next year</a> will be due to model inference needs, with “Nvidia deriving about 40% of its data center revenue just from inference.”</em> </p>
-<p><strong>― NVIDIA’s chips are the tastiest AI can find. It’s stock still has ways to go - The Pragmatic Optimist</strong> [<a target="_blank" rel="noopener" href="https://amritaroy.substack.com/p/nvidias-chips-are-the-tastiest-ai">Link</a>]</p>
-</blockquote>
-<p>This is a good summary of Nvidia’s strategies towards computing, path to AI domination, tailwinds of efficiency, position in the future.</p>
-<p>Nvidia is “at the right place at the right time”: </p>
-<ul>
-<li>During 2000-2010 where the world successfully emerged from the dot-com bust, demand of Nvidia’s GPUs increased as the proliferation of games and multimedia applications. By 2011, Nvidia had already begun to reposition the company’s strategy for GPU chips towards mobile computing. At the same time, the concept of cloud computing, crypto-mining, and data center started to form.</li>
-<li>Nvidia has built grounded relationship with academics and researchers. According to the paper published by Andrew Ng to show the power of NVIDIA GPU. During 2011-2015, Ng had been working as the Chief Scientist at many big tech firms and deployed data center architectures based on Nvidia’s GPUs. During 2010-2014, data center and HPC grew at a compounded growth rate of 64%. This period of time was one of the moments that set Nvidia on the course to dominate AI.</li>
-</ul>
-<p>In semiconductor industry, there are two different ways of manufacturing chips at scale:</p>
-<ol>
-<li>Designing and manufacturing your own chip - what Intel was doing. Manufacturing chips can be very expensive and hard. Today, chip foundries such as Taiwan’s TSMC and South Korea’s Samsung are able to maintain leading edge.</li>
-<li>Designing and producing powerful chips at a quicker pace by partnering with chip foundries like TSMC - what Nvidia and AMD fabless companies are doing.</li>
-</ol>
-<p>2024 could be the first year that Huang’s Nvidia could cede some market share to AMD. AMD launched their own MI300-series and Intel launched their Gaudi3 AI Accelerator chip, aiming to get back share from Nvidia’s H100&#x2F;H200 chips. However Huang looks ahead:</p>
-<ul>
-<li><p>Huang believes Nvidia must turn its attention to the next leg of AI - Model Inference. </p>
-<p>Tech companies spend more on AI data center equipment over years, Nvidia’s revenue won’t slow down.</p>
-</li>
-<li><p>Nvidia’s executives also believe that company can benefit from demand from specific industry verticals, such as automotive.s</p>
-<p>Tesla, for example, is leading self driving cars.</p>
-</li>
-<li><p>Automotive AI and Sovereign AI are two future areas of growth where enterprises continue to spend on data centers for model training and inferencing.</p>
-</li>
-</ul>
-<p>The authors also assessed Nvidia’s valuation and believe that:</p>
-<ul>
-<li>Between 2023 and 2026, Nvidia’s sales should be growing at a compounded annual growth rate of 43–45%.</li>
-<li>Over the next 3 years, they expect operating profit to grow in line with revenue growth, with operating profit margins remaining relatively flat in 2025 and 2026.</li>
-</ul>
-<blockquote>
-<p><strong>The Coming Wave of AI, and How Nvidia Dominates - Fabricated Knowledge</strong> [<a target="_blank" rel="noopener" href="https://www.fabricatedknowledge.com/p/the-coming-wave-of-ai-and-how-nvidia">Link</a>]</p>
-</blockquote>
-<p>Nvidia is the clear leader in 1) System and Networking, 2) Hardware (GPUs and Accelerators), and 3) Software (Kernels and Libraries) but offers the whole solution as a product.</p>
-<blockquote>
-<p><em>Amazon drives tremendous savings from custom silicon which are hard for competitors to replicate, especially in the standard CPU compute and storage applications. Custom silicon drives 3 core benefits for cloud providers.</em></p>
-<ol>
-<li><em>Engineering the silicon for your unique workloads for higher performance through architectural innovation.</em></li>
-<li><em>Strategic control and lock-in over certain workloads.</em></li>
-<li><em>Cost savings from removing margin stacking of fabless design firms.</em></li>
-</ol>
-<p><em>The removal of these workloads from server CPU cores to the custom Nitro chip not only greatly improves cost, but also improves performance due to <a target="_blank" rel="noopener" href="https://www.semianalysis.com/p/is-ampere-computings-cloud-native">removing noisy neighbor problems</a> associated with the hypervisor, such as shared caches, IO bandwidth, and power&#x2F;heat budgets.</em></p>
-<p><strong>― Amazon’s Cloud Crisis: How AWS Will Lose The Future Of Computing - Semianalysis</strong> [<a target="_blank" rel="noopener" href="https://www.semianalysis.com/p/amazons-cloud-crisis-how-aws-will">Link</a>]</p>
-</blockquote>
-<p>A good overview of Amazon’s in-house semiconductor designs (Nitro, Graviton, SSDs, Inferentia, and Trainium). It includes how Microsoft Azure, Google Cloud, Nvidia Cloud, Oracle Cloud, IBM Cloud, Equinix Fabric, Coreweave, Cloudflare, and Lambda are each fighting Amazon’s dominance across multiple vectors and to various degrees.</p>
-<p>Amazon’s custom silicon efforts - Nitro:</p>
-<ul>
-<li>AWS worked with Cavium on developing the custom SoC on a discrete PCIe card and associated software, named “Nitro System”. It removes workloads from server CPU cores to the custom Nitro chips.</li>
-<li>Annapurna Labs was acquired by Amazon in 2015. It focuses on server SOCs for networking and storage. Amazon was trying to continue its efforts on storage, and Nitro is the main enabler of a competitive advantage in these storage and databases.</li>
-<li>Nitro provides services such as virtual disk to the tenant’s virtual machines and enables customers to dynamically grow and shrink high performance storage at low cost. </li>
-<li>Amazon worked with Marvell to co-design the AWS Nitro SSD controller. The focus was on avoiding latency spikes and latency variability, and maximizing the lifetime of the SSD.</li>
-</ul>
-<p>Other two clouds (Google and Microsoft) are years behind Amazon, both required a partner, and both were stuck with 1st or 2nd generation merchant silicon for the next few years. </p>
-<p>James Hamilton, an engineer in Amazon, had and look at two key ways in which using AWS-designed, Arm-based CPUs could offer advantages compared to their external counterparts.</p>
-<ol>
-<li>Using Arm’s scale in mobile by using the arm-designed Neoverse cores or </li>
-<li>TSMC’s manufacturing scale. Both would reduce costs and offer better value to customers.</li>
-</ol>
-<p>In-house CPUs enables Amazon to design CPUs to maximize density and minimize server and system level energy which helps reduce costs. The tremendous scale of Amazon especially regarding general-purpose compute and storage-related verticals will continue to drive a durable advantage in the cloud for many years.</p>
-<blockquote>
-<p><em>Ultrafusion is Apple’s marketing name for using a local silicon interconnect (bridge die) to connect the two M2 Max chips in a package. The two chips are exposed as a single chip to many layers of software. M2 Ultra utilizes <a target="_blank" rel="noopener" href="https://www.semianalysis.com/p/advanced-packaging-part-1-pad-limited">TSMC’s InFO-LSI packaging technology</a>. This is a similar concept as TSMC’s CoWoS-L that is being adopted by Nvidia’s Blackwell and future accelerators down the road to make large chips. The only major difference between Apple and Nvidia’s approaches are that InFO is chip-first vs CoWoS-L is chip-last process flow, and that they are using different types of memory.</em></p>
-<p><strong>― Apple’s AI Strategy: Apple Datacenters, On-device, Cloud, And More - Semianalysis</strong> [<a target="_blank" rel="noopener" href="https://www.semianalysis.com/p/apples-ai-strategy-apple-datacenters">Link</a>]</p>
-</blockquote>
-<p>Apple’s purchases of GPUs are minuscule and Apple is not a top 10 customer of Nvidia. The production of M2 Ultras can be consistent with the fact that Apple is using their own silicon in their own data centers for serving AI to Apple users. And Apple has expansion plans for their own data center infrastructure. Furthermore, Apple made a number of hires including Sumit Gupta who joined to lead cloud infrastructure at Apple in March. </p>
-<blockquote>
-<p><em>One of the best known non-bank banks is Starbucks – “a bank dressed up as a coffee shop”. Trung Phan, <a target="_blank" rel="noopener" href="https://www.readtrung.com/p/starbucks-digital-dilemna">rates</a> the misperception up there alongside “McDonald’s is a real estate company dressed up as a hamburger chain” and “Harvard is a hedge fund dressed up as an institution of higher learning”.</em></p>
-<p><em>Today, more than 60% of the company’s peak morning business in the US comes from Starbucks Rewards members who overwhelmingly order via the app. The program has 33 million users, equivalent to around one in ten American adults.</em> </p>
-<p><strong>― Banks in Disguise - Net Interest</strong> [<a target="_blank" rel="noopener" href="https://www.netinterest.co/p/banks-in-disguise">Link</a>]</p>
-</blockquote>
-<p>Starbucks had offered a gift card since 2001 and started to pair it with a new loyalty program “Starbucks Rewards” in 2008. Consumers are allowed to access free wifi and refillable coffee by paying with a reloadable card. The card was put onto an app in 2010 and expanded to over 9000 locations. It quickly became the largest combined mobile payments in loyalty program in the US. Uses load or reload around $10 B of value onto their cards each year and so about $1.9B of stored card value sat on the company’s balance sheet, just like customer deposits. There are several advantages: 1) the company does not pay interest on customer funds, and 2) sweep customer funds into company’s own bank account when it concludes customers may have forgotten about them - this is called ‘breakage’. In late 2023, Starbucks was accused of making it impossible for consumers to spend down their stored value cards by only allowing funds to be added in $5 increments and requiring a $10 minimum spend. Although the company has to pay rewards to customers, it saves on merchant discount fees and receives a lots of free and valuable personal information about customers.</p>
-<p>Delta’s SkyMiles scheme is one of the largest globally with 25 M active members. There are two ways points schemes generate money: 1) when scheme member buy a regular ticket, they also buy mileage credit they can redeem in the future, and 2) they make money from card companies (such as American Express) and other partners. </p>
-<blockquote>
-<p><strong>VC Says “Chaos” Coming for Startups, Ads, and Online Business as Generative AI Eats Web - Big Technology</strong> [<a target="_blank" rel="noopener" href="https://www.bigtechnology.com/p/vc-says-chaos-coming-for-startups">Link</a>]</p>
-</blockquote>
-<p>The main point is that, as generative AI is ingested into the web, a decades-old system of online referrals and business building will be reshaped. The business model of every existing business (online travel, ecommerce, online advertising, etc) on the internet are impacted due to the transformation of online search by AI. It decreases the number of customer’s impressions on the internet thus reduce advertiser’s chance of being charged. And it also reduces the chance for startups to be observed and build brands. </p>
-<blockquote>
-<p><strong>OpenAI: $80 Billion - Trendline</strong> [<a target="_blank" rel="noopener" href="https://getthetrendline.substack.com/p/openai-80-billion">Link</a>]</p>
-</blockquote>
-<p>So top 10 most valuable unicorns are 1) ByteDance, 2) SpaceX, 3) OpenAI, 4) SHEIN, 5) Stripe, 6) Databricks, 7) Revolut, 8) Fanatics, 9) Canva, 10) Epic Games</p>
-<blockquote>
-<p><em>Nvidia’s four largest customers each have architectures in progress or production in different stages:</em> </p>
-<ol>
-<li><em>Google Tensor</em></li>
-<li><em>Amazon Inferentium and Trainium</em></li>
-<li><em>Microsoft Maia</em></li>
-<li><em>Meta MTIA</em></li>
-</ol>
-<p><strong>― What’s all the noise in the AI basement? - AI Supremacy</strong> [<a target="_blank" rel="noopener" href="https://www.ai-supremacy.com/p/whats-all-the-noise-in-the-ai-basement?utm_source=/inbox/saved&utm_medium=reader2">Link</a>]</p>
-</blockquote>
-<p>Current situation of players in semiconductor industry in the context of AI competition.</p>
-<blockquote>
-<p><strong>Big 4 Visualized - App Economy Insights</strong> [<a target="_blank" rel="noopener" href="https://www.appeconomyinsights.com/p/big-4-visualized">Link</a>]</p>
-</blockquote>
-<p>The four titans of accounting industry - Deloitte, PwC, EY, and KPMG. They make money from 1) audit: verifying financial statement, 2) assurance: including processes, internal control, cybersecurity assessments, and fraud investigations, 3) consulting: offering advice on everything from M&amp;A to digital transformation, especially in helping enterprise software sales, 4) risk adn tax advisory: navigating compliance, regulations, and tax laws.</p>
-<p>Insights:</p>
-<p>Deloitte: 1) fastest growing in revenue, 2) heavily investing in AI and digital transformation, 3) acquisition as a growth strategy.</p>
-<p>PwC: 1) heavily investing $1B in Gen AI initiative with Microsoft, 2) will become the largest customer and 1st reseller of OpenAI’s enterprise product, 3) leader of financial services sector, serving most global banks and insurers, 4) has faced scrutiny over its audit of the failed cryptocurrency exchange FTX, raising concerns about its risk management practices.</p>
-<p>EY: 1) invested $1.4B to create EY.ai EYQ, an AI platform and LLM, 2) abandoned its “Project Everest” plan to split it audit and consulting businesses in 2023, 3) growing business through strategic acquisitions, 4) has faced criticism for an about $2B hole in its accounts, raising concerns about its audit practices and risk management, 5) was fined $100M because hundreds of employees cheated on ethics exams.</p>
-<p>KPMG: 1) focusing on digital transformation (data analytics, AI, and cybersecurity), 2) has faced regulatory scrutiny and fines due to audit practices, raising concerns about its audit quality and independence.</p>
-<blockquote>
-<p><em>I think the release highlights something important happening in Al right now: experimentation with four kinds of models - Al models, models of use, business models, and mental models of the future. What is worth paying attention to is how all the Al giants are trying many different approaches to see what works.</em></p>
-<p><em>This demonstrates a pattern: the most advanced generalist Al models often outperform specialized models, even in the specific domains those specialized models were designed for.</em></p>
-<p><em>That means that if you want a model that can do a lot - reason over massive amounts of text, help you generate ideas, write in a non-robotic way - you want to use one of the three frontier models: GPT-40, Gemini 1.5, or Claude 3 Opus.</em></p>
-<p><em>The potential gains to AI, the productivity boosts and innovation, along with the weird risks, come from the <a target="_blank" rel="noopener" href="https://www.oneusefulthing.org/p/superhuman">larger, less constrained models</a>. And the benefits come from figuring out how to apply AI to your own use cases, even though that takes work. Frontier models thus have a very different approach to use cases than more constrained models. Take a look at this <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=wfAYBdaGVxs">demo, from OpenAI, where GPT-4o (rather flirtatiously?) helps someone work through an interview,</a> and compare it to <a target="_blank" rel="noopener" href="https://youtu.be/Q_EYoV1kZWk?si=lspCJUSZed9se-QR">this demo of Apple’s AI-powered Siri</a>, helping with appointments. Radically different philosophies at work.</em></p>
-<p><strong>― What Apple’s AI Tells Us: Experimental Models⁴ - One Useful Thing</strong>  [<a target="_blank" rel="noopener" href="https://www.oneusefulthing.org/p/what-apples-ai-tells-us-experimental">Link</a>]</p>
-</blockquote>
-<ol>
-<li><p>Al Models: Apple does not have frontier model like Google and Microsoft do, but they have created a bunch of small models that are able to run on Al-focused chips in their products. The medium-sized model that can be called by iPhone in the cloud. The model that’s running on iPhone and the model that’s running in the cloud are as good as Mistral’s and ChatGPT.</p>
-</li>
-<li><p>Models of Use: However, larger, less constrained models are the potential gains to Al, the productivity boosts and innovation. You would prefer to use GPT-4o to do nuanced tasks such as helping with your interviews rather than use Apple Al-powered Siri.</p>
-</li>
-<li><p>Business Models: Apple sounds like they will start with free service as well, but may decide to charge in the future. The truth is that everyone is exploring this space, and how they make money and cover costs is still unclear (though there is a lot of money out there. People don’t trust Al companies because they are concerning about privacy. However Apple makes sure models cannot learn about your data even if it wanted to. Personal data on your iPhone are only accessed by local Al.</p>
-<p>And those handed to the cloud is encrypted. For those data given to OpenAl, it’s anonymous and requires explicit permission. Apple is making very ethical use of Al. Though we should still be cautious about Apple’s training data.</p>
-</li>
-<li><p>Models of the Future: Apple and OpenAl have different goals. Apple is building narrow Al systems that can accurately answer questions about your personal data. While OpenAl is building autonomous agents that would complete complex tasks for you. In comparison, Apple has a clear and practical vision of how Al can be applied, while the future OpenAl’s AGI remains to be seen.</p>
-</li>
-</ol>
-<blockquote>
-<p><em>Elon has been spreading significant FUD by threatening to prohibit Apple devices at his companies. The truth is Apple at no point will be sending any of your data to OpenAI without explicit user permission. Even if you opt for “Use ChatGPT” for longer questions, OpenAI isn’t allowed to store your data.</em></p>
-<p><em>According to Counterpoint Research, smartphone makers who have launched AI features on their smartphones have seen a revival in sales. Look at Samsung for example, where its S24 series grew 8% compared to S23 in 2024 with sales for its mid-range premium model growing 52% YoY. With Apple having a larger market share, along with receding expectations for an economic recession, this could be the start of a new growth chapter for the Cupertino darling once again.</em></p>
-<p><em>Pete Huang at <a target="_blank" rel="noopener" href="https://www.theneurondaily.com/">The Neuron</a> explains in a step by step process of what really goes down when you ask Siri with AI a question.</em></p>
-<ol>
-<li><p><em>For almost all questions, Siri uses AI that lives on the device, aka it won’t need to hit up the cloud or ChatGPT, aka your question won’t ever leave the phone.</em></p>
-<ul>
-<li><em>These on-device models are decent (they’re built on top of open-source models) and outperform Google’s on-device model, Gemma-7B, 70% of the time.</em></li>
-</ul>
-</li>
-<li><p><em>For more complex questions like “Find the photo I took at the beach last summer,” Siri will consult a smarter AI model that runs on Apple’s servers.</em></p>
-<ul>
-<li><em>When Siri sends your question to Apple’s servers, your data is anonymized and not stored there forever.</em></li>
-</ul>
-</li>
-<li><p><em>Now, for longer questions like “Can you help me create a weekly meal plan?” or “Rewrite this email using a more casual tone,” Siri will use ChatGPT only if you give it permission to.</em></p>
-<ul>
-<li><em>Even if you opt for “Use ChatGPT,” OpenAI isn’t allowed to store your data.</em></li>
-</ul>
-</li>
-</ol>
-<p><strong>― The Real Test For Consumer’s AI Appetite Is About To Begin - The Pragmatic Optimist</strong> [<a target="_blank" rel="noopener" href="https://amritaroy.substack.com/p/consumers-ai-appetite-will-be-tested">Link</a>]</p>
-</blockquote>
-<p>Interested to know how it actually works when you ask Siri with AI a question.</p>
-<blockquote>
-<p><strong>5 Founder-Led Businesses - Invest in Quality</strong> [<a target="_blank" rel="noopener" href="https://www.investinassets.net/p/5-founder-led-businesses">Link</a>]</p>
-</blockquote>
-<p>Three research findings:</p>
-<ol>
-<li>Founder-led businesses outpaced other companies by a wide margin. (Researched by Ruediger Fahlenbrach in 2009).</li>
-<li>Family-owned businesses ignored short-term quarterly numbers to focus on the long-term value creation, which lead to a major outperformance because of 1) lower risk-taking in the short term, and 2) greater vision and investment for the long term. (Researched by Henry McVey in 2005).</li>
-<li>Businesses managed by billionaires outperformed the market by 7% annually from 1996 to 2011. (researched by Joel Shulman in 2012).</li>
-</ol>
-<p>Insights behind the findings above:</p>
-<ol>
-<li>Founders and owners often have their life savings invested in the shares of the business, so they have the incentive aligned.</li>
-<li>Bureaucracy reduces business performance. They will almost never make a radical shift, because politicians care more about their job title than the long term prospects of the business. Founders on the other hand are able to make radical decisions and overrule the bureaucracy, therefore they can take the business in a direction to fulfill long term vision. </li>
-<li>Founders and billionaires are exceptional people to run business.</li>
-</ol>
-<p>The article listed five examples of founder-led businesses: MercadoLibre, Adyen, Fortinet, Intercontinental Exchange, and Paycom. </p>
-<blockquote>
-<p><em>This move positions Apple as an AI aggregator, offering users a curated selection of the best AI tools while keeping their data private. It’s a win-win. Apple gets to enhance its user experience with powerful AI capabilities. At the same time, OpenAI gains access to Apple’s massive user base for brand recognition and potential upsell to ChatGPT Plus. There is no detail available on the exact terms of the partnership.</em></p>
-<p><strong>― Apple: AI for the Rest of Us - App Economy Insights</strong> [<a target="_blank" rel="noopener" href="https://www.appeconomyinsights.com/p/apple-ai-for-the-rest-of-us">Link</a>]</p>
-</blockquote>
-<p>Integrating ChatGPT alongside Apple Intelligence features is a smart move that allows Apple to focus on their strengths (privacy, personalization) while leveraging general knowledge AI from OpenAI. This will enable Apple to blame any wrong answers and hallucinations on the LLMs the company partners with and stay out of PR trouble. </p>
-<blockquote>
-<p><strong>The Other Side of the Trade - The Rational Walk</strong> [<a target="_blank" rel="noopener" href="https://rationalwalk.com/the-other-side-of-the-trade/">Link</a>]</p>
-</blockquote>
-<p>An ethical implication about taking advantage of a glitch caused by software malfunction.</p>
-<blockquote>
-<p><em>I have noticed the proliferation of a different type of species in academia: what I call The Failed Corporatist. This is someone who stumbles upon academia not so much out of a love for The Truth, as due to an inability to thrive in corporate settings for various other, unrelated reasons. But the Failed Corporatist has a very conventional, corporate like mindset anyway. It usually loves process, admin and adding more admin and adding more process and METRICS and social conformity. This skill set enables them to ascend the ranks of academic administration, often gaining significant influence and control over The Weird Nerd. Confronted with this altered habitat, The Nerd often finds itself in a state of distress and confusion. Its intrinsic motivation clashes with the newly imposed corporate-like order and the demand for conformity, leading to frantic efforts to assert its natural tendencies. Unfortunately, these efforts are often met with resistance or outright rejection, not only from The Failed Corporatist but also from the broader world that the academic reserve is a part of. All in all, I think this disturbance means the remaining Nerds are further driven away.</em></p>
-<p><strong>― The flight of the Weird Nerd from academia - Ruxandra’s Substack</strong> [<a target="_blank" rel="noopener" href="https://www.writingruxandrabio.com/p/the-flight-of-the-weird-nerd-from">Link</a>]</p>
-<p><em>A couple of months ago I wrote a piece called <a target="_blank" rel="noopener" href="https://www.writingruxandrabio.com/p/the-flight-of-the-weird-nerd-from">“The flight of the Weird Nerd from academia”</a>, in which I argued there is a trend wherein Weird Nerds are being driven out of academia by the so-called Failed Corporatist phenotype. Katalin Karikó is a perfect example of a Weird Nerd. I recently argued that many Weird Nerds (I called them autistics, but people really hated that<a target="_blank" rel="noopener" href="https://www.writingruxandrabio.com/p/the-weird-nerd-comes-with-trade-offs?utm_source=/inbox/saved&utm_medium=reader2#footnote-2-144974567">2</a>), have <a target="_blank" rel="noopener" href="https://www.writingruxandrabio.com/p/autism-and-the-internet-will-defeat">found a refuge on the Internet</a>, where their strengths are amplified and their weaknesses are less important.</em> </p>
-<p><em>And I believe the conversation here starts with accepting a simple truth, which is that Weird Nerds will have certain traits that might be less than ideal, that these traits come “in a package” with other, very good traits, and if one makes filtering or promotion based on the absence of those traits a priority, they will miss out on the positives. It means really internalizing the existence of trade-offs in human personality, in an era where accepting trade-offs is deeply unfashionable, and structuring institutions and their cultures while keeping them in mind.</em></p>
-<p><em>Everything comes at a cost: spend more time worrying about politics, there will be less time for science. What’s more, the kind of people who really care about science or truth to the extent that Karikó did, are not the same people that get motivated by playing politics or being incredibly pleasant. There is a strong anti-correlation between these interests (that of course does not mean there is no one who is good at both.) Selecting future intellectuals based on traits like Agreeableness or Extraversion might not be only unnecessary, but actually harmful. We might be actively depleting the talent pool of the kind of people we do want to see in academic institutions.</em></p>
-<p><strong>― The Weird Nerd comes with trade-offs - Ruxandra’s Substack</strong> [<a target="_blank" rel="noopener" href="https://www.writingruxandrabio.com/p/the-weird-nerd-comes-with-trade-offs">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><em>The intersection of AI with the ocean of mass surveillance data that’s been building up over the past two decades is going to put truly terrible powers in the hands of an unaccountable few. - <a target="_blank" rel="noopener" href="https://x.com/Snowden/status/1801792686724182242">Edward Snowden</a></em></p>
-<p><em>The former head of the NSA may be a great guy. But you don’t put the former head of the NSA on your board (as OpenAI just did) because he’s nice. You put him there to signal that you’re open to doing business with the IC and DoD. - <a target="_blank" rel="noopener" href="https://x.com/matthew_d_green/status/1801649274398163166">Matthew Green</a></em></p>
-<p><strong>― Is OpenAI an AI Surveillance Tool?</strong> [<a target="_blank" rel="noopener" href="https://www.ai-supremacy.com/p/is-openai-an-ai-surveillance-tool">Link</a>]</p>
-</blockquote>
-<p>OpenAI hired retired US Army general Paul M. Nakasone to its board of directors. This fact raises an issue of trust and makes people question where this leads to.</p>
-<blockquote>
-<p><strong>Adobe: Expanding Universe - App Economy Insights</strong> [<a target="_blank" rel="noopener" href="https://www.appeconomyinsights.com/p/adobe-expanding-universe">Link</a>]</p>
-</blockquote>
-<p>Adobe is one of the companies potentially most disrupted by Gen AI but it turns out to be one of the fastest to capitalize on the technology. Adobe benefits the most from AI as they incorporate it in all layers of their existing stack.</p>
-<p>Revenue has three main segments: 1) 74% digital media (creative cloud including Adobe express, document cloud including adobe acrobat), 2) 25% digital experience, 3) publishing and advertising (1%).</p>
-<p>New AI powered product: 1) GenStudio platform is a new Gen AI powered tool aiming to streamline the entire content creation process. It’s announced at Adobe Summit 2024 in March and expected to launch in Q3 2024. It will be integrated into Adobe Experience Cloud plans or offered as a standalone product. 2) Adobe Experience Platform AI Assistant is a natural language chatbot. 3) Adobe Experience Manager is a tool to deliver right content to users at the right time. 4) Adobe Content Analytics gives access to tools to measure the marketing performance of AI created content, 4) Acrobat AI Assistant was integrated into Adobe Acrobat Reader. Others: 1) Firefly Services, 2) Adobe Express on mobile, etc.</p>
-<blockquote>
-<p><em>One thing is clear: the future of fast food will be shaped by brands that can adapt to the changing landscape and evolve through savvy marketing, new menus, and the boost of tech to prepare and deliver your favorite meal.</em></p>
-<p><strong>― Fast Food Economics - App Economy Insights</strong> [<a target="_blank" rel="noopener" href="https://www.appeconomyinsights.com/p/fast-food-economics">Link</a>]</p>
-</blockquote>
-<p>Quick-service restaurant (QSR) industry is undergoing a shift. This article helps to understand how QSR giants navigates a landscape of soaring inflation, labor shortages, and ever-changing consumer tastes.</p>
-<p>Giants: </p>
-<ol>
-<li>McDonald: primary as a real estate company with majority of revenue from franchised restaurants paying rent and royalties. Working on offering more compelling value deals, menu innovation, digital sales and MyMcDonald’s rewards program, growth plan of reaching 50000 restaurants globally by 2027 and doubling sales from its loyalty program. </li>
-<li>Chipotle: digital platform works well, great menu that worths growing prices, rewards program members shows an impressive loyal and boosting sales, testing its new automated digital makeline and food prep robot ‘Autocado’.</li>
-<li>YUM! (KFC, Taco Bell, Pizza Hut, Habit Burger Grill): Taco Bell is proved resilient and popular. KFC and Pizza Hut are experiencing sales decline. Digital delivers and sales are bright, proving their investment in online ordering, delivery, and AI-powered drive-thru tech are successful.</li>
-<li>Restaurant Brand International (RBI) (Tim Hortons, Burger King, Popeyes, Firehouse Subs): Burger King’s investment in store renovations, menu innovations, marketing campaigns since 2022 are paying off. The coffee and donut chain performs reliably especially in its home market of Canada. Popeyes continues strong store sales growth. The main component of RBI’s growth strategy is digital transformation.</li>
-</ol>
-<blockquote>
-<p><strong>Broadcom: AI Surge - App Economy Insights</strong> [<a target="_blank" rel="noopener" href="https://www.appeconomyinsights.com/p/broadcom-ai-surge">Link</a>]</p>
-</blockquote>
-<p>Broadcom operates across two primary segments: 1) semiconductor solutions, which has traditionally been Broadcom’s core strength, and 2) infrastructure software, which was propelled since acquisition of VMware in 2023 Nov. </p>
-<p>Highlights: 1) $3.1B (roughly 26% of all) in revenue is from AI products. AI alone contributed to a $2.2B revenue increase year over year. 2) Margins were down year over year significantly, primarily due to expenses related to VMware integration. 3) Broadcom has a gigantic net debt position of $62B. 4) strong cash generation - $18 B in past 12 months. 5) 10-for-1 stock split will happen in July 15. 6) it’s known for regular cadence of product introduction - Tomahawk and Jericho switching products.</p>
-<blockquote>
-<p><em>AI is both a threat and an opportunity for software leaders. But for cybersecurity giants, AI means business. New technology means new threats, with Large Language Models (LLMs) dealing with vast amounts of data in the cloud and on devices.</em></p>
-<p><strong>― Cybersecurity Earnings - App Economy Insights</strong> [<a target="_blank" rel="noopener" href="https://www.appeconomyinsights.com/p/cybersecurity-earnings">Link</a>]</p>
-</blockquote>
-<p>AI tech stack has 3 layers: 1) top: Apps or enterprise software, 2) middle: LLMs, 3) bottom: compute hardware and chips. The bottom layer (NVIDIA, AMD, ASML, TSMC) and middle layer (AWS, Azure, Google Cloud) have already benefitted from AI revenue boost. However it usually takes longer time to manifest because companies take time to adapt to new ways of optimizing processes, particularly in ERP, CRM, and BI verticals.</p>
-<p>There is sentiment around enterprise software saying that AI would make the cost of software go to zero. But there are also some counterarguments: 1) the main expense for most software companies is not R&amp;D but sales and marketing, 2) switching cost is high enough that even freemium software is not able to disrupting existing solutions, 3) resources needed to develop new features will decline, 4) implementing and maintaining a software solution is costly.</p>
-<p>This article shows how some of the cybersecurity companies are navigating current environment.</p>
-<p>Highlights:</p>
-<ol>
-<li><p>Palo Alto Networks</p>
-<p>Strong strength and rapid growth in Next-Gen Security (NGS) offerings. Its platformization focus and one-stop shop for security needs include cloud-delivered security services like Prisma Access (SASE), Prisma Cloud (cloud security), and Cortex (security operations). It’s facing billing issues: it’s slashing its FY24 billings guidance by $600M.</p>
-</li>
-<li><p>CrowdStrike</p>
-<p>Strong Q1 performance, lower Total Cost of Ownership (TCO) due to  lightweight agent and unified approach, $4B in ARR growing at over 30% YoY.</p>
-</li>
-<li><p>Fortinet</p>
-<p>It specializes in network security appliances, secure SD-WAN, and operational tech security. It’s hardware-centric. And it’s currently under competitive pressure.</p>
-</li>
-<li><p>Zscaler</p>
-<p>It specializes in Zero Trust solutions, a security model that assumes no user or device should be trusted by default. It has strong growth and optimistic outlook. It’s riding the wave of increasing cybersecurity demand. And it current has a rumor of Broadcom acquisition.</p>
-</li>
-<li><p>Cloudflare</p>
-<p>Descipte beating earnings estimates in Q1 FY24, stock price has dropped due to concerns about its conservative guidance. Although there is short term headwind, long term growth is still promising.</p>
-</li>
-</ol>
-<blockquote>
-<p><strong>AI may take longer to monetize than most expect. How long will investor optimism last? - The Pragmatic Optimist</strong> [<a target="_blank" rel="noopener" href="https://amritaroy.substack.com/p/ai-may-take-longer-to-monetize-than">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><strong>The Dark Stain on Tesla’s Directors - Lawrence Fossi</strong> [<a target="_blank" rel="noopener" href="https://montanaskeptic.substack.com/p/the-dark-stain-on-teslas-directors">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><strong>2,596 - How to make the most out of Google’s leaked ranking factors</strong> [<a target="_blank" rel="noopener" href="https://www.growth-memo.com/p/2596">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><strong>Ramp and the AI Opportunity</strong> [<a target="_blank" rel="noopener" href="https://www.notboring.co/p/ramp-and-the-ai-opportunity">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><strong>How Perplexity builds product</strong> [<a target="_blank" rel="noopener" href="https://www.lennysnewsletter.com/p/how-perplexity-builds-product">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><strong>IBM’s Evolution of Qiskit</strong> [<a target="_blank" rel="noopener" href="https://www.thequantumfoundry.com/p/ibms-evolution-of-qiskit">Link</a>]</p>
-</blockquote>
-<h3 id="Articles-and-Blogs"><a href="#Articles-and-Blogs" class="headerlink" title="Articles and Blogs"></a>Articles and Blogs</h3><blockquote>
-<p><em>Today, foundries manufacture supermajority of the chips produced in the world, and Taiwan Semiconductor Manufacturing Company (<strong>TSMC</strong>) alone has ~60% market share in the global foundry market.</em></p>
-<p><em>Perhaps more astonishingly, TSMC has a de-facto monopoly with <strong>~90%</strong> market share in the leading edge nodes (manufacturing processes with the smallest transistor sizes and highest densities). Leading edge nodes are crucial for applications requiring the highest computing performance like supercomputers, advanced servers, high-end PCs&#x2F;laptops, smartphones, AI&#x2F;machine learning, and military&#x2F;defense systems. As a result, the very basic tenet of modern life is essentially standing on the shoulders of one company based in Taiwan.</em></p>
-<p><strong>― TSMC: The Most Mission-Critical Company on Earth</strong> [<a target="_blank" rel="noopener" href="https://www.mbi-deepdives.com/tsm/">Link</a>]</p>
-</blockquote>
-<p>This is a deep dive report of Taiwan Semiconductor Manufacturing Company (TSMC).</p>
-<blockquote>
-<p><em>In terms of next steps, Google has “limited the inclusion of satire and humor content” as part of “better detection mechanisms for nonsensical queries.” Additionally:</em></p>
-<ul>
-<li><em>“We updated our systems to limit the use of user-generated content in responses that could offer misleading advice.”</em></li>
-<li><em>“We added triggering restrictions for queries where AI Overviews were not proving to be as helpful.”</em></li>
-<li><em>“For topics like news and health, we already have strong guardrails in place. For example, we aim to not show AI Overviews for hard news topics, where freshness and factuality are important. In the case of health, we launched additional triggering refinements to enhance our quality protections.”</em></li>
-</ul>
-<p><strong>― Google explains AI Overviews’ viral mistakes and updates, defends accuracy</strong> [<a target="_blank" rel="noopener" href="https://9to5google.com/2024/05/30/google-ai-overviews-accuracy/">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><strong>The AI Revolution Is Already Losing Steam</strong> [<a target="_blank" rel="noopener" href="https://www.wsj.com/tech/ai/the-ai-revolution-is-already-losing-steam-a93478b1">Link</a>]</p>
-</blockquote>
-<p>It remains questions whether AI could become commoditized, whether it has potential to produce revenue and profits, and whether a new economy is actually being born.</p>
-<p>According to Anshu Sharma, the future of AI startups (OpenAI and Anthropic) could be dim, and big tech companies (Microsoft and Google) will make profits from existing users and networks but need to spend a lot of money for a long time, which would leave the AI startups unable to compete. This is true that AI startups are already struggling right now, because at current stage AI is hard to commoditized, and it requires a lot of investments.</p>
-<p>The improvement of AI is slowing down because they exhausted all available data on the internet. Regarding the adoption of AI in enterprise, time is required to make sure that chatbots can replace the specialized knowledge of human experts due to technical challenges.</p>
-<blockquote>
-<p><em>One thing we’ve learned: the business goal must be paramount. In our work with clients, we ask them to identify their most promising business opportunities and strategies and then work backward to potential gen AI applications. Leaders must avoid the trap of pursuing tech for tech’s sake. The greatest rewards also will go to those who are not afraid to think big. As we’ve observed, the leading companies are the ones that are focusing on reimagining entire workflows with gen AI and analytical AI rather than simply seeking to embed these tools into their current ways of working.  For that to be effective, leaders must be ready to manage change at every step along the way. And they should expect that change to be constant: enterprises will need to design a gen AI stack that is robust, cost-efficient, and scalable for years to come. They’ll also need to draw on leaders from throughout the organization. Realizing profit-and-loss impact from gen AI requires close partnership with HR, finance, legal, and risk to constantly readjust the resourcing strategies and productivity expectations. - Alex Singla</em></p>
-<p><em>Although it varies by industry, roughly half of our survey respondents say they are using readily available, off-the-shelf gen AI models rather than custom-designed solutions. This is a very natural tendency in the early days of a new technology—but it’s not a sound approach as gen AI becomes more widely adopted. If you have it, your competitor probably has it as well. Organizations need to ask themselves: What is our moat? The answer, in many cases, likely will be customization. - Alexander Sukharevsky</em> </p>
-<p><strong>― The state of AI in early 2024: Gen AI adoption spikes and starts to generate value - McKinsey</strong> [<a target="_blank" rel="noopener" href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai?stcr=D65B59511D5A4090A48ACEA19F2A2068&cid=other-eml-alt-mip-mck&hlkid=663b07a2cb3546e4a8a439ebd78d5ef0&hctky=14527191&hdpid=4e5b39a9-b017-49dc-bc7c-df8a492b551a">Link</a>]</p>
-</blockquote>
-<p>Industries are struggling with budgeting for Gen AI. There are some areas where investments are paying off, such as meaningful cost reductions in HR and revenue increases in supply chain management from Gen AI.</p>
-<p>There are varies risks of Gen AI usage: data privacy, bias, intellectual property (IP) infringement, model management risks, security and incorrect use, etc. Among all, inaccuracy and intellectual property infringement ar eincreasingly considered relevant risks to organizations’ Gen AI use.</p>
-<p>According to the three archetypes for implementing Gen AI solutions (takers, shapers, and makers), survey has found that in most industries, organizations are finding off-the-shelf offerings applicable to their business needs, about half of reported Gen AI uses publicly available models or tools with little or no customization. Respondents in energy and materials, technology, and media and telecommunications are more likely to report significant customization or tuning of publicly available models or developing their own proprietary models to address specific business needs.</p>
-<p>The time required to put Gen AI to production for most of the respondents is around 1-4 months.</p>
-<p>Gen AI high performers are excelling. Some common characteristics or practices: 1) They are using Gen AI in more business functions (an average of 3) compared to others average 2,  2) They are more likely to use Gen AI in marketing and sales and product or service development like others, but they are more likely than other s to use Gen AI solutions in risk, legal, and compliance; in strategy and corporate finance; and in supply chain and inventory management, 3) They are three times as likely as others to be using Gen AI in activities ranging from processing of accounting doc and risk assessment to R&amp;D testing and pricing and promotions, 4) They are less likely to use those off-the-shelf options than to either implement significantly customized version to develop their own proprietary foundation models, 5) encountered challenges with their operating model.</p>
-<blockquote>
-<p><em>Asian Americans are crucial in today’s knowledge economy: around <a target="_blank" rel="noopener" href="https://www.wsj.com/lifestyle/careers/employers-open-more-doors-to-workers-without-degrees-but-few-are-getting-in-732f1098">60% hold at least a bachelor’s degree</a> and, despite representing only <a target="_blank" rel="noopener" href="https://www.pewresearch.org/short-reads/2021/04/29/key-facts-about-asian-americans/">about 7% of the U.S. population</a>, account for <a target="_blank" rel="noopener" href="https://www.eeoc.gov/special-report/diversity-high-tech">50% of the workforce</a> in leading Silicon Valley tech companies.</em></p>
-<p><em>A detailed analysis of top Fortune 500 technology companies shows that Asian professionals are even <a target="_blank" rel="noopener" href="https://www.linkedin.com/pulse/more-diverse-less-equitable-api-leadership-pipeline-large-buck-gee-iyatc/">less likely to progress in their careers today than they were a decade ago</a>.</em></p>
-<p><strong>― Stop Overlooking the Leadership Potential of Asian Employees - Harvard Business Review</strong> [<a target="_blank" rel="noopener" href="https://hbr.org/2024/06/stop-overlooking-the-leadership-potential-of-asian-employees">Link</a>]</p>
-</blockquote>
-<p>This article talked about the reasons why Asian employees’ careers stagnate, solutions for the organization to help employees move past the roadblock, and reasons of investment in Asian employees.</p>
-<blockquote>
-<p><strong>How to do great work</strong> [<a target="_blank" rel="noopener" href="https://www.paulgraham.com/greatwork.html">Link</a>]</p>
-</blockquote>
-<p>A good summary of this great article:</p>
-<p><img src="/digital-di/./images/greatwork.jpg" alt="greatwork"></p>
-<blockquote>
-<p><strong>Introducing Apple’s On-Device and Server Foundation Models</strong> [<a target="_blank" rel="noopener" href="https://machinelearning.apple.com/research/introducing-apple-foundation-models">Link</a>]</p>
-</blockquote>
-<p>This article provides details about how Apple developers trained models, fine-tuned adapters for specific user needs, and evaluated model performance.</p>
-<blockquote>
-<p><em>The analogy here is to Search, another service that requires astronomical investments in both technology and infrastructure; Apple has never built and will never need to build a competitive search engine, because it owns the devices on which search happens, and thus can charge Google for the privilege of making the best search engine the default on Apple devices. This is the advantage of owning the device layer, and it is such an advantageous position that Apple can derive billions of dollars of profit at essentially zero cost.</em></p>
-<p><em>First, with regards to the title of this Article, the fact it is possible to be too early with AI features, as Microsoft seemed to be in this case, implies that not having AI features does not mean you are too late. Yes, AI features could differentiate an existing platform, but they could also diminish it. Second, Apple’s orientation towards prioritizing users over developers aligns nicely with its brand promise of privacy and security: Apple would prefer to deliver new features in an integrated fashion as a matter of course; making AI not just compelling but societally acceptable may require exactly that, which means that Apple is arriving on the AI scene just in time.</em></p>
-<p><strong>― Apple Intelligence is Right On Time - Stratechery</strong> [<a target="_blank" rel="noopener" href="https://stratechery.com/2024/apple-intelligence-is-right-on-time/">Link</a>]</p>
-</blockquote>
-<p>This article worths a read. It famously talks about Aggregation Theory as applied to the internet, and predicted much of how the Google&#x2F;Facebook age unfolded through that lens. This is one main reason why winners are still old players in AI era at least for now. </p>
-<blockquote>
-<p><strong>How to Fund Growth (&amp; when not to)</strong> [<a target="_blank" rel="noopener" href="https://www.cfosecrets.io/p/capital-allocation-funding-growth">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><strong>So You Want To Build A Browser Engine</strong> [<a target="_blank" rel="noopener" href="https://robert.ocallahan.org/2024/06/browser-engine.html">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><strong>Introducing the Property Graph Index: A Powerful New Way to Build Knowledge Graphs with LLMs</strong> [<a target="_blank" rel="noopener" href="https://www.llamaindex.ai/blog/introducing-the-property-graph-index-a-powerful-new-way-to-build-knowledge-graphs-with-llms">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><strong>What matters most? Eight CEO priorities for 2024 - McKinsey</strong> [<a target="_blank" rel="noopener" href="https://www.mckinsey.com/capabilities/strategy-and-corporate-finance/our-insights/what-matters-most-eight-ceo-priorities-for-2024?stcr=394A106D8BD3483F97F8ED2B6AF5EC98&cid=other-eml-alt-mip-mck&hlkid=411e594200b247bfb3abfce66520ad22&hctky=14527191&hdpid=97189783-1eb7-45dc-af69-cc1fdb6f90c1">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><strong>Gen AI’s second wave - McKinsey</strong> [<a target="_blank" rel="noopener" href="https://www.mckinsey.com/quarterly/the-five-fifty/five-fifty-gen-ais-second-wave">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><strong>Extracting Concepts from GPT-4 - OpenAI</strong> [<a target="_blank" rel="noopener" href="https://openai.com/index/extracting-concepts-from-gpt-4/">Link</a>]</p>
-</blockquote>
-<p>OpenAI presents new approach to interpret concepts captured by GPT-4’s neural networks. They used sparse autoencoder to make sense of neural activity within LLMs and found 16 million features in GPT-4. Limitations are 1) hard to interpret, 2) no good way to check the validity of interpretations, 3) not all behaviors are captured, 4) challenging to scale to frontier LLMs.</p>
-<h3 id="YouTube-and-Podcasts"><a href="#YouTube-and-Podcasts" class="headerlink" title="YouTube and Podcasts"></a>YouTube and Podcasts</h3><blockquote>
-<p><em>In an H100 GPU, every second we can move at most 3.35 terabytes of RAM in and out of memory registers. And in the same second, we can multiply 1.98 quadrillion 8bit floating point numbers. This means that it can do 591 floating point operations in the time it takes to move one byte. In the industry this is known as a 591:1 ops:byte ratio. In other words, if you are going to spend time moving an entire gigabyte around you should do at least 591 billion floating point operations. If you don’t, you are just wasting GPU and potential compute. But if you do more than that, you are just waiting around on memory bandwidth to get your data in there. In our models, the amount of memory we need to move around is relatively fixed, it’s roughly the size of our model. This means that we do have some control over on how much math that we can do by changing our batch size.</em> </p>
-<p><em>In reality, we’ve discovered that bottleneck can arise from everywhere from memory bandwidth, network bandwidth between GPUs, between nodes, and other areas. Furthermore the location of those bottlenecks will change dramatically on the model size, architecture, and usage patterns.</em></p>
-<p><strong>― Behind the scenes scaling ChatGPT - Evan Morikawa at LeadDev West Coast 2023</strong> [<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=PeKMEXUrlq4&ab_channel=LeadDev">Link</a>]</p>
-</blockquote>
-<p>This is a behind the scenes look at how OpenAI scaled ChatGPT and the OpenAI APIs. But also a very good talk to show how hard it is to scale infrastructure for model architecture etc, and how important it is to master these skills and knowledge in chip manufacture and design industry and in LLM development industry. The talk covers 1) GPU RAM and KV Cache, 2) batch size and ops:bytes, 3) scheduling in dozens of clusters, 4) autoscaling (and the lack thereof). </p>
-<p>Key facts to consider when developing metrics for compute optimization and model scaling:</p>
-<ol>
-<li>GPU memory is valuable. But it is frequently a bottleneck, not necessarily compute.</li>
-<li>Cache misses are non linear on compute, because we suddenly need to start recomputing all stuff.</li>
-</ol>
-<p>When scaling ChatGPT, we need to:</p>
-<ol>
-<li>Look at KV cache utilization and maximize all the GPU RAM we have, and </li>
-<li>Monitor batch size - the number of concurrent requests we run to the GPU at the same time, to ensure the GPUs are fully saturated. These are two main metrics used to determine how loaded our servers were.</li>
-</ol>
-<p>In reality, there are more bottlenecks (memory bandwidth, network bandwidth between GPUs, between nodes, and other areas) and the location where they arise can change according to the model size, architecture, and usage patterns. The variability has made it very hard for AI model developer and chip manufactures to design chips to get that balance right. Future ML architectures and sizes have been very difficult to predict. But overall we need to be tweaking this math as the models evolve. </p>
-<p>The third challenge is to find enough GPUs. Note that the time of a response is dominated by the GPU streaming out one token at a time, as a result, it’s been more important to just get capacity and optimized a well balanced fleet, over putting things geographically close to users.</p>
-<p>The fourth challenge is the inability to scale up this fleet. OpenAI has delayed some feature of ChatGPT due to the limitation of compute resources.</p>
-<p>Some lessons they have learned in solving GPU challenges: </p>
-<ol>
-<li>It’s important to treat this as a system engineering challenge as opposed to a pure research project. </li>
-<li>It’s important to adaptively factor in the novel constraints of these systems. </li>
-<li>Every time model architecture shifts, a new inference idea is proposed or a product decision is changed, we need to adapt and rerun a lot of this math again. Diving really deep has been important. This low level of implementation details matter.</li>
-</ol>
-<p>The final challenge is abuse on the system and AI safety challenges.</p>
-<blockquote>
-<p><em>For many years, particularly following the original SARS pandemic, there was a lot of conversations around how do we get in front of the next pandemic, how do we figure out what’s coming and how do we prepare for it. And there was a lot of research that was launched to try and resolve that key question. It’s like does the effort to try and stop the problem cause the problem. I think that from my point of view there is a very high probability that there was some leak that meant that the work that was going on to try and get in front of the next pandemic and understand what we could do to prepare ourselves, and what vaccines could be developed and so on, actually led to the pandemic. So then when that happens how do you respond when you are sitting in that seat, that’s the key question that I think this committee is uncovering. - David Friedberg</em></p>
-<p><strong>― Trump verdict, COVID Cover-up, Crypto Corner, Salesforce drops 20%, AI correction? - All-in Podcast</strong>  [<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=R6hJh-OwoZw">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><strong>The TED AI Show: What really went down at OpenAI and the future of regulation w&#x2F; Helen Toner</strong> [<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=K6BvU4I5ANc">Link</a>]</p>
-</blockquote>
-<p>In the interview, Toner revealed that the reason of firing Altman is his psychological abuse and being manipulative in different situation. Looking at Altman’s track record prior to OpenAI, it seems those are not new problems of Sam.</p>
-<blockquote>
-<p><strong>How Walt Mossberg Built Relationships With Jobs, Gates, and Bezos - Big Technology Podcast</strong> [<a target="_blank" rel="noopener" href="https://www.bigtechnology.com/p/how-walt-mossberg-built-relationships">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><strong>Nvidia’s 2024 Computex Keynote: Everything Revealed in 15 Minutes</strong> [<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Zgn7KJXVxNk&ab_channel=CNET">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><strong>What really works when it comes to digital and AI transformations? - McKinsey</strong> [<a target="_blank" rel="noopener" href="https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/what-really-works-when-it-comes-to-digital-and-ai-transformations?stcr=8C2EBECC6A7746E78BB590C9D48E31F0&cid=other-eml-alt-mip-mck&hlkid=6c3691cd7890438f920d484bf1e19aaa&hctky=14527191&hdpid=97189783-1eb7-45dc-af69-cc1fdb6f90c1">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><em>… but what I do take offense at is labeling millions and millions of ordinary Americans as somehow lacking in empathy, lacking in caring, not being a good parents, because you don’t like their support for Trump. And I think that that is a statement that frankly reeks of being cocooned in an elite bubble for way too long. Let me just explain. If you look at where Trump’s support is strongest. It’s really in Middle America and sort of the heartland of America, basically the part of America that the Coastal at least dismissively refer to as flyover country. It’s a lot of the industrial midwest and frankly that part of the country had not had the same type of economic experience that we’ve had in Silicon Valley. They have not been beneficiaries of globalization. If you are in a handful of export industries in America and I’m talking about if you are in Hollywood or you are in Big Finance or you are in Software, then globalization has been great for you, because it has created huge global markets for our products. However, if you are in an industry that has to compete with global exports, then it’s been very bad with you and blue collar workers have been hurt, labor’s been hurt, people who work with their hands have been hurt. They have not benefitted in the same way from the system we’ve had in this country for the last 30 years. So you can understand why they would not be so enchanted with elite thinking. I think to then label those people as lacking in caring or empathy or not being good parents because they haven’t had the same economic ride that you had for the last 30 years and then you are the one who is fighting a legal battle to kick some of those people off the public beach in front of your beach house, and then you are saying they are the ones lacking in empathy, dude, look in the mirror. - David Sacks</em></p>
-<p><em>This is the future of how smart reasonable moderate people should make decisions. It is an example. Talking to somebody you disagree with does not make your opinion bastardized, it actually makes your opinion valuable. There are these simple truths to living a productive live that if you want to embrace, you need to find friends that you can trust, even on issues when you disagree, you can hear them out. - Chamath Palihapitiya</em></p>
-<p><em>There is no law that defines why you should or shouldn’t buy a security, with respect to the diligence you have individually done, to determine whether the underlying business is worth the price you are paying. The law says, that the business that are listing their securities for public trading have an obligation to make disclosures on their financials and any other material events to the public and they do that through the SEC filing process. That’s all out there. And then what you as an individual will do with it is up you to. - David Friedberg.</em></p>
-<p><strong>― DOJ targets Nvidia, Meme stock comeback, Trump fundraiser in SF, Apple&#x2F;OpenAI, Texas stock market - All-in Podcast</strong> [<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=UuwCy9hmhIE&ab_channel=All-InPodcast">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><strong>Deloitte’s Pixel: A Case Study on How to Innovate from Within - HBR On Leadership Podcast</strong>  [<a target="_blank" rel="noopener" href="https://hbr.org/podcast/2024/06/deloittes-pixel-a-case-study-on-how-to-innovate-from-within">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><strong>WWDC 2024 — June 10 | Apple</strong> [<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=RXeOiIDNNek&t=12s&ab_channel=Apple">Link</a>] [<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=sBXdyUA6A88&ab_channel=TheVerge">Short Version</a>]</p>
-</blockquote>
-<p>Apple’s promising updates on visionOS, iOS, Audio&amp;Home, watchOS, iPadOS, and macOS.</p>
-<blockquote>
-<p><strong>Let’s reproduce GPT-2 (124M)</strong> [<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=l8pRSuU81PU&ab_channel=AndrejKarpathy">Link</a>]</p>
-</blockquote>
-<p>This four hours video guides you to create a fully functional GPT-2 model from scratch. It includes details about model construction, speed optimization, hyperparameter setup, model evaluation, and training.</p>
-<blockquote>
-<p><strong>Building open source LLM agents with Llama 3</strong> [<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=j2OAeeujQ9M&ab_channel=LangChain">Link</a>]</p>
-</blockquote>
-<p>LangChain and Meta uploads new recipes&#x2F;tutorials to build agents that runs locally using LangGraph and Llama 3.</p>
-<blockquote>
-<p><em>Apple took a shortcut to get here, they partnered with open ai. And this is something that I don’t think they’ve ever really done before at the operating system level. Apple is famous for being vertically integrated, for being a walled garden, for being end to end. They control everything from the chips to the hardware to the operating system, and they don’t let anybody else in, until you are at the App Store Layer. This is allowing somebody in beneath the level of the App Store. This is allowing someone OpenAI to get access to your data, and to control your apps, at the operating system level. Elon pointed out wait a sec what are the privacy implications here. And I think there are major privacy implications. There is simply no way that you are going to allow an AI on your phone to take. Remember Apple in the past has been the advocate for consumer privacy. There is a whole issue of the San Bernardino terrorist where the FBI went to Apple and said we want you to give us back door access to their phone and Apple refused to do it and went to court to defend user privacy. And furthermore, one of Apple’s defenses to the antitrust arguments for allowing sideloading and allowing other apps to get access to parts of the operating system, they’ve always said we can’t do this because it would jeopardize user privacy and user security. Well here they are opening themselves up to OpenAI in a very deep and fundamental way in order to accelerate the development of these features… I think this is going to open Pandora’s box for Apple, because again they’ve proven that they can open up the operating system to a third party now, and who knows what the privacy implications of this are going to be. - David Sacks</em></p>
-<p><em>I think there are three numbers that matter: the inflation rate, the growth in GDP, and the cost to borrow. The growth in GDP in the first quarter of 2024 was a lousy - 1.3% on the annualized basis. And even if the rate of inflation came down, we are still inflating the cost of  everything by north of 3%. So the economy is only growing by 1.3% and it costs more than 3% each year to buy stuff. So that means everyone’s spending power is reducing, and our government’s ability to tax is declining, because the economy is only growing by 1.3%. And the most important fact is that the interest rates are still between 4-5% (4.7%). That means that borrowing money costs 4.7%, but the business the economy on average is only growing 1.3%. So just think about that for a second. We have tremendous amount of leverage on businesses on economy on the federal government. That leverage, the cost to pay for that debt is more than 4-5% but you are only growing your revenue by 1.3%. So at some point you cannot make your payments. That is true for consumers, it’s true for enterprises, and it’s true for federal government. The whole purpose of raising rates is to slow the flow of money through the economy. And by slowing the flow of money through the economy, there is less spending which means that you are reducing the demand relative to the supplies, so the cost of things should come down, you should reduce the rate of increasing in the cost of things… There is certainly a shift in the market because what this tells us is that the timeline at which the fed will cut rates is coming is a little bit. So the market is saying okay let’s adjust to lower rates, the 10 year treasury yield has come down a little bit, but we are still in a difficult situation for people, and for businesses. - David Friedberg</em></p>
-<p><em>If the revenue of everything combined which is GDP isn’t going faster than the increase in the cost of everything, people, businesses, and government can’t afford their stuff. And that’f fundamentally what is going on right now. What we need to see is a normalization where GDP growth is greater than inflation rate. And as soon as that happens then we have a more normalized and stable economy. So right now things are not stable. There is a lot of difficulty and strain in the system. - David Friedberg</em></p>
-<p><em>You had 1.3% GDP growth rate with a 6% of GDP deficit by the government. If the government wasn’t printing so much money, wasn’t over spending, and you were to have a balanced budget, it would be a recession. It would be negative GDP growth if not for the government’s program stimulating the economy. And a lot of jobs you are talking about are government jobs. The government is creating jobs like crazy, not in the private sector but in the public sector, because it is an election year. So there is a lot of political forces proping things up, and I wonder what happens after the election. - David Sacks</em> </p>
-<p><strong>― Elon gets paid, Apple’s AI pop, OpenAI revenue rip, Macro debate &amp; Inside Trump Fundraiser - All-in Podcast</strong> [<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=NVYMKDiJGcI&ab_channel=All-InPodcast">Link</a>]</p>
-</blockquote>
-<p>Energy is high at the beginning with a blackjack! Went through several news and topics: 1) Elon’s comp package approved by shareholders, besties criticized some reneging people, who are really not good ones to do business with, 2) Apple announces “Apple Intelligence” and ChatGPT deal at WWDC, first time of opening up OS to the third party, raising data privacy concerns, 3) OpenAI reportedly hit a $3.4B revenue run rate, 4) state of US economy.</p>
-<blockquote>
-<p><strong>Leopold Aschenbrenner - 2027 AGI, China&#x2F;US Super-Intelligence Race, &amp; The Return of History</strong> [<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=zdbVtZIn9IM&ab_channel=DwarkeshPatel">Link</a>]</p>
-</blockquote>
-<p>An Interview with Leopold Aschenbrenner. Refering to his 165 page essay about AI safety: <a target="_blank" rel="noopener" href="https://situational-awareness.ai/">https://situational-awareness.ai/</a>.</p>
-<blockquote>
-<p><strong>Private Cloud Compute: A new frontier for AI privacy in the cloud  - Apple Security Research</strong> [<a target="_blank" rel="noopener" href="https://security.apple.com/blog/private-cloud-compute/?utm_source=www.theneurondaily.com&utm_medium=referral&utm_campaign=the-truth-about-apple-intelligence">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><em>What I learned from all of that, if I look at his mistakes and successes, I learned a couple things. The first is most of the money he’s made by holding onto things, not the momentum trading that he was known for in, in public equities. And number two, he made most of his money buying quality, like quality was very important to his success. And that’s something I’ve taken from him. And I truly believe, like <u>the environment in which you grow up dictates the kind of person and mentality you will have in life</u>. So let me just quickly expand on that. If you grow up during the Great Depression, I would presume you’re focused on saving every penny and looking for cheap. And I think I’m just taking a guess that you’re gonna be much more focused on buying cigar butts in life than you might be on buying the highest quality asset you can find and maybe paying up for. Somehow my father figured out that the <u>real money is in the best businesses and the higher quality assets</u>. And he instilled that in me very early. And sometimes these things look expensive. And so my point earlier is that he taught me very early <u>not to dismiss something that might look expensive on the surface before you do the deep work and really understand what you’re buying and what it’s worth</u>.</em> </p>
-<p><em>And the problem that a lot of value investors have, I think, is that they all screen for low p ratios, high dividend yields, you know, low ev to cash flows, what whatever it is. They’re screening and they will miss because the kind of any value in that area is gonna get competed away. And so I’m more interested in businesses that might look expensive on the surface, but actually aren’t, and you have to be careful because a lot actually are expensive, right? And there’s no margin safety there. But there is Peter Kaufman said <u>there’s margin where there’s mystery</u>. I think that’s so true. There’s margin where there’s mystery. And so sometimes <u>the best investments are those that are misunderstood and might appear expensive, and they’re often quality kinds of businesses</u>. So I gravitate toward quality partly as a result of that influence he had on me, if that makes sense.</em> </p>
-<p><em>Tesla company is definitely one of the most misunderstood companies that I’ve seen in my 25 years or so of managing money for others. It’s such an interesting company and it, and it’s so misunderstood and I think it’s misunderstood for a few reasons. One, you have this kind of overarching personality where people start to formulate opinions based on what Elon is. And people think about it as a car company. And third, most people haven’t actually dived in, right? They’ve not spent the hundreds and hundreds of hours on this company and they haven’t really gone through the financials to understand the economics of the business. So there are a few things coming together where I think that this company still remains misunderstood, but there’s a reason why it’s up whatever 15000% or so since the IPO. And there is a reason why it continues to go higher over time because there are plenty of people that do get it right and that it’s just getting more and more concentrated into what I would probably call hands of smart money.</em></p>
-<p><em>I’d say it’s not just a car company, <u>it is very much an EV company, but it’s not just a car company</u>… Why would the future look any different? And of course it, it it did. Why were people skeptical? While there were no paved roads, supply chains were very limited. There were very few fueling stations, there was very little manufacturing capacity. Kind of sound familiar right to today in EV terms. But ice vehicles, Henry Ford disrupted the horse and carriage very quickly within 20 years, which is happened to be pretty much the timeframe during which curves take formation is a 20 year disruption period with respect to pretty much all these transformational technologies.</em> </p>
-<p><em>Going back to the guttenberg printing press and the steam engine and the spinning wheel, it’s all about 20 years. So my point is that there’s all of this skepticism and you had horse and carriage competing against this noisy ice vehicle. Both were forms of transportation, both gotten you from point A to point B, but one was fundamentally different. It was fundamentally different because it was a much more efficient process of getting you from point A to point B. And that is the lens from a kind of very high top down level that I look at Tesla and electric vehicles in general, <u>they’re just a much more efficient way to get you from point A to point B than ice vehicles. And what I mean by that is the cost of ownership and cost per mile is just much lower</u>. And so then it’s a question of what are the risks? What are the competitive advantage does Tesla have over the rest of the competition in EV and how will Tesla survive and thrive against ice vehicles? Which to me are going the way of the dinosaur. That is a big assumption that I believe is true because I think that <u>EV adoption is following the traditional S curve adoption phase</u> and there’s not a lot of time left for ice vehicles to exist.</em> </p>
-<p><em>The real voyage of discovery is not in seeking new landscapes, but in having new eyes.</em> </p>
-<p><em>I gave you the first kind of like lens at which I’m looking at Tesla as competing as an EV company against ice vehicles and ev as a whole being much more efficient than ice. But the other lens I should share is that I don’t think you can understand this company if you don’t understand. I could be totally wrong, but as assuming that I’m right, I don’t believe you can understand the company if you don’t understand that - to me it’s an advanced electronics manufacturer and software company competing against a traditional automobile manufacturing company.</em> </p>
-<p><em><u>This is super important. It’s an electronics slash software company competing against traditional auto.</u> It’s super important to understand that because there’s certain things that kind of like come into play. There was an aeronautical engineer by the name of Theodore Wright, he devised this concept called the rights law, which states that for every doubling of cumulative production, that costs fall by a constant percentage. And when you understand that Tesla is an electronic software company, you understand like where is this company along this rights law curve.</em> </p>
-<p><em>Tesla is so much further along the curve than any of the ice vehicles that are constrained because they’re not electronic in software companies, they’re traditional auto companies. And it’s Tesla’s so much further along the curve with respect to other EV companies. And so as ice vehicles traditional auto catches up, Tesla just moves much further along the curve. And so <u>the spread between the competitive advantage of Tesla, the other EV companies and traditional auto is actually widening</u>. It’s not getting more narrow, it’s widening because of its massive scale, which allows it to push itself out along the, the cost curve further than anybody else.</em> </p>
-<p><em>We actually did buy more around current prices and these arguments, most of them at least except for the 50 billion compensation package, most of these arguments sound like the same arguments that you could go back and read since the company went public. They’re probably less negative articles today than there were around 2011, 2012, 2013. But they seem very similar. And yet the stock continues to go higher up 15,000 or so percent since it’s IPO. And what’s the case with pretty much every growth company from Amazon to Microsoft? <u>Any great growth company, there are always periods when the stock is not going up</u>. There have been so many massive drawdowns in Tesla since it’s IPO, like there’s gotta be a couple dozen, at least 40% drawdowns since it’s IPO or at least 30% drawdowns. And that’s just part of investing in growth companies. No businesses. And I wrote a paper called Power and Challenges of Compounding, which is on our website, but <u>growth companies just don’t go in straight lines. They move more like in a step formation</u>. And if you look at the kind of longer term chart of Tesla, Tesla’s just kind of in a step formation just like Amazon was and Microsoft was.</em> </p>
-<p><em>I totally focus on the business fundamentals. I really don’t, I don’t let the stock prices dictate like what I’m thinking about the business. And when I’m looking at a business, a potential company to buy, I try my very best like not to pay any attention to the stock price and just come up with my own idea of what I think the business is worth. And so <u>the key is really to focus on the fundamentals. And if the fundamentals are moving in the right direction, then the stock price will take care of itself over time.</u> The the problem is that if you have all your money in one or even five companies or maybe even 10 companies, it’s really, really hard to deal with that emotionally.</em> </p>
-<p><em>Mr. Rogers was not just a TV host who was the central figure for Mr. Rogers neighborhood, but he was also a Presbyterian minister. And I think that that upbringing education and that way of life influenced how he dealt with people. And he had this wonderful expression. He said that <u>there are three ways to ultimate success. The first is to be kind, the second is to be kind, and the third is to be kind</u>. I thought that was really interesting and very powerful and it meshed with how I wanted to try to live life. And it also me meshes with, you know, this idea of reciprocity, which is deep rooted human condition, right? <u>If we give kindness to the world and bringing kindness back, I truly believe that</u>. And, and so he was, and has been influential to how I think about life and how I try my best. I don’t always succeed, but I do try my best to live my life according to Mr. Rogers’ values.</em>  </p>
-<p><em>Peter said that, look, you need to look at your life as one ladder. And there’s seven steps to the ladder. <u>These seven steps are pretty much in this order. Health and then family and friends, career, community, spirituality and hobbies.</u> The most important, those of those seven steps is health. Because health is multiplicative, right? If you take health and you multiply it by zero, everything else goes to zero, not good. So you wanna focus on that as first and foremost.</em>  </p>
-<p><strong>― Real Success w&#x2F;Christopher Tsai - We Study Billionaires Podcast</strong> [<a target="_blank" rel="noopener" href="https://open.spotify.com/episode/6pjXzkTYpqgU7hwXz6LgYT">Link</a>] </p>
-</blockquote>
-<p>In this episode Christopher talked about his family history, investment in Tesla, Microsoft, Visa, and Mastercard, and some other personal development and investment tips. This is what I’ve learned:</p>
-<ol>
-<li>It completely changed my mind in understanding Tesla. I thought Tesla’s main business is traditional automobile, while EV is a new leading branch in the frontier. But it turns out that it’s wrong. Tesla is actually an electronic software company with a smart undercover of traditional automobile. As traditional auto vehicle companies catching up, Tesla is just moving further and further. Also being aware of what’s happening around Tesla: stock price was falling, sales growth is slowing, BMW and BYD are flooding the market with EV, unfocused CEO Elon Musk, no new models of the car since 2020, etc, I was already starting questioning Tesla, but in fact, the truth is Elon beat almost every milestone, he kept almost every promise, and he deserves his $50B pay package. What Tesla is current going through is as normal as what any other growth companies have experienced.</li>
-<li>The key of being a value investor and picking valuable stocks is to focus on the business fundamentals but not stock price.</li>
-<li>Diversifying portfolio is a good way to deal with pain and emotions, and stop you from interrupting the compounding process.</li>
-</ol>
-<blockquote>
-<p><strong>In conversation with President Trump - All-In Podcast</strong> [<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=blqIZGXWUpU&ab_channel=All-InPodcast">Link</a>]</p>
-</blockquote>
-<p>They brought President Donald Trump to the show! They asked great questions and they have 40 min high-quality recap, it’s very impressive. Btw, I do feel President Trump is a really engaging person - you can feel it by just listening to him speaking out. </p>
-<blockquote>
-<p><strong>Data + AI Summit Keynote Day 1 - Full - Databricks</strong> [<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=UfbyzK488Hk&ab_channel=Databricks">Link</a>]</p>
-</blockquote>
-<p>Experts, researchers and open source contributors — from Databricks and across the data and AI community gathered in San Francisco June 10 - 13, 2024 to discuss the latest technologies in data management, data warehousing, data governance, generative AI for the enterprise, and data in the era of AI. </p>
-<p><u>Notes of “Ali Ghodsi, Co-founder and CEO,Databricks”:</u></p>
-<p>There are three problem from AI practitioners: </p>
-<ol>
-<li><p>Everyone wants AI </p>
-<p>Organization don’t care about MMLU performance, they care about using model to do well on their data for their use cases and businesses. According to a survey, 85% of the use cases have not made it into production. This indicates that getting AI on your data into production is hard - people want high quality, low cost, and privacy.</p>
-</li>
-<li><p>Security and privacy are under pressure</p>
-<p>It’s under intense pressure. People care about AI regulation, data privacy, and cyberattacks.</p>
-</li>
-<li><p>Data estate is fragmented. </p>
-<p>Lots of complexity, huge costs, and proprietary lock-in.</p>
-</li>
-</ol>
-<p>Databricks solution to these three problems is data intelligence platform. The idea is: don’t give your data to vendors, instead, own your own data, store them in data lake in a format that’s standard. These are what Databricks is doing:</p>
-<ol>
-<li>They acquired Tabular because they want the data to be stored in a standard format so that every engine can access to.</li>
-<li>They also launched project UniForm, which aims to make sure that UniForm has 100% full compatibility and interoperability for both of Delta Lake and Iceberg projects.</li>
-<li>Unity Catalog allows you to do governance to ensure access, control, and security, and also discovery, lineage, auditing, data and model quality monitoring. And They have just open-sourced Unity Catalog.</li>
-<li>Data in data lake combining with Mosaic AI’s AI models is called Data Intelligence Platform. This platform trains Gen AI models on your data in isolation for each customer, and leverages that throughout the platform for everything it does. </li>
-<li>Data Intelligence is democratized data plus democratized AI. Democratized data means everyone in your organization should be able to access to the data directly. They, including those don’t know how to speak sql, should be able to access to data or get insights from data by spending languages. Democratized AI means everyone should be able to create AI models that understand your data in your organization.</li>
-<li>All the Databricks now are available in 100% serverless.</li>
-</ol>
-<p><u>Note of “Brian Ames, General Motors”:</u> </p>
-<p>Their mission is zero crashes, zero emissions, and zero congestion. In order for GM to be part of the future, they need to become a software company. They started from building data silos, on-prem infrastructure, and keeping pace of innovation. Their vision and strategy are to change the culture, move to the cloud, create a data insights factory cloud, and build upon Databricks.</p>
-<p>The GMs data insights factory today includes single source of truth (where big data are ingested), trusted data (with functions of GenAI platform, ETL and orchestration, and data warehousing), open ecosystem (with Meta’s LLMs, AI models, and data governance ), and react front end. Majority of the factory is supported by Databricks.</p>
-<blockquote>
-<p><strong>Morgan Housel: Get Rich, Stay Rich - The Knowledge Project</strong> [<a target="_blank" rel="noopener" href="https://podcasters.spotify.com/pod/show/s8186/episodes/195-Morgan-Housel-Get-Rich--Stay-Rich-e2k69la">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><strong>The Founder of Rolex: Hans Wilsdorf - Founders</strong> [<a target="_blank" rel="noopener" href="https://open.spotify.com/episode/6nxXutdfEfcR03sCTtlF4X">Link</a>] [<a target="_blank" rel="noopener" href="https://www.joincolossus.com/episodes/6536480/senra-351-the-founder-of-rolex-hans-wilsdorf?tab=transcript">Transcript</a>]</p>
-</blockquote>
-<blockquote>
-<p><strong>China’s AI Journey - Weighty Thoughts</strong> [<a target="_blank" rel="noopener" href="https://weightythoughts.com/p/chinas-ai-journey">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><strong>E156｜自动驾驶领域的GPT时刻来了？聊聊特斯拉V12、FSD入华与RoboTaxi - The Silicon Valleyer with Jane</strong> [<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?app=desktop&si=HbjIu_tcm8D1h8md&v=noKsqZ81XnA&feature=youtu.be&ab_channel=%E7%A1%85%E8%B0%B7101%E6%92%AD%E5%AE%A2">Link</a>]</p>
-</blockquote>
-<p>Good discussion about Tesla V12, FSD in China, and RoboTaxi. I learnt new views about end-to-end technology, Musk’s vision, overview of EV market, EV competitors, etc. </p>
-<blockquote>
-<p><em>It makes so much sense for them so I think they should do it as quickly as possible. We are in the first inning of what should probably be an enormous tectonic shift in technology. And I think if whoever wins in the first inning usually isn’t the one that’s winning by the ninth inning. And so I would encourage anybody that’s winning right now to monetize, get secondaries, take money off the table as fast as possible. Because the future is unknown and the more disruptive the technology is, the more entropy there is, which means that there is going to be more changes not less. And again I would just look at search as an example, I would look at social networking as an example. When you look 20 years later the people who captured all the value were not the one that at the beginning who everybody thought was going to win. And so I think If it plays out similarly, it’s important for the people that are in the lead today, to recognize that it’s too early, and they should monetize their perceived success as quickly as they can to the largest magnitude as possible. - Chamath Palihapitiya</em></p>
-<p><em>I think OpenAI is running a very strategic game plan to become part of the tech establishment as quickly as they can, so that they are in the inside looking out as opposed to the outside looking in. They were able to add the former head of the NSA to their board of directors. It’s how you become part of the establishment. Do you think the former head of the NSA no long has a security clearance or knows people in the NSA? No of course not.  And I think that there is a group of people that want to make sure that these kinds of technologies and capabilities are firmly within the hands of the US apparatus and not anybody else. And so I think that that pulls them closer to the kinds of folks that could otherwise give them a hard time or regulate them, etc. So now what happens is when you have senate hearing about this stuff it’s more likely that it’s confidential behind closed door, it’s under the purview of National Security. All these things are beneficial to OpenAI. And secondly they were able to get Elon to drop his lawsuit. So the next logical step is now to create Capital Market distribution, which is really about syndicating ownership of the company to all the big deep pools of money, so that they are also rowing in the same direction in support of OpenAI. That’s what a lot of people don’t get, it’s not about valuations or this and that, this is about creating a highlevel game theory of how to create an international apparatus that supports your corporate objectives. There are a few companies that have done this well, and they are now one of them, the only thing left is to get shares into the hands of the BlackRocks, the t-rows, all the big mutual fund apparatuses of the world that then syndicate to all the individual investors of the world. You have everything, you have government connections, you have no real legal overhang, then the likelihood that an IRS agent all of a sudden decides to audit OpenAI is basically zero. It’s a smart business strategy. - Chamath Palihapitiya</em></p>
-<p><em>“Microsoft excels with bundling. It’s their not so secret weapon for dominating new markets. We know the playboo: Office + Teams, Windows + Explorer, Azure + Visual Studio, 365 + OneDrive, &amp; Xbox + Game Pass. - Marc Benioff @X”</em></p>
-<p><strong>― Presidential Debate Reaction, Biden Hot Swap?, Tech unemployment, OpenAI considers for-profit &amp; more</strong> [<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=aEYcZtaZRXQ&ab_channel=All-InPodcast">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><strong>Statistical Learning Course - Stanford Online</strong> [<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=LvySJGj-88U&list=PLoROMvodv4rPP6braWoRt5UCXYZ71GZIQ&ab_channel=StanfordOnline">Link</a>]</p>
-</blockquote>
-<p>Last time of watching this series of lectures it was 3 years ago. Happy to see these two old guys again (Trevor Hastie and Robert Tibshirani). I’m planning to review the whole series in my spare time. </p>
-<blockquote>
-<p><strong>Machine Learning Course - CS 156 Caltech</strong> [<a target="_blank" rel="noopener" href="https://www.youtube.com/playlist?list=PLD63A284B7615313A">Link</a>]</p>
-</blockquote>
-<p>This is an unusual (to me) ML course with a strong focus on theory. It’s taught from a very different perspective that’s supplementary to what I have learned from my ML courses. Definitely going to watch it once I have time.</p>
-<blockquote>
-<p><strong>EfficientML.ai Lecture, Fall 2023, MIT 6.5940 - MIT HAN Lab</strong> [<a target="_blank" rel="noopener" href="https://www.youtube.com/playlist?list=PL80kAHvQbh-pT4lCkDT53zT8DKmhE0idB">Link</a>] [<a target="_blank" rel="noopener" href="https://hanlab.mit.edu/courses/2023-fall-65940">Website</a>]</p>
-</blockquote>
-<p>I have to watch this. Feed me knowledge please! ヾ(◍°∇°◍)ﾉﾞ</p>
-<h3 id="Papers-and-Reports"><a href="#Papers-and-Reports" class="headerlink" title="Papers and Reports"></a>Papers and Reports</h3><blockquote>
-<p><strong>SimPO: Simple Preference Optimization with a Reference-Free Reward</strong> [<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2405.14734">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><strong>Deep Learning Interviews: Hundreds of fully solved job interview questions from a wide range of key topics in AI</strong> [<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2201.00650">Link</a>]</p>
-</blockquote>
-<p>Best preparation book for AI&#x2F;ML job seekers and students.</p>
-<blockquote>
-<p><strong>The economic potential of generative AI: The next productivity frontier - McKinsey</strong> [<a target="_blank" rel="noopener" href="https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/the-economic-potential-of-generative-ai-the-next-productivity-frontier?stcr=C9A75624B81C4A47AB66FFA090CEB42B&cid=other-eml-alt-mip-mck&hlkid=c904212f9070458b85d9cc679f3436d8&hctky=14527191&hdpid=97189783-1eb7-45dc-af69-cc1fdb6f90c1">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><strong>Microsoft New Future of Work Report 2023</strong> [<a target="_blank" rel="noopener" href="https://www.microsoft.com/en-us/research/publication/microsoft-new-future-of-work-report-2023/">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><strong>The Prompt Report: A Systematic Survey of Prompting Techniques</strong> [<a target="_blank" rel="noopener" href="https://trigaten.github.io/Prompt_Survey_Site/">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><strong>Situational Awareness: The Decade Ahead</strong> [<a target="_blank" rel="noopener" href="https://situational-awareness.ai/">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><strong>Better &amp; Faster Large Language Models via Multi-token Prediction</strong> [<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2404.19737">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><strong>How Can Recommender Systems Benefit from Large Language Models: A Survey</strong> [<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2306.05817">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><strong>Sparser is Faster and Less is More: Efficient Sparse Attention for Long-Range Transformers</strong> [<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2406.16747">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><strong>Efficient data generation for source-grounded information-seeking dialogs: A use case for meeting transcripts - Google Research</strong> [<a target="_blank" rel="noopener" href="https://research.google/blog/efficient-data-generation-for-source-grounded-information-seeking-dialogs-a-use-case-for-meeting-transcripts/">Link</a>]</p>
-</blockquote>
-<p>This open source dataset “Meeting Information Seeking Dialogs” is unique with an aim of improving interaction with meeting recordings through conversational AI models. It allows users to query and engage with transcript content efficiently through a developed agent.</p>
-<blockquote>
-<p><strong>Meta Large Language Model Compiler: Foundation Models of Compiler Optimization - Meta Systems Research</strong> [<a target="_blank" rel="noopener" href="https://ai.meta.com/research/publications/meta-large-language-model-compiler-foundation-models-of-compiler-optimization/">Link</a>]</p>
-</blockquote>
-<p>Meta LLM Compiler is a family of models built on Meta Code Llama with additional code optimization and compiler capabilities.</p>
-<blockquote>
-<p><strong>ESM3: Simulating 500 million years of evolution with a language model - EvolutionaryScale Research</strong> [<a target="_blank" rel="noopener" href="https://www.evolutionaryscale.ai/blog/esm3-release">Link</a>]</p>
-</blockquote>
-<p>ESM3 is an AI model capable of understanding and predicting the sequence, structure and function of proteins, simulating evolutionary processes, and generating new proteins with specific traits.</p>
-<h3 id="Github"><a href="#Github" class="headerlink" title="Github"></a>Github</h3><blockquote>
-<p><strong>Tool Use - Anthropic</strong> [<a target="_blank" rel="noopener" href="https://github.com/anthropics/anthropic-cookbook/tree/main/tool_use">Cookbook</a>] [<a target="_blank" rel="noopener" href="https://github.com/anthropics/courses/tree/master/ToolUse">Notebook</a>]</p>
-</blockquote>
-<p>Anthropic has launched a new feature for its AI assistant, Claude, known as “Tool Use” or “function calling.” </p>
-<blockquote>
-<p><strong>All Machine Learning Algorithms Implemented in Python &#x2F; Numpy</strong> [<a target="_blank" rel="noopener" href="https://github.com/rushter/MLAlgorithms">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><strong>Spreadsheet Is All You Need</strong> [<a target="_blank" rel="noopener" href="https://github.com/dabochen/spreadsheet-is-all-you-need">Link</a>]</p>
-</blockquote>
-<p>GPT architecture is recreated in spreadsheet.</p>
-<blockquote>
-<p><strong>Hello Qwen2</strong> [<a target="_blank" rel="noopener" href="https://qwenlm.github.io/blog/qwen2/">Link</a>]</p>
-</blockquote>
-<p>Alibaba released new open-source LLM called Qwen2, which outperforms Meta’s Llama 3 in specialized tasks. It’s accessible via HuggingFace, with weights available and five model sizes (0.5B, 1.5B, 7B, 57B-14B (MoE), and 72B). Qwen2 has been trained on data in 29 languages, and can handle up to 128K tokens in context length. It has been benchmarked against Meta’s Llama 3 and OpenAI’s GPT-4, achieving top scores. The primary innovation of Qwen2 is its long-context understanding.</p>
-<blockquote>
-<p><strong>Cohere Cookbooks</strong> [<a target="_blank" rel="noopener" href="https://docs.cohere.com/page/cookbooks">Link</a>]</p>
-</blockquote>
-<p>A set of tutorials for building agents &#x2F; AI applications.</p>
-<blockquote>
-<p><strong>Mistral Cookbooks</strong> [<a target="_blank" rel="noopener" href="https://github.com/mistralai/cookbook/tree/main?tab=readme-ov-file">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><strong>Introducing llama-agents: A Powerful Framework for Building Production Multi-Agent AI Systems - LlamaIndex</strong> [<a target="_blank" rel="noopener" href="https://www.llamaindex.ai/blog/introducing-llama-agents-a-powerful-framework-for-building-production-multi-agent-ai-systems">Link</a>]</p>
-</blockquote>
-<h3 id="News"><a href="#News" class="headerlink" title="News"></a>News</h3><blockquote>
-<p><strong>Amazon to expand drone delivery service after clearing FAA hurdle</strong> [<a target="_blank" rel="noopener" href="https://www.cnbc.com/2024/05/30/amazon-drone-delivery-faa-approval.html">Link</a>]</p>
-</blockquote>
-<p>Amazon’s drone delivery services “Prime Air” was laid out more than a decade ago but has struggled since then. In 2022, Amazon said it would begin testing deliveries in College Station, Texas. In 2023, Prime Air was hit by layoffs. But recently Amazon said it would expand drone operations to Phoenix, Arizona, etc. And it’s expected to expand to other cities in 2025.</p>
-<blockquote>
-<p><strong>Salesforce’s stock suffers its biggest drop in two decades</strong> [<a target="_blank" rel="noopener" href="https://www.morningstar.com/news/marketwatch/20240530487/salesforces-stock-suffers-its-biggest-drop-in-two-decades">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><strong>NASA’s James Webb Space Telescope Finds Most Distant Known Galaxy</strong> [<a target="_blank" rel="noopener" href="https://blogs.nasa.gov/webb/2024/05/30/nasas-james-webb-space-telescope-finds-most-distant-known-galaxy/">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><strong>Saudi fund joins $400m funding round of Chinese AI startup Zhipu</strong> [<a target="_blank" rel="noopener" href="https://www.verdict.co.uk/prosperity7-ventures-zhipu-ai-investment/">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><strong>A PR disaster: Microsoft has lost trust with its users, and Windows Recall is the straw that broke the camel’s back</strong> [<a target="_blank" rel="noopener" href="https://www.windowscentral.com/software-apps/windows-11/microsoft-has-lost-trust-with-its-users-windows-recall-is-the-last-straw">Link</a>]</p>
-</blockquote>
-<p>As Microsoft has done a lot of things (obtrusive ads, full-screen popups, ignoring app defaults, forcing Microsoft Accounts, etc) to degrade the Windows user experience over the last few years, it lost the trust relationship between Windows users and Microsoft, therefore a tool like Recall is described as literal spyware or malware by users no matter how well you communicate the features to the world. </p>
-<blockquote>
-<p><strong>Apple Made Once-Unlikely Deal With Sam Altman to Catch Up in AI</strong> [<a target="_blank" rel="noopener" href="https://www.bloomberg.com/news/articles/2024-06-05/why-is-apple-aapl-teaming-up-with-openai-both-companies-need-each-other">Link</a>]</p>
-</blockquote>
-<p>The deal between Apple and OpenAI will give OpenAI access to hundreds of millions of Apple users, and bring Apple the hottest technology of the AI era - that can pair with its own services.</p>
-<blockquote>
-<p><strong>Nvidia is now more valuable than Apple at $3.01 trillion</strong> [<a target="_blank" rel="noopener" href="https://www.theverge.com/2024/6/5/24172363/nvidia-apple-market-cap-valuation-trillion-ai">Link</a>]</p>
-</blockquote>
-<p>Mark this today, on Jun 5, 2024, Nvidia’s market cap is higher than Apple becomes the second most valuable company in the world.</p>
-<blockquote>
-<p><strong>SpaceX’s Starship Rocket Successfully Completes 1st Return From Space</strong> [<a target="_blank" rel="noopener" href="https://www.nytimes.com/2024/06/06/science/spacex-starship-fourth-test-flight.html">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><strong>Woman Declared Dead Is Found Alive at Funeral Home</strong> [<a target="_blank" rel="noopener" href="https://www.nytimes.com/2024/06/03/us/nebraska-dead-woman-alive-funeral-home.html">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><strong>BYD Launches Hybrids With 1,300-Mile Driving Range</strong> [<a target="_blank" rel="noopener" href="https://www.wsj.com/business/autos/byd-launches-hybrids-with-1-300-mile-driving-range-5a3ae139">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><strong>China’s plan to dominate EV sales around the world</strong> [<a target="_blank" rel="noopener" href="https://arstechnica.com/cars/2024/06/chinas-plan-to-dominate-ev-sales-around-the-world/?utm_source=tldrnewsletter">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><strong>Nvidia emails: Elon Musk diverting Tesla GPUs to his other companies</strong> [<a target="_blank" rel="noopener" href="https://arstechnica.com/cars/2024/06/elon-musk-is-diverting-teslas-gpus-to-x-xai-nvidia-emails-say/?utm_source=tldrnewsletter">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><strong>How Apple Fell Behind in the AI Arms Race</strong> [<a target="_blank" rel="noopener" href="https://www.wsj.com/tech/ai/apple-ai-siri-development-behind-9ea65ee8?st=82mud84srao94aq&reflink=desktopwebshare_permalink&utm_source=tldrnewsletter">Link</a>]</p>
-</blockquote>
-<p>Next week, at Apple’s annual Worldwide Developers Conference, the company is set to join an AI arms race -  announce an array of generative AI upgrades to its software products, including Siri. </p>
-<blockquote>
-<p><strong>Tesla’s $450 lightning-shaped bottle of mezcal is its most expensive liquor yet</strong> [<a target="_blank" rel="noopener" href="https://www.businessinsider.com/tesla-mezcal-bottle-for-sale-2024-6">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><strong>Apple’s Upcoming AI Reveal, Pika Labs Raises $80 Million, Twelve Labs, $50 Million</strong> [<a target="_blank" rel="noopener" href="https://www.forbes.com/sites/charliefink/2024/06/06/apples-upcoming-ai-reveal-pika-labs-raises-80-million-twelve-labs-50-million/?ss=ai">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><em>Among the biggest spenders on sovereign AI is Singapore, whose national supercomputing center is being upgraded with Nvidia’s latest AI chips and where state-owned telecom <a target="_blank" rel="noopener" href="https://www.wsj.com/market-data/quotes/SG/XSES/Z74">Singtel</a> is pushing an expansion of its data center footprint in Southeast Asia in collaboration with Nvidia. The country is also spearheading a large language model that is trained on Southeast Asian languages.</em> </p>
-<p><em>Other big projects are taking place in Canada, which last month pledged $1.5 billion as part of a sovereign computing strategy for the country’s startups and researchers, and Japan, which said it is investing about $740 million to build up domestic AI computing power this year following a visit from Huang.</em></p>
-<p><em>Similar pushes are spreading across Europe, including those in France and Italy, where telecom companies are building AI supercomputers with Nvidia’s chips to develop local-language large language models. French President Emmanuel Macron last month called on Europe to create public-private partnerships to buy more graphics processing units, or the core chips used to train AI, to push its share of those deployed globally from 3% currently to 20% by 2030 or 2035.</em> </p>
-<p><strong>― Nvidia’s New Sales Booster: The Global Push for National AI Champions</strong> [<a target="_blank" rel="noopener" href="https://www.wsj.com/tech/ai/nvidias-new-sales-booster-the-global-push-for-domestic-ai-champions-6d005ab7?st=3t4jukdsg9da2bt&reflink=desktopwebshare_permalink">Link</a>]</p>
-</blockquote>
-<p>Cloud-computing giants and big tech companies have been a great source of revenue for NVIDIA, now Sovereign Al is another lever. Governments demand sovereign clouds for their AI infrastructure and sensitive data, and US tech companies such as NVIDIA are eager to build those for them. Question would be how long can they keep this momentum in generating high revenue. </p>
-<blockquote>
-<p><strong>Do you best creating, thinking, learning, brainstorming, note-taking - Google NotebookLM</strong> [<a target="_blank" rel="noopener" href="https://notebooklm.google/">Link</a>]</p>
-</blockquote>
-<p>Google upgraded its NotebookLM powered by Gemini 1.5.</p>
-<blockquote>
-<p><em>There’s one other way Apple is dealing with privacy concerns: making it someone else’s problem. Apple’s <a target="_blank" rel="noopener" href="https://www.theverge.com/2024/6/10/24171936/apple-siri-ai-update-ios18-features-wwdc">revamped Siri</a> can send some queries to <a target="_blank" rel="noopener" href="https://www.theverge.com/2024/6/10/24174786/apple-openai-partnership-chatgpt-wwdc">ChatGPT</a> in the cloud, but only with permission after you ask some really tough questions. That process shifts the privacy question into the hands of OpenAI, which has its own policies, and the user, who has to agree to offload their query. In <a target="_blank" rel="noopener" href="https://go.skimresources.com/?id=1025X1701640&xs=1&url=https://www.youtube.com/watch?v=pMX2cQdPubk&xcust=___vg__p_23940026__t_w__r_https://www.google.com/__d_D">an interview</a> with Marques Brownlee, Apple CEO Tim Cook said that ChatGPT would be called on for requests involving “world knowledge” that are “out of domain of personal context.”</em></p>
-<p><em>Apple’s local and cloud split approach for Apple Intelligence isn’t totally novel. Google has a Gemini Nano model that can work locally on Android devices alongside its Pro and Flash models that process on the cloud. Meanwhile, Microsoft Copilot Plus PCs can process AI requests locally while the company continues to lean on its deal with OpenAI and also <a target="_blank" rel="noopener" href="https://www.theverge.com/2024/5/6/24150449/microsoft-is-building-a-large-ai-model-that-could-rival-openai">build its own in-house MAI-1 model</a>. None of Apple’s rivals, however, have so thoroughly emphasized their privacy commitments in comparison.</em></p>
-<p><strong>― Here’s how Apple’s AI model tries to keep your data private</strong> [<a target="_blank" rel="noopener" href="https://www.theverge.com/2024/6/13/24175985/apple-intelligence-ai-model-local-cloud-privacy-how-it-works">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><strong>Introducing Apple Intelligence, the personal intelligence system that puts powerful generative models at the core of iPhone, iPad, and Mac</strong> [<a target="_blank" rel="noopener" href="https://www.apple.com/newsroom/2024/06/introducing-apple-intelligence-for-iphone-ipad-and-mac/">Link</a>]</p>
-</blockquote>
-<blockquote>
-<p><strong>Ilya Sutskever Has a New Plan for Safe Superintelligence</strong> [<a target="_blank" rel="noopener" href="https://www.bloomberg.com/news/articles/2024-06-19/openai-co-founder-plans-new-ai-focused-research-lab">Link</a>]</p>
-<p><strong>AI Employees Should Have a “Right To Warn” About Looming Trouble - Big Technology</strong> [<a target="_blank" rel="noopener" href="https://www.bigtechnology.com/p/ai-employees-should-have-a-right">Link</a>]</p>
-</blockquote>
-<p>Ilya left OpenAI in mid-May and started Safe Superintelligence Inc. in mid-Jun, with a goal of creating a safe powerful AI system. Daniel Gross (former Apple Inc. AI lead) and Daniel Levy (former AI engineer at OpenAI). </p>
-<p>To me, it’s not a bad thing to let OpenAI safety employees leave and start their own business. It’s actually a good thing for both. OpenAI led by Sam is eager to stay the leading AI company and develop AGI as quickly as possible. Having colleagues concerning about AI safety would only slow down the progress. So the goals of OpenAI vision &amp; mission and OpenAI safety team don’t align. Not saying AI safety is not important. I’m saying the AI pioneers and AI safety team should both exist individually and separately so that they are restricting each other in an official, public, and even way, and not conflicting each other from inside.</p>
-<blockquote>
-<p><strong>Musk’s xAI supercomputer will get server racks from Dell and Super Micro</strong> [<a target="_blank" rel="noopener" href="https://www.fastcompany.com/91143745/dell-super-micro-musk-xai-supercomputer-server-racks">Link</a>]</p>
-</blockquote>
-<p>Dell and Super Micro Computer will provide server racks for the supercomputer being developed by xAI. The supercomputer aims to power the next iteration of xAI’s chatbot Grok, which requires a vast number of Nvidia GPUs for training. Musk plans to have the supercomputer operational by fall 2025. </p>
-<blockquote>
-<p><strong>Releasing New AI Research Models to Accelerate Innovation at Scale - Meta News</strong> [<a target="_blank" rel="noopener" href="https://about.fb.com/news/2024/06/releasing-new-ai-research-models-to-accelerate-innovation-at-scale/">Link</a>]</p>
-</blockquote>
-<ul>
-<li><p>Meta Chameleon: 7B &amp; 34B language models </p>
-<p>Open source model is catching up GPT-4o. This is the first open source base model that is able to take multimodal inputs and generate outputs. Unfortunately it currently only has a research license. </p>
-</li>
-<li><p>Meta Multi-Token Prediction LLM</p>
-<p>Meta released a language model for code completion using multi-token prediction. The approach was newly proposed in a paper aiming to build better and faster LLMs by using multi-token prediction. [<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2404.19737">Paper</a>]</p>
-</li>
-<li><p>Meta JASCO: text-to-music models </p>
-<p>They released generative text to music models able to accept various conditioning inputs for greater controllability.</p>
-</li>
-<li><p>Meta AudioSeal: audio watermarking model</p>
-<p>This is the first designed specifically for the localized detection of AI-generated speech, available under a commercial license. This would be very useful to detect deep fakes.</p>
-</li>
-<li><p>Additional RAI artifacts</p>
-<p>To ensure geographical and cultural diversity in the capability of text to image models, they developed automatic indicators to evaluate potential geographical disparities in text to image models. And now they released this evaluation code and annotations. [<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2308.06198">Paper</a>]</p>
-</li>
-</ul>
-<blockquote>
-<p><strong>Claude 3.5 Sonnet - Anthropic News</strong> [<a target="_blank" rel="noopener" href="https://www.anthropic.com/news/claude-3-5-sonnet?utm_source=www.matthewberman.com&utm_medium=referral&utm_campaign=claude-3-5-is-the-new-king-ex-openai-founder-new-company">Link</a>]</p>
-<p><strong>On Claude 3.5 Sonnet - Zvi Mowshowitz</strong> [<a target="_blank" rel="noopener" href="https://thezvi.substack.com/p/on-claude-35-sonnet">Link</a>]</p>
-</blockquote>
-<p>Claude 3.5 Sonnet achieves higher performance in various key metrics and tasks, outperforms competitor models as well, and performs at twice the speed of Claude 3 Opus and at 1&#x2F;5 the cost. Also, Anthropic introduced a new feature called Artifacts on Claude.ai to expand how users can interact with Claude.</p>
-<blockquote>
-<p><strong>AI tools are coming to Gmail, Google Drive, and Firefox</strong> [<a target="_blank" rel="noopener" href="https://www.fastcompany.com/91146341/firefox-gmail-google-drive-ai-chatbots-coming-soon">Link</a>]</p>
-</blockquote>
-<p>Google is integrating AI side panels powered by Gemini into Gmail, Docs, Sheets, Slides, and Google Drive, enhancing writing assistance, summarization, and content creation.</p>
-<blockquote>
-<p><strong>Firefox starts letting you use AI chatbots in the sidebar</strong> [<a target="_blank" rel="noopener" href="https://www.engadget.com/firefox-starts-letting-you-use-ai-chatbots-in-the-sidebar-144218734.html">Link</a>]</p>
-</blockquote>
-<p>Mozilla is incorporating AI chatbots into Firefox. ChatGPT, Google Gemini, HuggingChat, or Le Chat Mistral are options for users to choose in the sidebar.</p>
-<blockquote>
-<p><strong>Meet Sohu, the fastest AI chip of all time. - Etched @X</strong> [<a target="_blank" rel="noopener" href="https://x.com/etched/status/1805625693113663834?s=46">Link</a>]</p>
-</blockquote>
-<p>Sohu is building the fastest specialized chip for transformer models.</p>
-<blockquote>
-<p><strong>Gemma 2 is now available to researchers and developers - Google Developers</strong> [<a target="_blank" rel="noopener" href="https://blog.google/technology/developers/google-gemma-2/">Link</a>]</p>
 </blockquote>
 
       
