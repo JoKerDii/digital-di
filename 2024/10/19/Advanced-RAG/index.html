@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/digital-di/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/digital-di/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/digital-di/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/digital-di/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/digital-di/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jokerdii.github.io","root":"/digital-di/","images":"/digital-di/images","scheme":"Muse","darkmode":false,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/digital-di/js/config.js"></script>
+
+    <meta name="description" content="[TOC] There are many products built almost solely on RAG. I realized that a lack of knowledge of RAG is one of the main reasons why it’s been slow to widely adopt Gen AI in enterprises. Therefore, I h">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Advanced RAG">
+<meta property="og:url" content="https://jokerdii.github.io/digital-di/2024/10/19/Advanced-RAG/index.html">
+<meta property="og:site_name" content="Di&#39;s Blog">
+<meta property="og:description" content="[TOC] There are many products built almost solely on RAG. I realized that a lack of knowledge of RAG is one of the main reasons why it’s been slow to widely adopt Gen AI in enterprises. Therefore, I h">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jokerdii.github.io/digital-di/images/naive_rag.png">
+<meta property="og:image" content="https://jokerdii.github.io/digital-di/images/adv_rag.png">
+<meta property="og:image" content="https://jokerdii.github.io/digital-di/images/query_analysis.png">
+<meta property="og:image" content="https://jokerdii.github.io/digital-di/images/query_trans2.png">
+<meta property="og:image" content="https://jokerdii.github.io/digital-di/images/multiquery_retrieval.png">
+<meta property="og:image" content="https://jokerdii.github.io/digital-di/images/rag_fusion.png">
+<meta property="og:image" content="https://jokerdii.github.io/digital-di/images/decomposition.png">
+<meta property="og:image" content="https://jokerdii.github.io/digital-di/images/least_to_most.png">
+<meta property="og:image" content="https://jokerdii.github.io/digital-di/images/ircot2.png">
+<meta property="og:image" content="https://jokerdii.github.io/digital-di/images/ircot3.png">
+<meta property="og:image" content="https://jokerdii.github.io/digital-di/images/hyde.png">
+<meta property="og:image" content="https://jokerdii.github.io/digital-di/images/data_structure.png">
+<meta property="og:image" content="https://jokerdii.github.io/digital-di/images/self_query.png">
+<meta property="og:image" content="https://jokerdii.github.io/digital-di/images/basic_index_retrieval.png">
+<meta property="og:image" content="https://jokerdii.github.io/digital-di/images/fusion_retrieval.png">
+<meta property="og:image" content="https://jokerdii.github.io/digital-di/images/sent_window_retrieval.png">
+<meta property="og:image" content="https://jokerdii.github.io/digital-di/images/parent_retrieval.png">
+<meta property="og:image" content="https://jokerdii.github.io/digital-di/images/hierarchical_retrieval.png">
+<meta property="article:published_time" content="2024-10-20T01:25:28.000Z">
+<meta property="article:modified_time" content="2024-10-20T12:19:40.323Z">
+<meta property="article:author" content="Di Zhen">
+<meta property="article:tag" content="knowledge">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jokerdii.github.io/digital-di/images/naive_rag.png">
+
+
+<link rel="canonical" href="https://jokerdii.github.io/digital-di/2024/10/19/Advanced-RAG/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://jokerdii.github.io/digital-di/2024/10/19/Advanced-RAG/","path":"2024/10/19/Advanced-RAG/","title":"Advanced RAG"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Advanced RAG | Di's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/digital-di/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/digital-di/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Di's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Naive-RAG"><span class="nav-number">1.</span> <span class="nav-text">Naive RAG</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Advanced-RAG"><span class="nav-number">2.</span> <span class="nav-text">Advanced RAG</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Overview"><span class="nav-number">2.1.</span> <span class="nav-text">Overview</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pre-Retrieval-Enhancements"><span class="nav-number">2.2.</span> <span class="nav-text">Pre-Retrieval Enhancements</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Query-Transformations-Translation"><span class="nav-number">2.2.1.</span> <span class="nav-text">Query Transformations &#x2F; Translation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Query-Construction"><span class="nav-number">2.2.2.</span> <span class="nav-text">Query Construction</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Advanced-Retrieval-Techniques"><span class="nav-number">2.3.</span> <span class="nav-text">Advanced Retrieval Techniques</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Post-Retrieval-Enhancements"><span class="nav-number">2.4.</span> <span class="nav-text">Post-Retrieval Enhancements</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Next-Topic-Prompt-Engineering"><span class="nav-number">4.</span> <span class="nav-text">Next Topic - Prompt Engineering</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Di Zhen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/digital-di/archives/">
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://jokerdii.github.io/digital-di/2024/10/19/Advanced-RAG/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/digital-di/images/avatar.gif">
+      <meta itemprop="name" content="Di Zhen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Di's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Advanced RAG | Di's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Advanced RAG
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-10-19 21:25:28" itemprop="dateCreated datePublished" datetime="2024-10-19T21:25:28-04:00">2024-10-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-10-20 08:19:40" itemprop="dateModified" datetime="2024-10-20T08:19:40-04:00">2024-10-20</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>[TOC]</p>
+<p>There are many products built almost solely on RAG. I realized that a lack of knowledge of RAG is one of the main reasons why it’s been slow to widely adopt Gen AI in enterprises. Therefore, I have conducted a research about naive RAG and advanced RAG, and have my notes written here. </p>
+<h2 id="Naive-RAG"><a href="#Naive-RAG" class="headerlink" title="Naive RAG"></a>Naive RAG</h2><p>The standard RAG workflow consists of three main steps as illustrated in the graph below:</p>
+<ol>
+<li><strong>Indexing</strong>: Creating an index of documents for retrieval.</li>
+<li><strong>Retrieval</strong>: Searching the index for relevant documents based on a user query.</li>
+<li><strong>Generation</strong>: Using a language model to generate answers or responses based on the retrieved documents.</li>
+</ol>
+<p>The three steps all face possible issues:</p>
+<ol>
+<li><p><strong>Indexing</strong>:</p>
+<ul>
+<li><p>Poor document parsing.</p>
+</li>
+<li><p>Inefficient document chunking strategies.</p>
+</li>
+<li><p>Weak semantic representations from embedding models.</p>
+</li>
+<li><p>Non-optimized index structures.</p>
+</li>
+</ul>
+</li>
+<li><p><strong>Retrieval</strong>:</p>
+<ul>
+<li><p>Low relevance: retrieved documents are not highly relevant to the user query (low accuracy).</p>
+</li>
+<li><p>Incomplete retrieval: not all relevant documents are retrieved (low recall).</p>
+</li>
+<li><p>Redundancy: retrieved documents may be repetitive or redundant.</p>
+</li>
+<li><p>Queries are often not specific or well-defined.</p>
+</li>
+<li><p>Retrieval strategies might not be well-suited to the use case and may rely solely on semantic similarity.</p>
+</li>
+</ul>
+</li>
+<li><p><strong>Generation</strong>:</p>
+<ul>
+<li>Overreliance on the retrieved content, leading to issues such as irrelevant or even harmful responses (e.g., toxic or biased content).</li>
+</ul>
+</li>
+</ol>
+<p><img src="/digital-di/./images/naive_rag.png" alt="naive-rag"></p>
+<p>This paper <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2312.10997">“Retrieval-Augmented Generation for Large Language Models: A Survey”</a> discussed several problems associated with Naive RAG implementations. The advanced approaches to RAG attempt to overcome the limitations of naive RAG by improving the way queries are processed, documents are retrieved, and responses are generated. Advanced RAG techniques focus on refining each step of the process, from query transformations to more efficient retrieval strategies.</p>
+<h2 id="Advanced-RAG"><a href="#Advanced-RAG" class="headerlink" title="Advanced RAG"></a>Advanced RAG</h2><h3 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h3><p><img src="/digital-di/./images/adv_rag.png" alt="adv_rag"></p>
+<h3 id="Pre-Retrieval-Enhancements"><a href="#Pre-Retrieval-Enhancements" class="headerlink" title="Pre-Retrieval Enhancements"></a>Pre-Retrieval Enhancements</h3><h4 id="Query-Transformations-Translation"><a href="#Query-Transformations-Translation" class="headerlink" title="Query Transformations &#x2F; Translation"></a>Query Transformations &#x2F; Translation</h4><p>Query transformations are techniques aimed at re-writing or modifying the input questions to improve the retrieval process. </p>
+<p><img src="/digital-di/./images/query_analysis.png" alt="Query Analysis"></p>
+<p>Query transformation types:</p>
+<p><img src="/digital-di/./images/query_trans2.png" alt="query_trans2"></p>
+<p>Some notable methods include:</p>
+<ol>
+<li><p><strong>Multi Query</strong>:</p>
+<p>The <strong>MultiQueryRetriever</strong> automates prompt tuning by using a language model (LLM) to generate multiple queries from different perspectives for a given user query. It retrieves relevant documents for each generated query and combines the results to create a larger, more comprehensive set of potentially relevant documents. This technique helps mitigate some of the limitations of distance-based retrieval, save time on experimenting with different prompts, and provides a richer set of results.</p>
+<p>LangChain Tutorial: <a target="_blank" rel="noopener" href="https://python.langchain.com/v0.2/docs/how_to/MultiQueryRetriever">How to use MultiQueryRetriever</a>.</p>
+<p>LangChain API: <a target="_blank" rel="noopener" href="https://api.python.langchain.com/en/latest/retrievers/langchain.retrievers.multi_query.MultiQueryRetriever.html">MultiQueryRetriever</a>.</p>
+<p>Video Tutorial: <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=JChPi0CRnDY">RAG from Scratch (Part 5 - Query Translation: Multi Query)</a>.</p>
+<p><img src="/digital-di/./images/multiquery_retrieval.png" alt="multiquery_retrieval"></p>
+</li>
+<li><p><strong>RAG Fusion</strong></p>
+<p>RAG-Fusion combines RAG and <strong>Reciprocal Rank Fusion (RRF)</strong> by generating multiple queries, reranking them with reciprocal scores and fusing the documents and scores. RRF gives the more relevant retrieval results higher scores and re-ranks them according to the scores. RAG-Fusion was able to provide accurate and comprehensive answers due to the generated queries contextualizing the original query from various perspectives.</p>
+<p>Paper: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2402.03367">A New Take on Retrieval-Augmented Generation</a>.</p>
+<p>Code: <a href="Raudaschl/rag-fusion">Raudaschl&#x2F;rag-fusion</a></p>
+<p>LangChain Cookbook：<a target="_blank" rel="noopener" href="https://github.com/langchain-ai/langchain/blob/master/cookbook/rag_fusion.ipynb?ref=blog.langchain.dev">RAG Fusion</a></p>
+<p>Video Tutorial: <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=77qELPbNgxA">RAG from scratch: Part 6 (Query Translation – RAG Fusion)</a></p>
+<p><img src="/digital-di/./images/rag_fusion.png" alt="rag_fusion"> </p>
+</li>
+<li><p><strong>Step-Back Prompting</strong></p>
+<p><strong>Step back prompting</strong> refers to the technique of generating a more generalized or abstract version of a specific query in order to mitigate potential issues with search quality or model-generated responses. This involves first reformulating the initial question into a broader or higher-level version (the “step back” question) and then querying both the original and the generalized question to improve the comprehensiveness and relevance of the responses. </p>
+<p>Paper: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2310.06117">Take a Step Back: Evoking Reasoning via Abstraction in Large Language Models</a>“. </p>
+<p>LangChain Tutorial: <a target="_blank" rel="noopener" href="https://python.langchain.com/v0.1/docs/use_cases/query_analysis/techniques/step_back/">Step Back Prompting</a></p>
+<p>LangChain Cookbook: <a target="_blank" rel="noopener" href="https://github.com/langchain-ai/langchain/blob/master/cookbook/stepback-qa.ipynb">Step-Back Prompting (Question-Answering)</a></p>
+<p>Video Tutorial: <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=xn1jEjRyJ2U">RAG from scratch: Part 8 (Query Translation – Step Back)</a></p>
+</li>
+<li><p><strong>Decomposition</strong>: </p>
+<p>When a user asks a complex question, a single query might not retrieve the right results. To address this, the question can be broken into sub-questions, each of which is retrieved separately, and the answers are combined.</p>
+<p>LangChain Doc: <a target="_blank" rel="noopener" href="https://python.langchain.com/v0.1/docs/use_cases/query_analysis/techniques/decomposition/">Decomposition</a></p>
+<p>Video Tutorial: <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=h0OPWlEOank">RAG from scratch: Part 7 (Query Translation – Decomposition)</a></p>
+<p><img src="/digital-di/./images/decomposition.png" alt="decomposition"></p>
+<ul>
+<li><p><strong>Least-to-Most Prompting</strong></p>
+<p>The key idea in this strategy is to break down a complex problem into a series of simpler subproblems and then solve them in sequence. Solving each subproblem is facilitated by the answers to previously solved subproblems. Least-to-most prompting is capable of generalizing to more difficult problems than those seen in the prompts. </p>
+<p>Paper: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2205.10625">Least-to-Most Prompting Enables Complex Reasoning in Large Language Models</a></p>
+<p>Video Tutorial: <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=h0OPWlEOank">RAG from scratch: Part 7 (Query Translation – Decomposition)</a></p>
+<p><img src="/digital-di/./images/least_to_most.png" alt="least_to_most"></p>
+</li>
+<li><p><strong>IR-Cot</strong></p>
+<p>An approach for multi-step QA that interleaves retrieval with steps (sentences) in a CoT, guiding the retrieval with CoT and in turn using retrieved results to improve CoT. It incorporates the idea of least-to-most prompting into RAG to improve retrieval, resulting in factually more accurate CoT reasoning.</p>
+<p>Paper: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2212.10509">Interleaving Retrieval with Chain-of-Thought Reasoning for Knowledge-Intensive Multi-Step Questions</a></p>
+<p>IR-CoT Code：<a target="_blank" rel="noopener" href="https://github.com/StonyBrookNLP/ircot">https://github.com/StonyBrookNLP/ircot</a></p>
+<p><img src="/digital-di/./images/ircot2.png" alt="ircot2"></p>
+<p><img src="/digital-di/./images/ircot3.png" alt="ircot3"></p>
+</li>
+</ul>
+</li>
+<li><p><strong>Hypothetical Document Embeddings (HyDE)</strong>: Given a query, HyDE first zero-shot instructs an instruction-following language model to generate a hypothetical document. The document captures relevance patterns but is unreal and may contain false details. Then, an unsupervised contrastively learned encoder (e.g. Contriever) encodes the document into an embedding vector. This vector identifies a neighborhood in the corpus embedding space, where similar real documents are retrieved based on vector similarity. </p>
+<p>Simply speaking, HyDE uses responses to retrieve documents rather than using queries to retrieve documents. The rational behind this approach is that the semantic similarity between query and real document is smaller than the semantic similarity between hypothetical document and real document.</p>
+<p>LangChain Doc: <a target="_blank" rel="noopener" href="https://python.langchain.com/v0.1/docs/use_cases/query_analysis/techniques/hyde/">Hypothetical Document Embeddings</a></p>
+<p>Paper: <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2212.10496.pdf">Precise Zero-Shot Dense Retrieval without Relevance Labels</a></p>
+<p>LangChain Cookbook: <a target="_blank" rel="noopener" href="https://github.com/langchain-ai/langchain/blob/master/cookbook/hypothetical_document_embeddings.ipynb">Improve document indexing with HyDE</a></p>
+<p><img src="/digital-di/./images/hyde.png" alt="hyde"></p>
+</li>
+<li><p><strong>New queries based on historical dialogues</strong></p>
+<p>This is a required technique for developing a chatbot or a conversational RAG.</p>
+<p>LangChain Tutorials: <a target="_blank" rel="noopener" href="https://python.langchain.com/v0.2/docs/tutorials/qa_chat_history/">Conversational RAG</a>; <a target="_blank" rel="noopener" href="https://python.langchain.com/v0.2/docs/tutorials/chatbot/">Build a Chatbot</a>; <a target="_blank" rel="noopener" href="https://python.langchain.com/v0.2/docs/how_to/message_history/">How to add message history</a>; <a target="_blank" rel="noopener" href="https://python.langchain.com/v0.2/docs/how_to/chatbots_memory/">How to add memory to chatbots</a></p>
+<p>LangChain Code: <a target="_blank" rel="noopener" href="https://github.com/langchain-ai/langchain/blob/master/libs/langchain/langchain/chains/history_aware_retriever.py">create_history_aware_retriever</a></p>
+</li>
+</ol>
+<h4 id="Query-Construction"><a href="#Query-Construction" class="headerlink" title="Query Construction"></a>Query Construction</h4><p>Query construction refers to converting a natural language query into the query language specific to the database you are working with. This is essential for interacting with different databases and vector stores that require structured queries for more efficient document retrieval.</p>
+<p>Check which vector databases support filtering: <a target="_blank" rel="noopener" href="https://superlinked.com/vector-db-comparison">https://superlinked.com/vector-db-comparison</a></p>
+<p>Data can be structured, unstructured or semi-structured (see demo below). This requires LLMs to have capability of query construction.</p>
+<p><img src="/digital-di/./images/data_structure.png" alt="data_structure"></p>
+<table>
+<thead>
+<tr>
+<th>Examples</th>
+<th>Data Source</th>
+<th>References</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Text-to-metadata-filter</td>
+<td>VectorStore</td>
+<td><a target="_blank" rel="noopener" href="https://python.langchain.com/docs/how_to/self_query/">Docs</a></td>
+</tr>
+<tr>
+<td>Text-to-SQL</td>
+<td>SQL DB</td>
+<td><a target="_blank" rel="noopener" href="https://python.langchain.com/docs/tutorials/sql_qa/">Docs</a>; <a target="_blank" rel="noopener" href="https://blog.langchain.dev/llms-and-sql/">Blog</a>; <a target="_blank" rel="noopener" href="https://blog.langchain.dev/incorporating-domain-specific-knowledge-in-sql-llm-solutions/">Blog</a></td>
+</tr>
+<tr>
+<td>Text-to-SQL + Semantic</td>
+<td>PGVector supported SQL DB</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/langchain-ai/langchain/blob/master/cookbook/retrieval_in_sql.ipynb?ref=blog.langchain.dev">Cookbook</a></td>
+</tr>
+<tr>
+<td>Text-to-Cypher</td>
+<td>Graph DB</td>
+<td><a target="_blank" rel="noopener" href="https://blog.langchain.dev/implementing-advanced-retrieval-rag-strategies-with-neo4j/">Blog</a>; <a target="_blank" rel="noopener" href="https://blog.langchain.dev/using-a-knowledge-graph-to-implement-a-devops-rag-application/">Blog</a></td>
+</tr>
+</tbody></table>
+<ol>
+<li><p><strong>Self-query retriever</strong></p>
+<p>A self-querying retriever is one that, as the name suggests, has the ability to query itself. Specifically, given any natural language query, the retriever uses a query-constructing LLM chain to write a structured query (usually in JSON) and then applies that structured query to its underlying VectorStore. This allows the retriever to not only use the user-input query for semantic similarity comparison with the contents of stored documents but to also extract filters from the user query on the metadata of stored documents and to execute those filters.</p>
+<p>LangChain Docs:</p>
+<p>(v0.2): <a target="_blank" rel="noopener" href="https://python.langchain.com/v0.2/docs/how_to/self_query/">How to do “self-querying” retrieval</a></p>
+<p>(v0.1): <a target="_blank" rel="noopener" href="https://python.langchain.com/v0.1/docs/modules/data_connection/retrievers/self_query/">Self-querying</a></p>
+<p>Integration: <a target="_blank" rel="noopener" href="https://python.langchain.com/v0.2/docs/integrations/components/">Components</a> -&gt; <a target="_blank" rel="noopener" href="https://python.langchain.com/v0.2/docs/integrations/retrievers/">Retrievers</a> -&gt; <a target="_blank" rel="noopener" href="https://python.langchain.com/v0.2/docs/integrations/retrievers/self_query/">Self-querying retrievers</a> -&gt; <a target="_blank" rel="noopener" href="https://python.langchain.com/v0.1/docs/integrations/retrievers/self_query/qdrant_self_query/">Qdrant</a></p>
+<p><img src="/digital-di/./images/self_query.png" alt="self_query.png"></p>
+<p><strong>Text-to-metadata-filter</strong>: VectorStores equipped with metadata filtering enable structured queries to filter embedded unstructured documents.</p>
+</li>
+<li><p><strong>Prompt templates and output parsers</strong></p>
+<p>**Prompt analysis and prompt template **: converting user’s query to filtering conditions</p>
+<ul>
+<li><p>When constructing queries, the system uses a specific JSON format to organize the query and filters. The prompt is designed to create structured queries that can be applied to a document database or vector store. The queries consist of two main components:</p>
+<ul>
+<li>Query: The natural language query string that is used to match the document content.</li>
+<li>Filter: Logical conditions used to filter the documents based on specific metadata attributes.</li>
+</ul>
+</li>
+<li><p>Comparison Operations</p>
+<p>Comparison operators (<code>comp</code>) are used to compare attributes (like year, name, time, product, or team) in the document with specific values provided by the user. Here are the comparison operators:</p>
+<ul>
+<li><strong>eq</strong>: Equals (e.g., <code>eq(&quot;team&quot;, &quot;TSE&quot;)</code> matches documents where the team is “TSE”).</li>
+<li><strong>ne</strong>: Not equal (e.g., <code>ne(&quot;name&quot;,&quot;Ashley&quot;)</code> matches documents where the year is not 2022).</li>
+<li><strong>gt</strong>: Greater than (e.g., <code>gt(&quot;year&quot;, 2023)</code> matches documents with a year greater than 2023).</li>
+<li><strong>gte</strong>: Greater than or equal to (e.g., <code>gte(&quot;year&quot;, 2022)</code> matches documents from the year 2000 or later).</li>
+<li><strong>lt</strong>: Less than (e.g., <code>lt(&quot;year&quot;, 2021)</code> matches documents created before 2021).</li>
+<li><strong>lte</strong>: Less than or equal to (e.g., <code>lte(&quot;time&quot;, 13)</code> matches documents with a time length of 13 mins or lower).</li>
+<li><strong>contain</strong>: Contains (e.g., <code>contain(&quot;product&quot;, &quot;gold&quot;)</code> matches documents where the product contains the word “gold”).</li>
+<li><strong>like</strong>: Similar to or like (used for pattern matching).</li>
+</ul>
+</li>
+<li><p>Logical Operations</p>
+<p>Logical operators combine multiple conditions (comparisons) into a single filter:</p>
+<ul>
+<li><strong>and</strong>: Logical AND (e.g., <code>and(gt(&quot;year&quot;, 2022), eq(&quot;product&quot;, &quot;gold&quot;))</code> matches documents created later than year 2022 and are related to gold card product).</li>
+<li><strong>or</strong>: Logical OR (e.g., <code>or(eq(&quot;team&quot;, &quot;TS&quot;), eq(&quot;team&quot;, &quot;TSE&quot;))</code> matches documents that are either TS or TSE).</li>
+<li><strong>not</strong>: Logical NOT (e.g., <code>not(eq(&quot;name&quot;, &quot;Ashley&quot;))</code> matches documents where Ashley is not the owner).</li>
+</ul>
+</li>
+</ul>
+<p><strong>Output parser</strong>: This output parser can be used when you want to return multiple fields or you need the response to be formatted. </p>
+<p>LangChain Docs: <a target="_blank" rel="noopener" href="https://python.langchain.com/v0.1/docs/modules/model_io/output_parsers/types/structured/">Structured output parser</a></p>
+<p>API: <a target="_blank" rel="noopener" href="https://api.python.langchain.com/en/latest/chains/langchain.chains.query_constructor.base.StructuredQueryOutputParser.html">StructuredQueryOutputParser</a></p>
+</li>
+</ol>
+<h3 id="Advanced-Retrieval-Techniques"><a href="#Advanced-Retrieval-Techniques" class="headerlink" title="Advanced Retrieval Techniques"></a>Advanced Retrieval Techniques</h3><ol>
+<li><p><strong>Vector Store-Backed Retriever</strong>: A retriever that uses a vector database to store document embeddings and retrieve documents based on their proximity to the query embedding.</p>
+<p><img src="/digital-di/./images/basic_index_retrieval.png" alt="basic_index_retrieval"></p>
+</li>
+<li><p><strong>Fusion Retrieval or hybrid search</strong>: Combining multiple retrieval strategies (semantic similarity retrieval; keywords retrieval) to obtain a more diverse set of results.</p>
+<p>LangChain Docs:</p>
+<p>v0.2: <a target="_blank" rel="noopener" href="https://python.langchain.com/v0.2/docs/how_to/ensemble_retriever/">How to combine results from multiple retrievers</a></p>
+<p>v0.1: <a target="_blank" rel="noopener" href="https://python.langchain.com/v0.1/docs/modules/data_connection/retrievers/ensemble/">Ensemble Retriever</a></p>
+<p>API: <a target="_blank" rel="noopener" href="https://api.python.langchain.com/en/latest/retrievers/langchain.retrievers.ensemble.EnsembleRetriever.html">EnsembleRetriever</a></p>
+<p>Code: <a target="_blank" rel="noopener" href="https://github.com/langchain-ai/langchain/blob/master/libs/langchain/langchain/retrievers/ensemble.py#L57">EnsembleRetriever</a></p>
+<p><img src="/digital-di/./images/fusion_retrieval.png" alt="fusion_retrieval"></p>
+<p>The <strong>EnsembleRetriever</strong> is a retrieval strategy that enhances retrieval performance by combining multiple retrievers. This approach leverages the strengths of different types of retrievers to compensate for each other’s weaknesses. A common example is combining a <strong>Sparse Retriever</strong> (e.g., BM25, which performs keyword-based retrieval) with a <strong>Dense Retriever</strong> (which performs semantic similarity retrieval based on embeddings). This combination works because sparse and dense methods complement each other.</p>
+<p><strong>Sparse vs. Dense Representation</strong></p>
+<ol>
+<li><strong>Sparse Representation</strong>:<ul>
+<li><strong>High-dimensional sparse vectors</strong>: Documents and queries are represented as high-dimensional vectors, but most dimensions have zero values. This is typical of traditional information retrieval methods like TF-IDF and BM25.</li>
+<li><strong>Term frequency</strong>: Each dimension corresponds to a term, and the vector values represent term frequencies or weights (e.g., TF-IDF weights).</li>
+<li><strong>Sparsity</strong>: Since a document or query contains only a small subset of all possible terms, most dimensions in the vector are zero, which makes it “sparse.”</li>
+</ul>
+</li>
+<li><strong>Dense Representation</strong>:<ul>
+<li><strong>Low-dimensional dense vectors</strong>: Documents and queries are represented as low-dimensional vectors, where most or all dimensions have non-zero values. This representation is typically generated by deep learning models like BERT.</li>
+<li><strong>Semantic embeddings</strong>: The vectors capture semantic and contextual information, rather than just term frequency.</li>
+<li><strong>Density</strong>: All dimensions in the vector usually have non-zero values, hence “dense.”</li>
+</ul>
+</li>
+</ol>
+<p><strong>Sparse and Dense Retrievers</strong></p>
+<ul>
+<li><strong>Sparse Retriever</strong>: The name comes from the fact that most elements in the vector representation of documents and queries are zero. It works well for exact keyword matches but may miss semantically relevant content that uses different vocabulary.</li>
+<li><strong>Dense Retriever</strong>: The name reflects that the vector representation has mostly non-zero values. Dense retrievers perform better at capturing the meaning behind the text and finding semantically related content, even when the exact terms differ.</li>
+</ul>
+<p><strong>Combining Sparse and Dense Retrievers</strong></p>
+<p>By combining sparse and dense retrievers, the <strong>EnsembleRetriever</strong> can retrieve relevant documents more effectively:</p>
+<ul>
+<li>The <strong>Sparse Retriever</strong> excels at matching specific keywords or phrases.</li>
+<li>The <strong>Dense Retriever</strong> is better at capturing the semantic meaning and context, helping to retrieve documents even when exact terms differ.</li>
+</ul>
+<p>This combination creates a more robust retrieval system, addressing both lexical matches (through sparse retrieval) and semantic relevance (through dense retrieval).</p>
+<p>LangChain Doc: <a target="_blank" rel="noopener" href="https://python.langchain.com/v0.2/docs/integrations/retrievers/bm25/">BM25 Retriever</a></p>
+<p>API: <a target="_blank" rel="noopener" href="https://api.python.langchain.com/en/latest/retrievers/langchain_community.retrievers.bm25.BM25Retriever.html">BM25Retriever</a></p>
+<p>Code: <a target="_blank" rel="noopener" href="https://github.com/langchain-ai/langchain/blob/langchain%3D%3D0.2.1/libs/community/langchain_community/retrievers/bm25.py">BM25Retriever</a></p>
+<p>Python Package: <a target="_blank" rel="noopener" href="https://github.com/dorianbrown/rank_bm25">rank_bm25</a></p>
+</li>
+<li><p><strong>Sentence Window Retrieval</strong>: Retrieving extended context pre and post the relevant context, rather than only retrieving the relevant context, which can reduce information lost.</p>
+<p><img src="/digital-di/./images/sent_window_retrieval.png" alt="sent_window_retrieval"></p>
+</li>
+<li><p><strong>Parent Document Retrieval</strong>: Instead of sending the multiple smaller chunks to the LLM, the system merges them into their larger parent chunk. This allows for more contextualized information to be fed to the LLM, giving it a broader and more coherent set of data to generate an answer.</p>
+<p><img src="/digital-di/./images/parent_retrieval.png" alt="parent_retrieval"></p>
+<p>LangChain Doc: <a target="_blank" rel="noopener" href="https://python.langchain.com/v0.1/docs/modules/data_connection/retrievers/parent_document_retriever/">Parent Document Retriever</a></p>
+<p>API: <a target="_blank" rel="noopener" href="https://api.python.langchain.com/en/latest/retrievers/langchain.retrievers.parent_document_retriever.ParentDocumentRetriever.html">ParentDocumentRetriever</a></p>
+<p>Code: <a target="_blank" rel="noopener" href="https://github.com/langchain-ai/langchain/blob/master/libs/langchain/langchain/retrievers/parent_document_retriever.py#L10">ParentDocumentRetriever</a></p>
+</li>
+<li><p><strong>Hierarchical index retrieval</strong>: By structuring the search in two layers—summaries for broad filtering and chunks for detailed search—this hierarchical approach increases efficiency, making it easier to find and synthesize relevant information, especially when dealing with large document sets.</p>
+<p><img src="/digital-di/./images/hierarchical_retrieval.png" alt="hierarchical_retrieval"></p>
+</li>
+<li><p><strong>Hypothetical Questions</strong>: This technique involves having the language model generate hypothetical questions for each chunk of a document. These hypothetical questions are then embedded, and retrieval is performed based on these question embeddings, improving the relevance of the results.</p>
+<p>LangChain Doc: <a target="_blank" rel="noopener" href="https://python.langchain.com/v0.1/docs/modules/data_connection/retrievers/multi_vector/#hypothetical-queries">hypothetical-queries</a></p>
+</li>
+<li><p><strong>MultiVector Retriever</strong>: MultiVector Retriever is a higher level category of parent document retriever, hierarchical index retrieval, and hypothetical questions.</p>
+<p>LangChain Doc: <a target="_blank" rel="noopener" href="https://python.langchain.com/v0.1/docs/modules/data_connection/retrievers/multi_vector/">MultiVector</a></p>
+<p>Summary: <a target="_blank" rel="noopener" href="https://python.langchain.com/v0.1/docs/expression_language/interface/">Runnable interface</a></p>
+</li>
+</ol>
+<h3 id="Post-Retrieval-Enhancements"><a href="#Post-Retrieval-Enhancements" class="headerlink" title="Post-Retrieval Enhancements"></a>Post-Retrieval Enhancements</h3><ol>
+<li><strong>Re-ranking</strong>: After retrieving the documents, the system re-ranks or filters them to ensure that the most relevant results appear at the top.</li>
+</ol>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://pub.towardsai.net/advanced-rag-techniques-an-illustrated-overview-04d193d8fec6">Advanced RAG Techniques: an Illustrated Overview</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/NirDiamant/RAG_Techniques">RAG System Techniques</a></li>
+<li><a target="_blank" rel="noopener" href="https://python.langchain.com/v0.1/docs/get_started/introduction">LangChain</a></li>
+</ol>
+<h2 id="Next-Topic-Prompt-Engineering"><a href="#Next-Topic-Prompt-Engineering" class="headerlink" title="Next Topic - Prompt Engineering"></a>Next Topic - Prompt Engineering</h2><p><a target="_blank" rel="noopener" href="https://platform.openai.com/docs/guides/prompt-engineering/strategy-write-clear-instructions">A comprehensive OpenAI prompt engineering guide</a>.</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/anthropics/courses/tree/master/prompt_evaluations">Prompt Evaluations - Anthropic</a></p>
+<blockquote>
+<p><em>The quality of the output of a large language model (LLM) is very sensitive to the quality of the prompt. Ambiguous or not well-formed questions will make the AI try to guess the question you are really asking, which in turn increases the probability of getting an imprecise or even totally made-up answer (a phenomenon that’s often referred to as “hallucination”).  Because of that, one would have to first and foremost master reasoning, logic, and first-principles thinking to get the most out of AI — all foundational skills developed through philosophical training. The question “Can you code?” will become “Can you get the best code out of your AI by asking the right question?”</em></p>
+<p><strong>― Why Engineers Should Study Philosophy ― Harvard Business Review</strong> [<a target="_blank" rel="noopener" href="https://hbr.org/2024/04/why-engineers-should-study-philosophy?utm_medium=email&utm_source=circ_other&utm_campaign=subbenemail_digitalcontent_monthinreview&hideIntromercial=true&tpcc=subbenemail&deliveryName=SUB_Ben_DigitialContent_MonthInReview_20240507">Link</a>]</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/digital-di/tags/knowledge/" rel="tag"># knowledge</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/digital-di/2024/10/05/2024-October/" rel="prev" title="2024-October">
+                  <i class="fa fa-angle-left"></i> 2024-October
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Di Zhen</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/digital-di/js/comments.js"></script><script src="/digital-di/js/utils.js"></script><script src="/digital-di/js/motion.js"></script><script src="/digital-di/js/schemes/muse.js"></script><script src="/digital-di/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
